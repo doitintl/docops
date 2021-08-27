@@ -18,7 +18,7 @@ If you have Poetry installed, you can set up your Python [virtual
 environment](https://python-poetry.org/docs/managing-environments/) and install
 the required project dependencies by running the `poetry install` command:
 
-```shell
+```sh
 $ poetry install
 Installing dependencies from lock file
 
@@ -35,7 +35,7 @@ This command will create a Python virtual environment in a directory named
 
 To activate the virtual environment, run the `poetry shell` command:
 
-```shell
+```sh
 $ poetry shell
 Spawning shell within [...]/gbclient/.venv
 . [...]/gbclient/.venv/bin/activate
