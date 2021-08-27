@@ -1,2 +1,2 @@
-# docops-python
-DocOps Python library and CLI tools
+# gbclient
+GitBook CLI tool and Python client library
