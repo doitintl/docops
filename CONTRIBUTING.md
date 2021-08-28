@@ -18,7 +18,7 @@ If you have Poetry installed, you can set up your Python [virtual
 environment](https://python-poetry.org/docs/managing-environments/) and install
 the required project dependencies by running the `poetry install` command:
 
-```sh
+```console
 $ poetry install
 Installing dependencies from lock file
 
@@ -35,14 +35,14 @@ This command will create a Python virtual environment in a directory named
 
 To activate the virtual environment, run the `poetry shell` command:
 
-```sh
+```console
 $ poetry shell
 Spawning shell within [...]/gbclient/.venv
 . [...]/gbclient/.venv/bin/activate
 ```
 
-After you have activated the virtual environment, you can run the `dbclient`
-program and import the `dbclient` Python library (as they exist in your local
+After you have activated the virtual environment, you can run the `gbclient`
+program and import the `gbclient` Python library (as they exist in your local
 copy of the repository).
 
 Consult the [Poetry documentation](https://python-poetry.org/docs/basic-usage/)

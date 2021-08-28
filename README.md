@@ -9,7 +9,7 @@ if you wish to install it, you must [do so manually](CONTRIBUTING.md).
 
 After installing the package, you can run the `gbclient` program:
 
-```sh
+```console
 $ gbclient
 Usage:
   gbclient (-h --help)
