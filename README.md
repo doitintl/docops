@@ -40,8 +40,8 @@ API token.
 
 ## Contributing
 
-This project is maintained by [DoiT
-International](https://github.com/doitintl), but we welcome community
+This project is primarily maintained by [DoiT
+International](https://github.com/doitintl), but we do welcome community
 contributions!
 
 See the [contribution docs](CONTRIBUTING.md) for more information.
