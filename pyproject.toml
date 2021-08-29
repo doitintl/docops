@@ -1,8 +1,9 @@
 [tool.poetry]
-name = "gbclient"
+name = "gitbook-client"
 version = "0.0.0"
-description = "GitBook CLI tool and Python client library"
-authors = ["Naomi Rose <23469+mechanomi@users.noreply.github.com>"]
+description = "Python client library and CLI tool for the GitBook API"
+authors = ["Naomi Rose <23469+norosa@users.noreply.github.com>"]
+packages = [{ include = "gitbook", "from" = "src" }]
 
 [tool.poetry.dependencies]
 python = "^3.9"
@@ -17,7 +18,7 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-gbclient = "gbclient.cli:run"
+gbc = "gitbook.cli:run"
 
 [tool.black]
 line-length = 79

@@ -1,7 +1,9 @@
-"""GitBook CLI tool
+"""GitBook API Client
 
 Usage:
-  gbclient [options]
+  {entry_point} [options] (-h, --help)
+  {entry_point} [options] (--version)
+  {entry_point} [options] (--test-env)
 
 Options:
   -h, --help      Print this help message and exit
@@ -17,6 +19,13 @@ import pkg_resources
 from docopt import docopt
 
 import pastel
+
+from gitbook import __dist__, __version__
+
+console_scripts = __dist__.get_entry_map()["console_scripts"]
+for name, entry_point in console_scripts.items():
+    if entry_point.module_name == __name__:
+        __entry_point__ = name
 
 
 class ClientError(Exception):
@@ -43,10 +52,8 @@ def main(args):
 
 
 def run():
-    dist_name = __package__.split(".")[0]
-    dist = pkg_resources.get_distribution(dist_name)
-    version = dist.version
-    args = docopt(__doc__, version=version)
+    doc = __doc__.format(entry_point=__entry_point__)
+    args = docopt(doc, version=__version__)
     try:
         main(args)
     except ClientError as err:
