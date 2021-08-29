@@ -1,7 +1,5 @@
 # GitBook API Python Client
 
-Unofficial Python client library and CLI tool for the GitBook API.
-
 This project is still being developed and has no functionality at the moment.
 
 ## Install
@@ -12,7 +10,7 @@ manually](CONTRIBUTING.md).
 
 After installation, you will be able to:
 
-- Import the `gitbook` Python client library
+- Import the `gbc` Python client library
 - Run the `gbc` CLI tool
 
 ## Configure your API token
