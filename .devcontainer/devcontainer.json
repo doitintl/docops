@@ -4,5 +4,8 @@
 		"dockerfile": "Dockerfile",
 		"args": { "VARIANT": "buster" }
 	},
-	"remoteUser": "vscode"
+	"remoteUser": "vscode",
+	"extensions": [
+		"ms-azuretools.vscode-docker"
+	]
 }
