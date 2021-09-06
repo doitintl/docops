@@ -1,17 +1,17 @@
-# GitBook API Python Client
+# DoiT GitBook Client
 
 This project is still being developed and has no functionality at the moment.
 
 ## Install
 
-The GitBook API Python Client has not yet been published to the Python Package
-Index (PyPI), so if you wish to install it, you must [do so
+The *DoiT GitBook Client* has not yet been published to the *Python Package
+Index* (PyPI), so if you wish to install it, you must [do so
 manually](CONTRIBUTING.md).
 
 After installation, you will be able to:
 
-- Import the `gbc` Python client library
-- Run the `gbc` CLI tool
+- Import the `dgbc` Python client library
+- Run the `dgbc` CLI tool
 
 ## Configure your API token
 
@@ -24,7 +24,7 @@ select the *Settings* menu item. On the *Settings* page, scroll down and select
 the *API Tokens* section, then select the *Generate new token* button.
 
 The *Token label* is for your reference only. We recommend that you give it a
-descriptive name like "GitBook API Python Client". The second text box will
+descriptive name like "DoiT GitBook Client". The second text box will
 contain your API token string.
 
 Before using the Python library or CLI tool, you must set the
@@ -41,10 +41,8 @@ API token.
 ## Contributing
 
 This project is primarily maintained by [DoiT
-International](https://github.com/doitintl), but we do welcome community
-contributions!
-
-See the [contribution docs](CONTRIBUTING.md) for more information.
+International](https://github.com/doitintl). If you would like to contribute,
+please read the [contribution docs](CONTRIBUTING.md) for more information.
 
 ## See also
 

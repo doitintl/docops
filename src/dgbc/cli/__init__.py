@@ -1,4 +1,4 @@
-"""GitBook API Client
+"""DoiT GitBook Client
 
 Usage:
   {entry_point} [options] (-h, --help)
@@ -20,7 +20,7 @@ from docopt import docopt
 
 import pastel
 
-from gbc import __dist__, __version__
+from dgbc import __dist__, __version__
 
 console_scripts = __dist__.get_entry_map()["console_scripts"]
 for name, entry_point in console_scripts.items():

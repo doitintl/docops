@@ -37,13 +37,13 @@ To activate the virtual environment, run the `poetry shell` command:
 
 ```console
 $ poetry shell
-Spawning shell within [...]/gbclient/.venv
-. [...]/gbclient/.venv/bin/activate
+Spawning shell within [...]/gitbook-client/.venv
+. [...]/gitbook-client/.venv/bin/activate
 ```
 
-After you have activated the virtual environment, you can run the `gbclient`
-program and import the `gbclient` Python library (as they exist in your local
-copy of the repository).
+After you have activated the virtual environment, you can run the `dgbc`
+program and import the `dgbc` Python library (as they exist in your local copy
+of the repository).
 
 Consult the [Poetry documentation](https://python-poetry.org/docs/basic-usage/)
 for more information.

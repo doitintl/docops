@@ -1,9 +1,10 @@
 [tool.poetry]
-name = "gitbook-client"
+name = "doit-gitbook-client"
 version = "0.0.0"
 description = "Python client library and CLI tool for the GitBook API"
-authors = ["Naomi Rose <23469+norosa@users.noreply.github.com>"]
-packages = [{ include = "gbc", "from" = "src" }]
+authors = ["DoiT International <engineering@doit-intl.com>"]
+homepage = "https://github.com/doitintl/gitbook-client"
+packages = [{ include = "dgbc", "from" = "src" }]
 
 [tool.poetry.dependencies]
 python = "^3.9"
@@ -18,7 +19,7 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-gbc = "gbc.cli:run"
+dgbc = "dgbc.cli:run"
 
 [tool.black]
 line-length = 79
