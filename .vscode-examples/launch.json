@@ -1,0 +1,13 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Default",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceRoot}/.venv/bin/dgloss-analyze-terms",
+            "args": ["-v", "."],
+            "console": "integratedTerminal"
+        }
+    ]
+}

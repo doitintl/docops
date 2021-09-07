@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "doit-gloss-utils"
+version = "0.0.0"
+description = "A collection of utilities for the creation and maintenance of technical glossaries"
+homepage = "https://github.com/doitintl/docops-gloss-utils"
+authors = ["DoiT International <engineering@doit-intl.com>"]
+maintainers = ["DoiT International <engineering@doit-intl.com>"]
+packages = [{ include = "dgloss", "from" = "src" }]
+# include = ["pyproject.toml", "vendor/data"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+appdirs = "^1.4.4"
+charset-normalizer = "^2.0.4"
+docopt = "^0.6.2"
+pastel = "^0.2.1"
+nltk = "^3.6.2"
+tabulate = "^0.8.9"
+
+[tool.poetry.dev-dependencies]
+black = { version = "^21.7b0", allow-prereleases = true }
+ipython = "^7.27.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+dgloss-analyze-terms = "dgloss.cli.analyze.terms:run"
+
+[tool.black]
+line-length = 79
