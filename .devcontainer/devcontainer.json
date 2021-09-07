@@ -8,8 +8,6 @@
         }
     },
     "settings": {
-        "gitlens.codeLens.authors.enabled": false,
-        "gitlens.codeLens.recentChange.enabled": false,
         "python.formatting.autopep8Path": "/usr/local/py-utils/bin/autopep8",
         "python.formatting.blackPath": "/usr/local/py-utils/bin/black",
         "python.formatting.yapfPath": "/usr/local/py-utils/bin/yapf",
@@ -24,20 +22,5 @@
         "python.linting.pylintPath": "/usr/local/py-utils/bin/pylint",
         "python.pythonPath": "/usr/local/bin/python"
     },
-    "extensions": [
-        "bierner.markdown-checkbox",
-        "bierner.markdown-preview-github-styles",
-        "bierner.markdown-yaml-preamble",
-        "davidanson.vscode-markdownlint",
-        "eamodio.gitlens",
-        "editorconfig.editorconfig",
-        "esbenp.prettier-vscode",
-        "ms-azuretools.vscode-docker",
-        "ms-python.python",
-        "ms-python.vscode-pylance",
-        "stkb.rewrap",
-        "whinarn.python-auto-venv",
-        "yzhang.markdown-all-in-one"
-    ],
     "remoteUser": "vscode"
 }
