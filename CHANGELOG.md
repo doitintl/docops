@@ -19,7 +19,7 @@ display (i.e., on the `main` branch)
 
 > :memo: **Note**
 >
-> This project uses [semantic versioning](semver/)
+> This project uses [semantic versioning][semver]
 
 ### 0.x
 

@@ -9,8 +9,8 @@ glossaries*
 
 ## Install
 
-You can install the [doit-gloss-utils](pypi-project) Python package using
-[Pip](pip):
+You can install the [doit-gloss-utils][pypi-project] Python package using
+[Pip][pip]:
 
 ```console
 $ pip install doit-gloss-utils
@@ -20,7 +20,7 @@ Collecting doit-gloss-utils
 Successfully installed doit-gloss-utils-0.0.0
 ```
 
-The [project releases](releases) page has a complete list of all releases, along
+The [project releases][releases] page has a complete list of all releases, along
 with the corresponding release notes and release assets.
 
 <!-- Link references go below this line, sorted ascending --->
