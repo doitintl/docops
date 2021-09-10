@@ -1,3 +1,3 @@
-# DocOps at DoiT
+# Doing DocOps at DoiT
 
-*A general, catch-all project for doing DocOps*
+*A miscellaneous collection of DocOps resources*
