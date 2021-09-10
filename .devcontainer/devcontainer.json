@@ -22,5 +22,5 @@
         "python.linting.pylintPath": "/usr/local/py-utils/bin/pylint",
         "python.pythonPath": "/usr/local/bin/python",
     },
-    "remoteUser": "vscode"
+    "remoteUser": "vscode",
 }

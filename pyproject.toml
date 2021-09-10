@@ -2,11 +2,28 @@
 name = "doit-gloss-utils"
 version = "0.0.0"
 description = "A collection of utilities for the creation and maintenance of technical glossaries"
-homepage = "https://github.com/doitintl/docops-gloss-utils"
 authors = ["DoiT International <engineering@doit-intl.com>"]
-maintainers = ["DoiT International <engineering@doit-intl.com>"]
+readme = "README.md"
+homepage = "https://github.com/doitintl/docops"
+repository = "https://github.com/doitintl/docops-gloss-utils"
+keywords = ["nlp", "glossaries", "docops"]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Information Technology",
+    "Natural Language :: English",
+    "Programming Language :: Python",
+    "Topic :: Text Processing",
+    "Topic :: Utilities",
+    "Topic :: Software Development :: Documentation",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Software Development :: Testing",
+    "License :: OSI Approved :: MIT License",
+    "License :: OSI Approved :: Apache Software License",
+    "License :: Other/Proprietary License"
+]
 packages = [{ include = "dgloss", "from" = "src" }]
-# include = ["pyproject.toml", "vendor/data"]
+include = ["CHANGELOG.md", "LICENSE"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
@@ -19,7 +36,6 @@ tabulate = "^0.8.9"
 
 [tool.poetry.dev-dependencies]
 black = { version = "^21.7b0", allow-prereleases = true }
-ipython = "^7.27.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

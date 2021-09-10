@@ -20,8 +20,10 @@ class Configuration:
 
     def __init__(self):
         self._formatter = Formatter()
-        homepage = dgloss.__dist__.metadata["Home-page"]
-        repo_url = parse.urlparse(homepage)
+        project_url = dgloss.__dist__.metadata["Project-URL"]
+        # Expect `project_url` to look like "Repository, <URL>"
+        repo_url = project_url.split(",")[1].strip()
+        repo_url = parse.urlparse(repo_url)
         repo_path = pathlib.PurePosixPath(repo_url.path)
         self._repo_org, self._repo_name = repo_path.parts[1:]
 
