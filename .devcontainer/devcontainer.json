@@ -22,5 +22,6 @@
         "python.linting.pylintPath": "/usr/local/py-utils/bin/pylint",
         "python.pythonPath": "/usr/local/bin/python",
     },
+    "postCreateCommand": "poetry install",
     "remoteUser": "vscode",
 }
