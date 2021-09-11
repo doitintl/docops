@@ -20,10 +20,10 @@ classifiers = [
     "Topic :: Software Development :: Testing",
     "License :: OSI Approved :: MIT License",
     "License :: OSI Approved :: Apache Software License",
-    "License :: Other/Proprietary License"
+    "License :: Other/Proprietary License",
 ]
 packages = [{ include = "dgloss", "from" = "src" }]
-include = ["CHANGELOG.md", "LICENSE"]
+include = ["CHANGELOG.md", "LICENSE", "data", ".editorconfig"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
@@ -33,9 +33,23 @@ docopt = "^0.6.2"
 pastel = "^0.2.1"
 nltk = "^3.6.2"
 tabulate = "^0.8.9"
+tomli = "^1.2.1"
+PyYAML = "^5.4.1"
+inflection = "^0.5.1"
+pylama = "^7.7.1"
+Pygments = "^2.10.0"
+EditorConfig = "^0.12.3"
+inflect = "^5.3.0"
 
 [tool.poetry.dev-dependencies]
 black = { version = "^21.7b0", allow-prereleases = true }
+bandit = "^1.7.0"
+flake8 = "^3.9.2"
+pycodestyle = "^2.7.0"
+pylint = "^2.10.2"
+pydocstyle = "^6.1.1"
+isort = "^5.9.3"
+ipython = "^7.27.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

@@ -1,0 +1,69 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "No args",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceRoot}/.venv/bin/dgloss-analyze-terms",
+            "args": [],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Help",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceRoot}/.venv/bin/dgloss-analyze-terms",
+            "args": ["--help"],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Basic config",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceRoot}/.venv/bin/dgloss-analyze-terms",
+            "args": ["examples"],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Basic config (quiet)",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceRoot}/.venv/bin/dgloss-analyze-terms",
+            "args": ["-q", "examples"],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Basic config (verbose)",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceRoot}/.venv/bin/dgloss-analyze-terms",
+            "args": ["-v", "examples"],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Test config",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceRoot}/.venv/bin/dgloss-analyze-terms",
+            "args": ["-c", "data/configs", "examples"],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Test config (quiet)",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceRoot}/.venv/bin/dgloss-analyze-terms",
+            "args": ["-c", "data/configs", "-q", "examples"],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Test config (verbose)",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceRoot}/.venv/bin/dgloss-analyze-terms",
+            "args": ["-c", "data/configs", "-v", "examples"],
+            "console": "integratedTerminal"
+        }
+    ]
+}

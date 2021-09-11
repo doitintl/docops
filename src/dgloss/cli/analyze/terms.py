@@ -2,16 +2,18 @@
 
 Usage:
 
-  {entry_point} [options] <DIR>
-  {entry_point} [options] (-h | --help)
-  {entry_point} [options] (--version)
-  {entry_point} [options] (--show-formats)
-  {entry_point} [options] (--print-cache)
-  {entry_point} [options] (--delete-cache)
+  {cmd_name} [options] <DIR>
+  {cmd_name} [options] (-h | --help)
+  {cmd_name} [options] (--version)
+  {cmd_name} [options] (--show-formats)
+  {cmd_name} [options] (--print-cache)
+  {cmd_name} [options] (--delete-cache)
+
+  {row_limit}
 
 This program will:
 
-  - Scan the given directory (`<DIR>`) for files (ignoring any directory or
+  - Scan the target directory (`<DIR>`) for files (ignoring any directory or
     filename that begins with the `.` character).
 
   - Tokenize all files (that can be decoded as character data) into a list of
@@ -26,50 +28,64 @@ This program will:
   - Print a list of terms that appear more often than expected, ranked on a
     logarithmic scale, and sorted from highest to lowest frequency.
 
-Options:
+Basic options:
 
-  -h, --help         Print this help message and exit
+  -h, --help               Print this help message and exit
 
-  --version          Print the software version number and exit
+  --version                Print the software version number and exit
 
-  -v, --verbose      Display verbose output messages
+  -v, --verbose            Display verbose output messages
 
-  -q, --quiet        Silence most output messages
+  -q, --quiet              Silence most output messages
 
-  --disable-ansi     Disable ANSI escape code formatting
+  --disable-ansi           Disable ANSI escape code formatting
 
-  -l, --limit=NUM    Limit the number of result rows [default: 100]
+  -c --config-dir=DIR      Search `DIR` for `.dgloss.conf` files instead of the
+                           target directory
 
-  -f, --format=NAME  Specify the table format [default: simple]
+  -l, --row-limit=NUM      Limit results to `NUM` rows [default: {row_limit}]
 
-  --show-formats     Print a list of supported table formats and exit
+  -r, --table-format=TYPE  Use table format `TYPE` [default: {table_format}]
 
-  --print-cache      Print the location of the cache directory and exit
+  --show-formats           Print a list of supported table formats and exit
 
-  --delete-cache     Delete the cache directory and exit
+  --print-cache            Print the location of the cache directory and exit
 
-  --show-warnings    Show Python warnings
+  --delete-cache           Delete the cache directory and exit
+
+  --show-warnings          Show Python warnings
 """
 
 import sys
 import warnings
+import pathlib
 
-from docopt import docopt
+import editorconfig
+from editorconfig.handler import EditorConfigHandler
+
+import docopt
 
 import tabulate
 
 import dgloss
-from dgloss import color
-from dgloss.analyzers.terms import TermAnalyzer
+from dgloss.print import Printer
 from dgloss.config import Configuration
+from dgloss.analyzers.terms import TermAnalyzer
+from dgloss.cache import Cache
 
-__entry_point__ = None
-
-for entry_point in dgloss.__dist__.entry_points:
-    if entry_point.module == __name__:
-        __entry_point__ = entry_point.name
-
-_doc = __doc__.format(entry_point=__entry_point__)
+# Format the docstring
+cmd_path = pathlib.PurePath(sys.argv[0])
+format_dict = {
+    "cmd_name": cmd_path.name,
+    "row_limit": dgloss.row_limit,
+    "table_format": dgloss.table_format,
+}
+# Not needed for now, but may need again the future
+#
+# Unwrap lines marked up with `<unwrap>`, which is used to wrap the docstring
+# to fit the 79 char limit for source files
+# __doc__ = re.sub("\n *<unwrap>", " ", __doc__)
+__doc__ = __doc__.format(**format_dict)
 
 
 class TermsCommand:
@@ -80,8 +96,9 @@ class TermsCommand:
     verbose = None
     quiet = None
     disable_ansi = None
-    limit = None
-    format = None
+    config_dir = None
+    row_limit = None
+    table_format = None
     show_formats = None
     print_cache = None
     delete_cache = None
@@ -90,11 +107,9 @@ class TermsCommand:
     # Allowed positional arguments
     dir = None
 
-    # Configuration settings
-    # TODO: Set these values using a configuration file (they are hardcoded for
-    # the time being)
-    ignore_case = True
-    ignore_stop_words = True
+    _config = None
+    _cache = None
+    _analyzer = None
 
     def __init__(self, args):
         # Process the dict returned by docopt and use it to automatically set
@@ -110,7 +125,32 @@ class TermsCommand:
                 continue
             attr_name = key.lower()
             self.set_class_attr(attr_name, value)
+        self._config = Configuration(self.dir, self.config_dir)
+        self._cache = Cache()
+        self._validate_docstring()
         self.set_pkg_options()
+
+    def _validate_docstring(self):
+        try:
+
+            parser = EditorConfigHandler(__file__, dgloss.editorconfig_path)
+            config = parser.get_configurations()
+        except editorconfig.EditorConfigError:
+            raise dgloss.ProgramError(
+                "Unable to parse package `.editorconfig` file"
+            )
+        try:
+            max_line_length = int(config["max_line_length"])
+        except KeyError:
+            raise dgloss.ProgramError(
+                "No `max_line_length` set in package `.editorconfig` file"
+            )
+        for line_num, line in enumerate(__doc__.splitlines()):
+            if len(line) > max_line_length:
+                raise dgloss.ProgramError(
+                    f"Docstring line {line_num} "
+                    + f"exceeds max line length ({max_line_length})"
+                )
 
     def set_class_attr(self, name, value):
         # Raise an exception if the attribute is not a predefined class
@@ -122,9 +162,12 @@ class TermsCommand:
     # TODO: I think this is probably an anti-pattern and these should be passed
     # through in other ways
     def set_pkg_options(self):
+        # Set module options
         dgloss.verbose = self.verbose
         dgloss.quiet = self.quiet
         dgloss.disable_ansi = self.disable_ansi
+        dgloss.table_format = self.table_format
+        dgloss.row_limit = self.row_limit
 
     def run(self):
         if self.help:
@@ -137,53 +180,51 @@ class TermsCommand:
             return self.do_print_cache()
         if self.show_formats:
             return self.do_show_formats()
-        return self.do_print_table()
+        self.do_main()
 
-    def exit_help(self):
-        print(_doc.strip())
+    def do_help(self):
+        print(__doc__.strip())
         return 0
 
     def do_delete_cache(self):
-        config = Configuration()
-        config.delete_cache()
+        self._cache.delete_cache()
         return 0
 
     def do_print_cache(self):
-        config = Configuration()
-        if not config.print_cache_path():
+        if not self._cache.print_cache_path():
             return 1
         return 0
 
     def do_show_formats(self):
-        formatter = color.Formatter()
+        printer = Printer()
         msg = "Supported table formats:\n\n"
         for format in tabulate.tabulate_formats:
             msg += f" - {format}\n"
-        formatter.print(msg.strip())
+        printer.print(msg.strip())
         return 0
 
-    def do_print_table(self):
-        analyzer = TermAnalyzer()
-        if self.ignore_case:
-            analyzer.ignore_case()
-        if self.ignore_stop_words:
-            analyzer.ignore_stop_words()
-        analyzer.init_nltk()
-        analyzer.use_pkg_corpus("leeds")
-        analyzer.scan_dir(self.dir)
-        analyzer.print_ranks(self.limit, self.format)
+    def do_main(self):
+        self._config.load()
+        self._analyzer = TermAnalyzer(self._config)
+        self._analyzer.run()
+        self._analyzer.print_ranks()
         return 0
 
 
 def run():
     # TODO: Switch to the new version of docopt? Annoyed with this one...
     # TODO: Switch to using colors for the help output
-    doc = _doc.replace("Usage:\n", "Usage:")
-    args = docopt(doc, help=False, version=dgloss.__version__)
+    printer = Printer()
     # Default to exiting with an error unless the `run` method indicates a
     # successful operation
     exit_code = 1
     try:
+        try:
+            # TODO: There's gotta be a way of doing this differently
+            doc = __doc__.replace("Usage:\n", "Usage:")
+            args = docopt.docopt(doc, help=False, version=dgloss.__version__)
+        except docopt.DocoptExit as err:
+            raise dgloss.CliError(err)
         command = TermsCommand(args)
         exit_code = command.run()
     except KeyboardInterrupt:
@@ -193,4 +234,6 @@ def run():
         # Exit silently when the pipe is broken (e.g., when piped to a program
         # like `head`)
         pass
+    except dgloss.Error as err:
+        printer.print(str(err), sys.stderr)
     sys.exit(exit_code)

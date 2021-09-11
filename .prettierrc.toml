@@ -1,4 +1,4 @@
 endOfLine = "lf"
 printWidth = 79
 proseWrap = "always"
-tabWidth = 4
+tabWidth = 2

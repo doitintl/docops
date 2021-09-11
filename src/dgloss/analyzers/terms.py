@@ -1,38 +1,18 @@
 import gzip
 import math
 import os
-import pathlib
 import re
 import sqlite3
 
-import charset_normalizer
-
-import nltk
-from nltk import downloader
-from nltk import stem
-from nltk.corpus import stopwords
-
 from tabulate import tabulate
 
+import nltk
+
 import dgloss
-from dgloss.config import Configuration
-from dgloss.color import Formatter
+from dgloss import charset
 
 
 class TermAnalyzer:
-
-    # TODO: Add more corpora to test with
-    # TODO: Allow users to select which corpora to use
-    # TODO: Document this in the CLI script
-    PKG_CORPORA = {
-        "leeds": {
-            "filename": "data/corpora/leeds.txt.gz",
-            "re": r"(?P<rank>\d+) +(?P<ipm>\d+(\.?\d+)) +(?P<lemma>\\w+)",
-        }
-    }
-
-    # https://www.nltk.org/nltk_data/
-    NLTK_CORPORA = ["punkt", "wordnet", "stopwords"]
 
     _DROP_TABLE_QUERY = """
         DROP TABLE IF EXISTS lemmas;
@@ -57,47 +37,32 @@ class TermAnalyzer:
 
     _SELECT_DELTAS_QUERY = """
         SELECT
-            local.lemma AS lemma,
-            IIF(ref.ipm IS NOT NULL, local.ipm - ref.ipm, local.ipm) AS delta
+            target.lemma AS lemma,
+            IIF(ref.ipm IS NOT NULL, target.ipm - ref.ipm, target.ipm) AS delta
         FROM
-            lemmas AS local
+            lemmas AS target
         LEFT JOIN
             lemmas AS ref
         ON
-            ref.source = 'reference' AND ref.lemma = local.lemma
+            ref.source = 'reference' AND ref.lemma = target.lemma
         WHERE
-            local.source = 'local' AND delta > 0
+            target.source = 'target' AND delta > 0
         ORDER BY
             delta DESC
         LIMIT ?;
     """
 
-    _formatter = None
     _config = None
 
-    _cache_path = None
-    _db_path = None
+    def __init__(self, config):
+        # Load configuration before continuing
+        self._config = config
 
-    _lemmatizer = None
-    _stop_words = None
-
-    _ignore_case = None
-    _ignore_stop_words = None
-
-    def __init__(self, case_sensitive=False):
-        self.case_sensitive = case_sensitive
-        self._formatter = Formatter()
-        self._config = Configuration()
-        self._cache_path = self._config.make_cache()
-        filename_path = pathlib.Path(f"{__name__}.db")
-        self.db_path = self._cache_path.joinpath(filename_path)
-        self._create_schema()
-
-    def _print(self, msg, stdout=True):
-        self._formatter.print(msg, stdout)
+    def _print(self, *args):
+        self._config.printer.print(*args)
 
     def _create_schema(self):
-        con = sqlite3.connect(self.db_path)
+        con = sqlite3.connect(self._config.cache.get_db_path())
         cur = con.cursor()
         cur.execute(self._DROP_TABLE_QUERY)
         cur.execute(self._CREATE_TABLE_QUERY)
@@ -110,67 +75,47 @@ class TermAnalyzer:
     def ignore_stop_words(self):
         self._ignore_stop_words = True
 
-    def init_nltk(self):
-        nltk_dir = self._cache_path.joinpath("nltk")
-        nltk_dir.mkdir(parents=True, exist_ok=True)
-        nltk.data.path.insert(0, nltk_dir)
-        dl = downloader.Downloader()
-        for name in self.NLTK_CORPORA:
-            if not dl.is_installed(name):
-                self._print(f"<fg=blue>Installing corpus</>: {name}")
-                dl.download(name, quiet=True)
-            else:
-                if dl.is_stale(name):
-                    self._print(f"<fg=blue>Updating corpus</>: {name}")
-                    dl.update(name, quiet=True)
-        self._lemmatizer = stem.WordNetLemmatizer()
-        self._stop_words = set(stopwords.words("english"))
-
-    def process_lemma(self, lemma):
-        if self._ignore_case:
-            lemma = lemma.lower()
-        if not self._ignore_stop_words:
-            return lemma
-        if lemma in self._stop_words:
-            # Ignore lemmas that match any stop words
-            if dgloss.verbose:
-                # TODO: Make this configurable
-                self._print(f"<fg=yellow>Ignoring</>: {lemma}")
-        return lemma
-
-    def use_pkg_corpus(self, corpus_name):
-        module_path = pathlib.Path(f"{__file__}")
+    def _load_pkg_corpus(self):
         # TODO: Raise custom exception if dict key not found
-        corpus = self.PKG_CORPORA[corpus_name]
-        data_path = module_path.parent.parent.joinpath(corpus["filename"])
+        corpus_def = self._config.word_freq_corpus
+        if not corpus_def:
+            raise dgloss.ConfigurationError(
+                "No word frequency corpus specified"
+            )
+        corpus_name = corpus_def["name"]
         if not dgloss.quiet:
-            self._print(f"<fg=blue>Loading corpus</>: {corpus_name}")
-        with gzip.open(data_path, "rb") as f:
-            data_bytes = f.read()
-        data = str(charset_normalizer.from_bytes(data_bytes).best())
-        line_re = re.compile(corpus["re"])
-        con = sqlite3.connect(self.db_path)
+            self._print(
+                f"<fg=blue>Loading word frequency corpus</>: {corpus_name}"
+            )
+        with gzip.open(corpus_def["abs_filename"], "rb") as f:
+            bytes = f.read()
+        text = charset.decode_bytes(
+            bytes, filename=corpus_def["data_filename"]
+        )
+        line_re = re.compile(corpus_def["re"])
+        con = sqlite3.connect(self._config.cache.get_db_path())
         cur = con.cursor()
         source = "reference"
-        for line in data.splitlines():
+        for line in text.splitlines():
             matches = line_re.match(line.strip())
             if not matches:
                 continue
             ipm = float(matches.group("ipm"))
             lemma = matches.group("lemma")
-            lemma = self.process_lemma(lemma)
+            lemma = self._config.lemmatizer.lemmatize(lemma)
+            lemma = self._filter_lemma(lemma)
             if not lemma:
                 continue
             cur.execute(self._INSERT_LEMMA_QUERY, [source, lemma, ipm])
-            # TODO convert to canonical lemma using nltk before importing
             if dgloss.verbose:
                 self._print(f"<fg=green>Added</>: {source}, {lemma}, {ipm}")
         con.commit()
         con.close()
 
-    def scan_dir(self, dirname):
+    def _scan_dir(self):
+        dirname = self._config.target_dirname
         if not dgloss.quiet:
-            self._print(f"<fg=blue>Scanning directory</>: {dirname}")
+            self._print(f"<fg=blue>Scanning target directory</>: {dirname}")
         lemmas_counts = {}
         total_lemma_count = 0
         for root, dirs, files in os.walk(dirname):
@@ -181,29 +126,25 @@ class TermAnalyzer:
                 if filename.startswith("."):
                     continue
                 filename = os.path.join(root, filename)
-                lemma_count = self.scan_file(filename, lemmas_counts)
+                lemma_count = self._scan_file(filename, lemmas_counts)
                 total_lemma_count += lemma_count
-        self.process_lemmas(lemmas_counts, total_lemma_count)
+        self._process_lemmas(lemmas_counts, total_lemma_count)
 
-    def scan_file(self, filename, lemmas_counts):
-        charset = charset_normalizer.from_path(filename).best()
-        if not charset:
-            # We were unable to decode this as a text file
+    def _scan_file(self, filename, lemmas_counts):
+        if dgloss.verbose:
+            self._print(f"<fg=blue>Scanning</>: {filename}")
+        try:
+            text = charset.decode_file(filename)
+        except dgloss.EncodingError:
             if dgloss.verbose:
                 self._print(f"<fg=yellow>Skipped</>: {filename}")
             # Return a count of zero lemmas
             return 0
-        if not dgloss.quiet:
-            self._print(f"<fg=blue>Scanning</>: {filename}")
-        text = str(charset)
         tokens = nltk.word_tokenize(text)
-        word_re = re.compile(r"\w")
         total_lemma_count = 0
         for token in tokens:
-            if not word_re.search(token):
-                continue
-            lemma = self._lemmatizer.lemmatize(token)
-            lemma = self.process_lemma(lemma)
+            lemma = self._config.lemmatizer.lemmatize(token)
+            lemma = self._filter_lemma(lemma)
             if not lemma:
                 continue
             count = lemmas_counts.get(lemma, 0)
@@ -211,9 +152,23 @@ class TermAnalyzer:
             total_lemma_count += 1
         return total_lemma_count
 
-    def process_lemmas(self, lemmas_counts, total_lemma_count):
-        source = "local"
-        con = sqlite3.connect(self.db_path)
+    def _filter_lemma(self, lemma):
+        config = self._config
+        if config.ignore_case:
+            lemma = lemma.lower()
+        if lemma in config.ignore_literals:
+            if dgloss.verbose:
+                self._print(f"<fg=yellow>Ignoring literal</>: {lemma}")
+            return
+        if any(regex.search(lemma) for regex in config.ignore_regexes):
+            if dgloss.verbose:
+                self._print(f"<fg=yellow>Ignoring regex</>: {lemma}")
+            return
+        return lemma
+
+    def _process_lemmas(self, lemmas_counts, total_lemma_count):
+        source = "target"
+        con = sqlite3.connect(self._config.cache.get_db_path())
         cur = con.cursor()
         for lemma, count in lemmas_counts.items():
             percent = count / total_lemma_count
@@ -226,15 +181,22 @@ class TermAnalyzer:
         con.commit()
         con.close()
 
-    def print_ranks(self, limit=100, format="github"):
+    def run(self):
+        self._create_schema()
+        self._load_pkg_corpus()
+        self._scan_dir()
+
+    def print_ranks(self):
         headers = ["Rank", "Base term"]
-        con = sqlite3.connect(self.db_path)
+        con = sqlite3.connect(self._config.cache.get_db_path())
         cur = con.cursor()
         table_rows = []
-        for row in cur.execute(self._SELECT_DELTAS_QUERY, [limit]):
+        for row in cur.execute(self._SELECT_DELTAS_QUERY, [dgloss.row_limit]):
             lemma, delta = row
             rank = round(math.log(delta))
             table_rows.append([rank, lemma])
         con.close()
-        table = tabulate(table_rows, headers=headers, tablefmt=format)
+        table = tabulate(
+            table_rows, headers=headers, tablefmt=dgloss.table_format
+        )
         self._print(table)

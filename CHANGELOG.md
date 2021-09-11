@@ -16,6 +16,30 @@ This project uses [semantic versioning][semver].
 
 - The terms analyzer now ignores common English [stop words][stop words].
 
+- The token analyzer (CLI and library) can now read configuration files named
+  `.dgloss.conf` (which are automatically found when scanning the target
+  directory).
+
+- Added the `--config-dir` option, which allows you to specify a separate
+  directory to scan for config files (so that you're not forced to add the
+  config files to the target directory).
+
+- Configuration files now give you the option to:
+
+  - Specify which reference corpus you want to use for comparison
+
+  - Switch case-sensitivity on and off
+
+  - Switch the use of common English stop words filtering on and off
+
+  - Specify term literals to ignore
+
+  - Specify term regexes to ignore
+
+  Combined, these features improve the utility of the term analysis by allowing
+  you to filter out terms that are of no interest. This allows for an iterative
+  approach to improving the relevancy of the output.
+
 -->
 
 ## 0.x
