@@ -1,27 +1,26 @@
 # Release Notes
 
+This project uses [semantic versioning][semver].
+
 **Table of contents:**
 
-- [Versions](#versions)
-  - [0.x](#0x)
+- [0.x](#0x)
+  - [0.0.x](#00x)
     - [Version 0.0.0](#version-000)
 
 <!--
-Comment out the *Unreleased* header unless there are unreleased changes to
-display (i.e., on the `main` branch)
--->
 
-<!--
 ## Unreleased
+
+- The terms analyzer now converts all terms to lower case prior to analysis.
+
+- The terms analyzer now ignores common English [stop words][stop words].
+
 -->
 
-## Versions
+## 0.x
 
-> :memo: **Note**
->
-> This project uses [semantic versioning][semver]
-
-### 0.x
+### 0.0.x
 
 #### Version 0.0.0
 
@@ -40,3 +39,4 @@ display (i.e., on the `main` branch)
 <!-- Link references go below this line, sorted ascending --->
 
 [semver]: https://semver.org/
+[stop words]: https://en.wikipedia.org/wiki/Stop_word

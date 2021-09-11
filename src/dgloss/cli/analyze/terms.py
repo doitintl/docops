@@ -72,62 +72,107 @@ for entry_point in dgloss.__dist__.entry_points:
 _doc = __doc__.format(entry_point=__entry_point__)
 
 
-def do_help():
-    print(_doc.strip())
+class TermsCommand:
 
+    # Allowed options
+    help = None
+    version = None
+    verbose = None
+    quiet = None
+    disable_ansi = None
+    limit = None
+    format = None
+    show_formats = None
+    print_cache = None
+    delete_cache = None
+    show_warnings = None
 
-def do_set_pkg_options(verbose, quiet, disable_ansi):
-    dgloss.verbose = verbose
-    dgloss.quiet = quiet
-    dgloss.disable_ansi = disable_ansi
+    # Allowed positional arguments
+    dir = None
 
+    # Configuration settings
+    # TODO: Set these values using a configuration file (they are hardcoded for
+    # the time being)
+    ignore_case = True
+    ignore_stop_words = True
 
-def do_delete_cache():
-    config = Configuration()
-    config.delete_cache()
+    def __init__(self, args):
+        # Process the dict returned by docopt and use it to automatically set
+        # the predefined class attributes
+        for key, value in args.items():
+            if key.startswith("--"):
+                attr_name = key.lstrip("--").replace("-", "_")
+                self.set_class_attr(attr_name, value)
+                continue
+            if key.startswith("<"):
+                attr_name = key.lstrip("<").rstrip(">").lower()
+                self.set_class_attr(attr_name, value)
+                continue
+            attr_name = key.lower()
+            self.set_class_attr(attr_name, value)
+        self.set_pkg_options()
 
+    def set_class_attr(self, name, value):
+        # Raise an exception if the attribute is not a predefined class
+        # attribute
+        getattr(self, name)
+        # Set the value of the predefined class attribute
+        setattr(self, name, value)
 
-def do_print_cache():
-    config = Configuration()
-    if not config.print_cache_path():
-        sys.exit(1)
+    # TODO: I think this is probably an anti-pattern and these should be passed
+    # through in other ways
+    def set_pkg_options(self):
+        dgloss.verbose = self.verbose
+        dgloss.quiet = self.quiet
+        dgloss.disable_ansi = self.disable_ansi
 
+    def run(self):
+        if self.help:
+            return self.do_help()
+        if not self.show_warnings:
+            warnings.filterwarnings("ignore")
+        if self.delete_cache:
+            return self.do_delete_cache()
+        if self.print_cache:
+            return self.do_print_cache()
+        if self.show_formats:
+            return self.do_show_formats()
+        return self.do_print_table()
 
-def do_show_formats():
-    formatter = color.Formatter()
-    msg = "Supported table formats:\n\n"
-    for format in tabulate.tabulate_formats:
-        msg += f" - {format}\n"
-    formatter.print(msg.strip())
+    def exit_help(self):
+        print(_doc.strip())
+        return 0
 
+    def do_delete_cache(self):
+        config = Configuration()
+        config.delete_cache()
+        return 0
 
-def do_process_dir(dir, limit, format):
-    analyzer = TermAnalyzer()
-    analyzer.use_pkg_corpus("leeds")
-    analyzer.init_nltk()
-    analyzer.scan_dir(dir)
-    analyzer.print_ranks(limit, format)
+    def do_print_cache(self):
+        config = Configuration()
+        if not config.print_cache_path():
+            return 1
+        return 0
 
+    def do_show_formats(self):
+        formatter = color.Formatter()
+        msg = "Supported table formats:\n\n"
+        for format in tabulate.tabulate_formats:
+            msg += f" - {format}\n"
+        formatter.print(msg.strip())
+        return 0
 
-def main(args):
-    if args["--help"]:
-        do_help()
-        return
-    do_set_pkg_options(
-        args["--verbose"], args["--quiet"], args["--disable-ansi"]
-    )
-    if not args["--show-warnings"]:
-        warnings.filterwarnings("ignore")
-    if args["--delete-cache"]:
-        do_delete_cache()
-        return
-    if args["--print-cache"]:
-        do_print_cache()
-        return
-    if args["--show-formats"]:
-        do_show_formats()
-        return
-    do_process_dir(args["<DIR>"], args["--limit"], args["--format"])
+    def do_print_table(self):
+        analyzer = TermAnalyzer()
+        if self.ignore_case:
+            analyzer.ignore_case()
+        if self.ignore_stop_words:
+            analyzer.ignore_stop_words()
+        analyzer.init_nltk()
+        analyzer.use_pkg_corpus("leeds")
+        analyzer.scan_dir(self.dir)
+        analyzer.print_ranks(self.limit, self.format)
+        return 0
 
 
 def run():
@@ -135,8 +180,12 @@ def run():
     # TODO: Switch to using colors for the help output
     doc = _doc.replace("Usage:\n", "Usage:")
     args = docopt(doc, help=False, version=dgloss.__version__)
+    # Default to exiting with an error unless the `run` method indicates a
+    # successful operation
+    exit_code = 1
     try:
-        main(args)
+        command = TermsCommand(args)
+        exit_code = command.run()
     except KeyboardInterrupt:
         # Exit silently when the the user terminates the program early
         pass
@@ -144,4 +193,4 @@ def run():
         # Exit silently when the pipe is broken (e.g., when piped to a program
         # like `head`)
         pass
-    sys.exit(0)
+    sys.exit(exit_code)

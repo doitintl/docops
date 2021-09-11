@@ -10,6 +10,7 @@ import charset_normalizer
 import nltk
 from nltk import downloader
 from nltk import stem
+from nltk.corpus import stopwords
 
 from tabulate import tabulate
 
@@ -31,7 +32,7 @@ class TermAnalyzer:
     }
 
     # https://www.nltk.org/nltk_data/
-    NLTK_CORPORA = ["punkt", "wordnet"]
+    NLTK_CORPORA = ["punkt", "wordnet", "stopwords"]
 
     _DROP_TABLE_QUERY = """
         DROP TABLE IF EXISTS lemmas;
@@ -73,11 +74,18 @@ class TermAnalyzer:
 
     _formatter = None
     _config = None
+
     _cache_path = None
     _db_path = None
-    _lemmatizer = None
 
-    def __init__(self):
+    _lemmatizer = None
+    _stop_words = None
+
+    _ignore_case = None
+    _ignore_stop_words = None
+
+    def __init__(self, case_sensitive=False):
+        self.case_sensitive = case_sensitive
         self._formatter = Formatter()
         self._config = Configuration()
         self._cache_path = self._config.make_cache()
@@ -95,6 +103,40 @@ class TermAnalyzer:
         cur.execute(self._CREATE_TABLE_QUERY)
         con.commit()
         con.close()
+
+    def ignore_case(self):
+        self._ignore_case = True
+
+    def ignore_stop_words(self):
+        self._ignore_stop_words = True
+
+    def init_nltk(self):
+        nltk_dir = self._cache_path.joinpath("nltk")
+        nltk_dir.mkdir(parents=True, exist_ok=True)
+        nltk.data.path.insert(0, nltk_dir)
+        dl = downloader.Downloader()
+        for name in self.NLTK_CORPORA:
+            if not dl.is_installed(name):
+                self._print(f"<fg=blue>Installing corpus</>: {name}")
+                dl.download(name, quiet=True)
+            else:
+                if dl.is_stale(name):
+                    self._print(f"<fg=blue>Updating corpus</>: {name}")
+                    dl.update(name, quiet=True)
+        self._lemmatizer = stem.WordNetLemmatizer()
+        self._stop_words = set(stopwords.words("english"))
+
+    def process_lemma(self, lemma):
+        if self._ignore_case:
+            lemma = lemma.lower()
+        if not self._ignore_stop_words:
+            return lemma
+        if lemma in self._stop_words:
+            # Ignore lemmas that match any stop words
+            if dgloss.verbose:
+                # TODO: Make this configurable
+                self._print(f"<fg=yellow>Ignoring</>: {lemma}")
+        return lemma
 
     def use_pkg_corpus(self, corpus_name):
         module_path = pathlib.Path(f"{__file__}")
@@ -116,27 +158,15 @@ class TermAnalyzer:
                 continue
             ipm = float(matches.group("ipm"))
             lemma = matches.group("lemma")
+            lemma = self.process_lemma(lemma)
+            if not lemma:
+                continue
             cur.execute(self._INSERT_LEMMA_QUERY, [source, lemma, ipm])
             # TODO convert to canonical lemma using nltk before importing
             if dgloss.verbose:
-                self._print(f"<fg=green>Inserted</>: {source}, {lemma}, {ipm}")
+                self._print(f"<fg=green>Added</>: {source}, {lemma}, {ipm}")
         con.commit()
         con.close()
-
-    def init_nltk(self):
-        nltk_dir = self._cache_path.joinpath("nltk")
-        nltk_dir.mkdir(parents=True, exist_ok=True)
-        nltk.data.path.insert(0, nltk_dir)
-        dl = downloader.Downloader()
-        for name in self.NLTK_CORPORA:
-            if not dl.is_installed(name):
-                self._print(f"<fg=blue>Installing corpus</>: {name}")
-                dl.download(name, quiet=True)
-            else:
-                if dl.is_stale(name):
-                    self._print(f"<fg=blue>Updating corpus</>: {name}")
-                    dl.update(name, quiet=True)
-        self._lemmatizer = stem.WordNetLemmatizer()
 
     def scan_dir(self, dirname):
         if not dgloss.quiet:
@@ -160,7 +190,7 @@ class TermAnalyzer:
         if not charset:
             # We were unable to decode this as a text file
             if dgloss.verbose:
-                self._print(f"<fg=yellow>Skipping</>: {filename}")
+                self._print(f"<fg=yellow>Skipped</>: {filename}")
             # Return a count of zero lemmas
             return 0
         if not dgloss.quiet:
@@ -173,6 +203,9 @@ class TermAnalyzer:
             if not word_re.search(token):
                 continue
             lemma = self._lemmatizer.lemmatize(token)
+            lemma = self.process_lemma(lemma)
+            if not lemma:
+                continue
             count = lemmas_counts.get(lemma, 0)
             lemmas_counts[lemma] = count + 1
             total_lemma_count += 1
@@ -189,7 +222,7 @@ class TermAnalyzer:
             if dgloss.verbose:
                 if len(lemma) > 40:
                     lemma = lemma[:40] + "[...]"
-                self._print(f"<fg=green>Inserted</>: {source}, {lemma}, {ipm}")
+                self._print(f"<fg=green>Added</>: {source}, {lemma}, {ipm}")
         con.commit()
         con.close()
 
