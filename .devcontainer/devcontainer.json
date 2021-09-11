@@ -23,5 +23,10 @@
         "python.pythonPath": "/usr/local/bin/python",
     },
     "postCreateCommand": "poetry install",
-    "remoteUser": "vscode",
+	"remoteUser": "vscode",
+	"extensions": [
+		"ms-python.vscode-pylance",
+		"ms-python.python",
+		"whinarn.python-auto-venv"
+	],
 }
