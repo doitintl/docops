@@ -40,6 +40,14 @@ This project uses [semantic versioning][semver].
   you to filter out terms that are of no interest. This allows for an iterative
   approach to improving the relevancy of the output.
 
+- Fixed the dgloss-analyze-terms --help output and added information about how
+  configuration files are  scanned and processed
+
+- Made the use corpus instruction optional with a default of english
+
+- Made the ignore stopwords instruction optional with a default of true
+
+- Expanded the README with more documentation
 -->
 
 ## 0.x

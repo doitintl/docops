@@ -9,9 +9,13 @@ Usage:
   {cmd_name} [options] (--print-cache)
   {cmd_name} [options] (--delete-cache)
 
-  {row_limit}
-
 This program will:
+
+  - Scan the target directory (`<DIR>`) for configuration files named
+    `.dgloss.conf` and process them prior to analysis.
+
+    You can use the `--config-dir` option to specify an alternative directory
+    to scan for configuration files.
 
   - Scan the target directory (`<DIR>`) for files (ignoring any directory or
     filename that begins with the `.` character).
@@ -26,7 +30,7 @@ This program will:
     data from a standard (i.e., non-technical) English-language corpus.
 
   - Print a list of terms that appear more often than expected, ranked on a
-    logarithmic scale, and sorted from highest to lowest frequency.
+    logarithmic scale, and sorted from the highest to the lowest frequency.
 
 Basic options:
 

@@ -18,7 +18,7 @@
             "console": "integratedTerminal"
         },
         {
-            "name": "Basic config",
+            "name": "No config",
             "type": "python",
             "request": "launch",
             "program": "${workspaceRoot}/.venv/bin/dgloss-analyze-terms",
@@ -26,15 +26,7 @@
             "console": "integratedTerminal"
         },
         {
-            "name": "Basic config (quiet)",
-            "type": "python",
-            "request": "launch",
-            "program": "${workspaceRoot}/.venv/bin/dgloss-analyze-terms",
-            "args": ["-q", "examples"],
-            "console": "integratedTerminal"
-        },
-        {
-            "name": "Basic config (verbose)",
+            "name": "No config (verbose)",
             "type": "python",
             "request": "launch",
             "program": "${workspaceRoot}/.venv/bin/dgloss-analyze-terms",

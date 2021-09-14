@@ -50,7 +50,7 @@ class Configuration(UserDict):
         }
     ]
 
-    # https://www.nltk.org/nltk_data/
+    # See https://www.nltk.org/nltk_data/
     NLTK_CORPORA = ["punkt", "wordnet", "stopwords"]
 
     target_dirname = None
@@ -58,10 +58,11 @@ class Configuration(UserDict):
 
     printer = None
     cache = None
-    word_freq_corpus = None
     lemmatizer = None
 
+    word_freq_corpus = None
     ignore_case = True
+    ignore_stop_words = set()
     ignore_literals = set()
     ignore_regexes = set()
 
@@ -73,12 +74,11 @@ class Configuration(UserDict):
         # this value will be None
         if target_dirname:
             self.target_dirname = pathlib.Path(target_dirname)
-        if config_dirname:
-            self.config_dirname = pathlib.Path(config_dirname)
-        else:
             # If no config directory is specified, default to searching the
             # target directory for configuration files
             self.config_dirname = pathlib.Path(target_dirname)
+        if config_dirname:
+            self.config_dirname = pathlib.Path(config_dirname)
         self.printer = Printer()
         self.cache = Cache()
 
@@ -88,6 +88,9 @@ class Configuration(UserDict):
     def load(self):
         self._init_nltk()
         self._scan_dir()
+        if not self.word_freq_corpus:
+            # Use the default word frequency corpus
+            self._run_command_use_corpus(None)
 
     def _init_nltk(self):
         cache_path = self.cache.get_cache_path()
@@ -158,8 +161,6 @@ class Configuration(UserDict):
             )
             self._print(table)
             print("")
-        # TODO: Make a private variable
-        self.instructions = instructions
 
     def _process_line(self, filename, line_num, line):
         line = line.strip()
@@ -205,10 +206,16 @@ class Configuration(UserDict):
         return instruction
 
     def _run_command_use_corpus(self, instruction):
-        for corpus_def in self.PKG_WORD_FREQ_CORPORA:
-            if corpus_def["name"] == instruction.argument:
-                self.word_freq_corpus = corpus_def
-                break
+        if instruction:
+            for corpus_def in self.PKG_WORD_FREQ_CORPORA:
+                if corpus_def["name"] == instruction.argument:
+                    self.word_freq_corpus = corpus_def
+                    break
+        else:
+            # Default to the first corpora in the list if no instruction was
+            # provided
+            self.word_freq_corpus = self.PKG_WORD_FREQ_CORPORA[0]
+            instruction = None
         if self.word_freq_corpus:
             abs_filename = dgloss.data_path.joinpath(
                 self.word_freq_corpus["data_filename"]
@@ -247,8 +254,6 @@ class Configuration(UserDict):
         return instruction
 
     def _run_command_ignore_stopwords(self, instruction):
-        # TODO: convert this to a set of regexps
-        # re_obj = re.compile(re.escape(str))
         try:
             # Attempt to load the stopwords for language indicated by the value
             # of `argument` (e.g., "english")

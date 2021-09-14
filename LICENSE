@@ -40,6 +40,6 @@ For the `src/dgloss` directory:
 For the `src/dgloss/data/corpora/leeds.txt.gz` file:
 
     This file was copied from the University of Leeds Centre for Translation
-    Studies page of word frequency lists <http://corpus.leeds.ac.uk/list.html>
-    and is distributed under the Creative Commons (CC BY) Attribution license
+    Studies corpora collection <http://corpus.leeds.ac.uk/list.html> and is
+    distributed under the Creative Commons (CC BY) Attribution license
     <https://creativecommons.org/licenses/by/2.5/>.
