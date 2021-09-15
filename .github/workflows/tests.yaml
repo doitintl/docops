@@ -1,0 +1,25 @@
+name: CLI
+on:
+  pull_request: ~
+  push:
+    branches:
+      - main
+
+jobs:
+  cli:
+    name: Testing using Python ${{ matrix.py }}
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/doitintl/docops/containers/python-${{ matrix.py }}:main
+      options: --user root
+
+    strategy:
+      matrix:
+        py: ["3.8", "3.9"]
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.py }}
+      - run: make test

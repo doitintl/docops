@@ -129,10 +129,10 @@ class TermsCommand:
                 continue
             attr_name = key.lower()
             self.set_class_attr(attr_name, value)
+        self.set_pkg_options()
         self._config = Configuration(self.dir, self.config_dir)
         self._cache = Cache()
         self._validate_docstring()
-        self.set_pkg_options()
 
     def _validate_docstring(self):
         try:

@@ -14,14 +14,19 @@ This project uses [semantic versioning][semver].
 
 ## Unreleased
 
-- ADD UNRELEASED CHANGES HERE UNTIL THE NEXT RELEASE IS MADE
+ADD UNRELEASED CHANGES HERE UNTIL THE NEXT RELEASE IS MADE
 
 #### Enhancements
 
+- Lowered required Python version to 3.8.
+
 #### Fixes
+
+- Fixed bug with `--print-cache` not working unless you first run the analyzer.
 
 - Fixed emoji rendering bug on PyPI by using the emoji character directly
   instead of GitHub emoji syntax.
+
 
 -->
 
@@ -53,7 +58,7 @@ _Released on 2021-09-15_ ([view source and package files][0.0.1])
   Configuration instructions improve the utility of term analysis by allowing
   you to filter out terms that are of no interest.
 
-  The [README][README] has some basic examples as well as basic syntax
+  The [README][readme] has some basic examples as well as basic syntax
   documentation for writing configuration files.
 
 - Added the `--config-dir` option, which allows you to specify a separate
@@ -89,7 +94,7 @@ _Released on 2021-09-15_ ([view source and package files][0.0.1])
   - Specify an arbitrary number of regexes to ignore. If a regex matches a
     term, the term will be ignored.
 
-  See the [README][README] for more details.
+  See the [README][readme] for more details.
 
 #### Fixes
 
@@ -115,6 +120,6 @@ _Released on 2021-09-10_ ([view source and package files][0.0.1])
 
 [semver]: https://semver.org/
 [stop words]: https://en.wikipedia.org/wiki/Stop_word
-[README]: https://github.com/doitintl/docops-gloss-utils
+[readme]: https://github.com/doitintl/docops-gloss-utils
 [0.0.0]: https://github.com/doitintl/docops-gloss-utils/releases/tag/0.0.0
-[0.0.1]: https://github.com/doitintl/docops-gloss-utils/releases/tag/0.0.1
+[containers]: https://github.com/doitintl/docops-containers

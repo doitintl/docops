@@ -1,12 +1,6 @@
 {
   "name": "Python 3",
-  "build": {
-    "dockerfile": "Dockerfile",
-    "context": "..",
-    "args": {
-      "VARIANT": "3"
-    }
-  },
+  "image": "ghcr.io/doitintl/docops/containers/python-3.8:main",
   "settings": {
     "cSpell.words": [
       "autopep",
@@ -66,7 +60,6 @@
     "pythonautovenv.autoInstallVenv": true,
     "redhat.telemetry.enabled": false
   },
-  "postCreateCommand": "poetry install",
   "remoteUser": "vscode",
   "extensions": [
     "bierner.github-markdown-preview",
@@ -82,6 +75,7 @@
     "streetsidesoftware.code-spell-checker",
     "tamasfe.even-better-toml",
     "whinarn.python-auto-venv",
-    "yzhang.markdown-all-in-one"
+    "yzhang.markdown-all-in-one",
+    "xshrim.txt-syntax"
   ]
 }

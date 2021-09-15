@@ -33,7 +33,7 @@ inflect = "^5.3.0"
 inflection = "^0.5.1"
 nltk = "^3.6.2"
 pastel = "^0.2.1"
-python = "^3.9"
+python = "^3.8"
 tabulate = "^0.8.9"
 
 [tool.poetry.dev-dependencies]
