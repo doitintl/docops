@@ -216,7 +216,7 @@ The current list of valid instructions are:
     <td><code>ignore&nbsp;regex&nbsp;&lt;ARGUMENT&gt;</td>
     <td>Any regular expression</td>
     <td>None</td>
-    <td>Ignore any terms that  match the specified regular expression</td>
+    <td>Ignore any terms that match the specified regular expression</td>
   </tr>
 </table>
 

@@ -49,7 +49,7 @@ Basic options:
 
   -l, --row-limit=NUM      Limit results to `NUM` rows [default: {row_limit}]
 
-  -r, --table-format=TYPE  Use table format `TYPE` [default: {table_format}]
+  -t, --table-format=TYPE  Use table format `TYPE` [default: {table_format}]
 
   --show-formats           Print a list of supported table formats and exit
 

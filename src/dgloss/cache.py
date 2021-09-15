@@ -50,6 +50,7 @@ class Cache:
         cache_path = self.get_cache_path()
         if os.path.isdir(cache_path):
             self._print(f"{cache_path}")
+            return True
         else:
             if dgloss.verbose:
                 self._print("<fg=yellow>No cache directory found</>")
