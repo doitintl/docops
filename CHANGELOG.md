@@ -16,6 +16,13 @@ This project uses [semantic versioning][semver].
 
 - ADD UNRELEASED CHANGES HERE UNTIL THE NEXT RELEASE IS MADE
 
+#### Enhancements
+
+#### Fixes
+
+- Fixed emoji rendering bug on PyPI by using the emoji character directly
+  instead of GitHub emoji syntax.
+
 -->
 
 ## 0.x

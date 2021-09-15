@@ -3,7 +3,7 @@
 *A collection of utilities for the creation and maintenance of technical
 glossaries*
 
-> :pencil2:&nbsp;&nbsp;**Note**
+> 📝 &nbsp;&nbsp;**Note**
 >
 > This project does not currently have any documentation besides the sparse
 > information in this README. We will add more detailed documentation at a
