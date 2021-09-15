@@ -1,11 +1,19 @@
 {
-	"name": "Debian",
-	"build": {
-		"dockerfile": "Dockerfile",
-		"args": { "VARIANT": "buster" }
-	},
-	"remoteUser": "vscode",
+	"name": "Docker in Docker",
+	"dockerFile": "Dockerfile",
+	"runArgs": [
+		"--init",
+		"--privileged"
+	],
+	"mounts": [
+		"source=dind-var-lib-docker,target=/var/lib/docker,type=volume"
+	],
+	"overrideCommand": false,
+	"settings": {},
 	"extensions": [
-		"ms-azuretools.vscode-docker"
-	]
+		"ms-azuretools.vscode-docker",
+		"omartawfik.github-actions-vscode",
+		"cschleiden.vscode-github-actions"
+	],
+	"remoteUser": "vscode"
 }
