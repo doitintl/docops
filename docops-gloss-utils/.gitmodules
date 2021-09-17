@@ -1,4 +1,4 @@
 [submodule "examples/gitbook/cmp-docs"]
-	path = examples/gitbook/cmp-docs
+	path = docops-gloss-util/examples/gitbook/cmp-docs
 	url = https://github.com/doitintl/cmp-docs.git
 	shallow = true
