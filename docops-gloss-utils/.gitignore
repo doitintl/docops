@@ -1,8 +1,0 @@
-__pycache__
-.venv/
-.vscode/settings.json
-.vscode/*.log
-*.stamp
-dist/
-init.stamp
-test/logs/

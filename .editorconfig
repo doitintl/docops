@@ -1,0 +1,30 @@
+# Configuration for EditorConfig
+# https://github.com/editorconfig/editorconfig-core-js
+# ============================================================================
+
+# VSCode extension: editorconfig.editorconfig
+
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_size = 2
+indent_style = space
+insert_final_newline = true
+max_line_length = 79
+trim_trailing_whitespace = true
+
+[*.py]
+indent_size = 4
+
+[Makefile]
+indent_size = 4
+indent_style = tab
+
+[*.mk]
+indent_size = 4
+indent_style = tab
+
+[COMMIT_EDITMSG]
+max_line_length = 72

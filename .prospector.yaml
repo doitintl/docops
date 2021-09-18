@@ -1,0 +1,81 @@
+# Configuration for Prospector
+# http://prospector.landscape.io/
+# =============================================================================
+
+# For configuration options, see:
+# http://prospector.landscape.io/en/master/profiles.html
+
+
+# Global configurations
+# -----------------------------------------------------------------------------
+
+strictness: verylow
+doc-warnings: false
+member-warnings: true
+
+# Without this setting, Prospector incorrectly tries to load the Django plugin,
+# which raised an Exception
+autodetect: false
+
+
+# Module-specific configurations
+# -----------------------------------------------------------------------------
+
+# https://www.pylint.org/
+# http://prospector.landscape.io/en/master/supported_tools.html#id1
+pylint:
+  run: true
+
+# https://pep8.readthedocs.io/
+# http://prospector.landscape.io/en/master/supported_tools.html#id2
+pep8:
+  run: true
+
+# https://launchpad.net/pyflakes
+# http://prospector.landscape.io/en/master/supported_tools.html#id3
+pyflakes:
+  run: true
+
+# https://github.com/PyCQA/mccabe
+# http://prospector.landscape.io/en/master/supported_tools.html#id4
+mccabe:
+  run: true
+
+# https://github.com/landscapeio/dodgy
+# http://prospector.landscape.io/en/master/supported_tools.html#id5
+dodgy:
+  run: true
+
+# https://github.com/PyCQA/pydocstyle
+# http://prospector.landscape.io/en/master/supported_tools.html#id6
+pep257:
+  run: true
+
+# http://prospector.landscape.io/en/master/supported_tools.html#profile-validator
+profile-validator:
+  run: true
+
+# https://github.com/regebro/pyroma
+# http://prospector.landscape.io/en/master/supported_tools.html#id7
+pyroma:
+  run: true
+
+# https://github.com/jendrikseipp/vulture
+# http://prospector.landscape.io/en/master/supported_tools.html#id8
+vulture:
+  true
+
+# https://github.com/timothycrosley/frosted
+# http://prospector.landscape.io/en/master/supported_tools.html#id9
+frosted:
+  run: false # Use pyflakes instead
+
+# https://github.com/python/mypy
+# https://github.com/python/mypy
+mypy:
+  run: false # This project is not ready for static typing
+
+# https://github.com/PyCQA/bandit
+# http://prospector.landscape.io/en/master/supported_tools.html#id11
+bandit:
+  true

@@ -1,0 +1,55 @@
+// Configuration for CSpell
+// https://github.com/streetsidesoftware/cspell
+// ============================================================================
+//
+// VSCode extension: streetsidesoftware.code-spell-checker
+{
+    "version": "0.2",
+    "language": "en-US",
+    "words": [
+        "autodetect",
+        "autopep",
+        "autopep8",
+        "azuretools",
+        "bierner",
+        "cschleiden",
+        "davidanson",
+        "Devcontainer",
+        "dgbc",
+        "dgloss",
+        "docops",
+        "doitintl",
+        "eamodio",
+        "esbenp",
+        "fnmatch",
+        "gitbook",
+        "isort",
+        "lemmatization",
+        "lemmatize",
+        "lemmatizer",
+        "markdownlint",
+        "mypy",
+        "nltk",
+        "punkt",
+        "pycodestyle",
+        "pydocstyle",
+        "pyflakes",
+        "pylama",
+        "pylance",
+        "pylint",
+        "pythonautovenv",
+        "regexes",
+        "ROWID",
+        "stopwords",
+        "tablefmt",
+        "tamasfe",
+        "titleize",
+        "tomli",
+        "venv",
+        "verylow",
+        "whinarn",
+        "yapf",
+        "ywhinarn",
+        "yzhang"
+    ]
+}

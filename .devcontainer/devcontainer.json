@@ -1,0 +1,78 @@
+// Configuration for creating a VSCode devcontainer
+// ============================================================================
+{
+  "name": "Python 3",
+  "image": "ghcr.io/doitintl/docops/containers/python-3.8:main",
+  "remoteUser": "vscode",
+  "settings": {
+    // Markdown All in One
+    // VSCode extension: yzhang.markdown-all-in-one
+    // --------------------------------------------------------------------
+    "markdown.extension.italic.indicator": "_",
+    "markdown.extension.toc.levels": "2..6",
+    "markdown.extension.toc.updateOnSave": true,
+    // Python
+    // VSCode extension: ms-python.python
+    // --------------------------------------------------------------------
+    "python.analysis.logLevel": "Information",
+    "python.formatting.provider": "black",
+    "python.languageServer": "Pylance",
+    "python.linting.enabled": true,
+    "python.linting.lintOnSave": true,
+    "python.linting.prospectorEnabled": true,
+    "python.linting.pydocstyleEnabled": true,
+    "python.terminal.activateEnvInCurrentTerminal": true,
+    "python.terminal.activateEnvironment": true,
+    "python.workspaceSymbols.enabled": true,
+    // These lint checks are all handled by Prospector
+    "python.linting.banditEnabled": false,
+    "python.linting.flake8Enabled": false,
+    "python.linting.pycodestyleEnabled": false,
+    "python.linting.pylamaEnabled": false,
+    "python.linting.pylintEnabled": false,
+    // Python Auto Venv
+    // VSCode extension: ywhinarn.python-auto-venv
+    // --------------------------------------------------------------------
+    "pythonautovenv.autoInstallVenv": true,
+    "pythonautovenv.enable": true,
+    // GitLens — Git supercharged
+    // VSCode extension: eamodio.gitlens
+    // ----------------------------------------------------------------------
+    // Disable inline author information. This feature is confusing because
+    // it essentially inserts fake lines to display this information, which
+    // can easily disguise missing empty lines between code blocks.
+    "gitlens.codeLens.authors.enabled": false,
+    "gitlens.codeLens.recentChange.enabled": false,
+    // Disable annoying pop-up screens
+    "gitlens.showWelcomeOnInstall": false,
+    "gitlens.showWhatsNewAfterUpgrades": false,
+    // EditorConfig for VS Code
+    // VSCode extension: editorconfig.editorconfig
+    // ----------------------------------------------------------------------
+    "editorconfig.generateAuto": false,
+    // YAML
+    // VSCode extension: redhat.vscode-yaml
+    // ----------------------------------------------------------------------
+    "redhat.telemetry.enabled": false,
+    "yaml.format.printWidth": 79,
+    "yaml.format.singleQuote": true,
+    // Even Better TOML
+    // VSCode extension: tamasfe.even-better-toml
+    "evenBetterToml.formatter.columnWidth": 79,
+    "evenBetterToml.formatter.reorderKeys": true,
+    // VSCode settings
+    // ----------------------------------------------------------------------
+    // This isn't possible to set in EditorConfig yet, so we set it here
+    // See: https://github.com/editorconfig/editorconfig/issues/269
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    // GitHub ignores line-breaks in Markdown
+    "markdown.preview.breaks": false,
+    // Allow JSON comments in VSCode configuration files
+    "files.associations": {
+      "cspell.json": "jsonc",
+      "devcontainer.json": "jsonc",
+      "extensions.json": "jsonc"
+    }
+  }
+}

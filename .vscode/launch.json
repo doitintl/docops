@@ -1,0 +1,74 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Gloss: No config",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceRoot}/.venv/bin/docops-gloss-terms",
+            "args": [
+                "examples"
+            ],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Gloss: No config (verbose)",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceRoot}/.venv/bin/docops-gloss-terms",
+            "args": [
+                "-v",
+                "examples"
+            ],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Gloss: Test config",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceRoot}/.venv/bin/docops-gloss-terms",
+            "args": [
+                "-c",
+                "data/configs",
+                "examples"
+            ],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Gloss: Test config (quiet)",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceRoot}/.venv/bin/docops-gloss-terms",
+            "args": [
+                "-c",
+                "data/configs",
+                "-q",
+                "examples"
+            ],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Gloss: Test config (verbose)",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceRoot}/.venv/bin/docops-gloss-terms",
+            "args": [
+                "-c",
+                "data/configs",
+                "-v",
+                "examples"
+            ],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "GitBook: Test auth",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceRoot}/.venv/bin/docops-gitbook",
+            "args": [
+                "--whoami"
+            ],
+            "console": "integratedTerminal",
+        }
+    ]
+}
