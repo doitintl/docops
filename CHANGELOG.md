@@ -56,7 +56,7 @@ _Released on 2021-09-19 ([view source and package files][1.0.0])_
   instead of GitHub emoji syntax.
 
 [pep-420]: https://www.python.org/dev/peps/pep-0420/
-[1.0.0]: https://github.com/doitintl/docops-gloss-utils/releases/tag/1.0.0
+[1.0.0]: https://github.com/doitintl/docops-python/releases/tag/1.0.0
 
 ## 0.x
 
@@ -146,5 +146,3 @@ _Released on 2021-09-10 (tag no longer available)_
 
 - Added `dgloss-analyze-terms` CLI tool to wrap the `dgloss.analyzers.terms`
   module.
-
-[0.0.0]: https://github.com/doitintl/docops-gloss-utils/releases/tag/0.0.0
