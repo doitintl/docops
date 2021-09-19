@@ -156,8 +156,8 @@ The current list of valid instructions are:
   `leeds`.
 
   The `leeds` corpus is an English language word frequency corpus taken from
-  the _University of Leeds Centre for Translation Studies_
-  [corpora][leeds_corpora].
+  the _University of Leeds_ [Centre for Translation Studies
+  corpora][leeds_corpora].
 
   In the future, this package may provide alternative word frequency corpora.
 
