@@ -88,13 +88,17 @@ This method allows any other [DoiT International](https://github.com/doitintl)
 projects to contribute modules to the `doitintl` namespace by following the
 same pattern.
 
+---
+
+🏠 [Home][home]
+
 <!-- Add link references below this line (sorted ascending) -->
 
 [auto-env]: https://marketplace.visualstudio.com/items?itemName=whinarn.python-auto-venv
+[doitintl]: https://github.com/doitintl
+[pep-420]: https://www.python.org/dev/peps/pep-0420/
 [poetry-docs]: https://python-poetry.org/docs/basic-usage/
 [poetry-install]: https://python-poetry.org/docs/#installation
 [poetry-venv]: https://python-poetry.org/docs/managing-environments/
 [poetry]: https://python-poetry.org/
 [vscode]: https://code.visualstudio.com/
-[pep-420]: https://www.python.org/dev/peps/pep-0420/
-[doitintl]: https://github.com/doitintl

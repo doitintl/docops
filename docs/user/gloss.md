@@ -25,7 +25,7 @@ glossaries*
 You can invoke the CLI program with this command:
 
 ```console
-$ docops-gloss-terms 
+$ docops-gloss-terms
 Usage:
   docops-gloss-terms [options] <DIR>
   docops-gloss-terms [options] (-h | --help)
