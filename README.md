@@ -16,9 +16,9 @@ You can install the [doit-docops][pypi-project] package using [Pip][pip]:
 ```console
 $ pip install doit-docops
 Collecting doit-docops
-  Downloading doit_docops-0.0.0-py3-none-any.whl (175 kB)
+  Downloading doit_docops-1.0.0-py3-none-any.whl (175 kB)
 [...]
-Successfully installed doit-docops-0.0.0
+Successfully installed doit-docops-1.0.0
 ```
 
 The [project releases][releases] page has a complete list of all releases and
