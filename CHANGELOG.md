@@ -25,7 +25,7 @@ ADD UNRELEASED CHANGES HERE UNTIL THE NEXT RELEASE IS MADE
 
 _Released on 2021-09-19 ([view source and package files][1.0.0])_
 
-**Breaking changes**
+**Breaking changes:**
 
 - This project has been renamed from `doit-gloss-utils` to
   `doitintl-docops`, and a previously unreleased `doit-gitbook-client`
