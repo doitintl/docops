@@ -176,11 +176,11 @@ The current list of valid instructions are:
 
 <!-- Link references go below this line, sorted ascending --->
 
-[config file]: blob/main/data/configs/test/.dgloss.conf
-[examples_dir]: tree/main/examples
+[config file]: ../../data/configs/test/.dgloss.conf
+[examples_dir]: ../../examples
 [home]: https://github.com/doitintl/docops-python
 [leeds_corpora]: http://corpus.leeds.ac.uk/list.html
 [nltk_corpora]: http://www.nltk.org/nltk_data/
 [nltk]: https://www.nltk.org/
 [re_module]: https://docs.python.org/3/library/re.html
-[test_dir]: tree/main/data/configs/test
+[test_dir]: ../../data/configs/test
