@@ -24,12 +24,12 @@ classifiers = [
 description = "Python library and CLI tools for doing DocOps at DoiT"
 homepage = "https://github.com/doitintl/docops"
 include = ["CHANGELOG.md", "LICENSE", "docs", "data", ".editorconfig"]
-keywords = ["nlp", "glossaries", "docops"]
+keywords = [ "ci-cd", "docs", "docops", "glossaries", "nlp", "qa-automation"]
 name = "doitintl-docops"
 packages = [{ include = "doitintl", "from" = "src" }]
 readme = "README.md"
 repository = "https://github.com/doitintl/docops-python"
-version = "0.0.0"
+version = "1.0.0"
 
 
 [tool.poetry.dependencies]

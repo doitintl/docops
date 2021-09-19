@@ -1,13 +1,13 @@
-# Release Notes
+# Changelog
 
 This project uses [semantic versioning][semver].
 
 **Table of contents:**
 
+- [1.x](#1x)
+  - [1.0.0](#100)
 - [0.x](#0x)
-  - [0.0.1](#001)
-    - [Enhancements](#enhancements)
-    - [Fixes](#fixes)
+  - [0.1.0](#010)
   - [0.0.0](#000)
 
 [semver]: https://semver.org/
@@ -17,7 +17,15 @@ This project uses [semantic versioning][semver].
 
 ADD UNRELEASED CHANGES HERE UNTIL THE NEXT RELEASE IS MADE
 
-#### Breaking changes
+-->
+
+## 1.x
+
+### 1.0.0
+
+_Released on 2021-09-19 ([view source and package files][1.0.0])_
+
+**Breaking changes**
 
 - This project has been renamed from `doit-gloss-utils` to
   `doitintl-docops`, and a previously unreleased `doit-gitbook-client`
@@ -32,7 +40,7 @@ ADD UNRELEASED CHANGES HERE UNTIL THE NEXT RELEASE IS MADE
   `docops-gloss-terms`, and the previously named `dgbc` tool is now
   `docops-gitbook`.
 
-#### Enhancements
+**Enhancements:**
 
 - Added `--whoami` functionality to the `docops-gitbook` CLI tool (i.e.,
   to demonstrate that authentication worked by showing you your own user
@@ -40,7 +48,7 @@ ADD UNRELEASED CHANGES HERE UNTIL THE NEXT RELEASE IS MADE
 
 - Lowered required Python version to 3.8.
 
-#### Fixes
+**Fixes:**
 
 - Fixed bug with `--print-cache` not working unless you first run the analyzer.
 
@@ -48,16 +56,15 @@ ADD UNRELEASED CHANGES HERE UNTIL THE NEXT RELEASE IS MADE
   instead of GitHub emoji syntax.
 
 [pep-420]: https://www.python.org/dev/peps/pep-0420/
-
--->
+[1.0.0]: https://github.com/doitintl/docops-gloss-utils/releases/tag/1.0.0
 
 ## 0.x
 
-### 0.0.1
+### 0.1.0
 
-_Released on 2021-09-15_ ([view source and package files][0.0.1])
+_Released on 2021-09-15 (tag no longer available)_
 
-#### Enhancements
+**Enhancements:**
 
 - The terms analyzer can now ignore word case during analysis.
 
@@ -117,19 +124,18 @@ _Released on 2021-09-15_ ([view source and package files][0.0.1])
 
   See the [README][readme] for more details.
 
-#### Fixes
+**Fixes:**
 
 - Fixed a few minor bugs.
 
 - Fixed the `dgloss-analyze-terms --help` output.
 
-[0.0.1]: https://github.com/doitintl/docops-gloss-utils/releases/tag/0.0.1
 [readme]: https://github.com/doitintl/docops-gloss-utils
 [stop words]: https://en.wikipedia.org/wiki/Stop_word
 
 ### 0.0.0
 
-_Released on 2021-09-10_ ([view source and package files][0.0.1])
+_Released on 2021-09-10 (tag no longer available)_
 
 - Added release notes (`CHANGELOG.md`).
 
