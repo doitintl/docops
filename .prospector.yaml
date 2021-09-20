@@ -5,7 +5,6 @@
 # For configuration options, see:
 # http://prospector.landscape.io/en/master/profiles.html
 
-
 # Global configurations
 # -----------------------------------------------------------------------------
 
@@ -16,7 +15,6 @@ member-warnings: true
 # Without this setting, Prospector incorrectly tries to load the Django plugin,
 # which raised an Exception
 autodetect: false
-
 
 # Module-specific configurations
 # -----------------------------------------------------------------------------
@@ -62,8 +60,7 @@ pyroma:
 
 # https://github.com/jendrikseipp/vulture
 # http://prospector.landscape.io/en/master/supported_tools.html#id8
-vulture:
-  true
+vulture: true
 
 # https://github.com/timothycrosley/frosted
 # http://prospector.landscape.io/en/master/supported_tools.html#id9
@@ -77,5 +74,4 @@ mypy:
 
 # https://github.com/PyCQA/bandit
 # http://prospector.landscape.io/en/master/supported_tools.html#id11
-bandit:
-  true
+bandit: true

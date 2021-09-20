@@ -21,7 +21,7 @@
 # SOFTWARE.
 
 
-.DEFAULT_GOAL = test
+.DEFAULT_GOAL   = test
 
 CMD            := docops-gloss-terms --disable-ansi
 CMP_DOCS       := examples/gitbook/cmp-docs

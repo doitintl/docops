@@ -1,92 +1,71 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "Gloss: No config",
-            "type": "python",
-            "request": "launch",
-            "program": "${workspaceRoot}/.venv/bin/docops-gloss-terms",
-            "args": [
-                "examples"
-            ],
-            "env": {
-              "DOCOPS_DEBUG": "1"
-            },
-            "console": "integratedTerminal"
-        },
-        {
-            "name": "Gloss: No config (verbose)",
-            "type": "python",
-            "request": "launch",
-            "program": "${workspaceRoot}/.venv/bin/docops-gloss-terms",
-            "args": [
-                "-v",
-                "examples"
-            ],
-            "env": {
-              "DOCOPS_DEBUG": "1"
-            },
-            "console": "integratedTerminal"
-        },
-        {
-            "name": "Gloss: Test config",
-            "type": "python",
-            "request": "launch",
-            "program": "${workspaceRoot}/.venv/bin/docops-gloss-terms",
-            "args": [
-                "-c",
-                "data/configs",
-                "examples"
-            ],
-            "env": {
-              "DOCOPS_DEBUG": "1"
-            },
-            "console": "integratedTerminal"
-        },
-        {
-            "name": "Gloss: Test config (quiet)",
-            "type": "python",
-            "request": "launch",
-            "program": "${workspaceRoot}/.venv/bin/docops-gloss-terms",
-            "args": [
-                "-c",
-                "data/configs",
-                "-q",
-                "examples"
-            ],
-            "env": {
-              "DOCOPS_DEBUG": "1"
-            },
-            "console": "integratedTerminal"
-        },
-        {
-            "name": "Gloss: Test config (verbose)",
-            "type": "python",
-            "request": "launch",
-            "program": "${workspaceRoot}/.venv/bin/docops-gloss-terms",
-            "args": [
-                "-c",
-                "data/configs",
-                "-v",
-                "examples"
-            ],
-            "env": {
-              "DOCOPS_DEBUG": "1"
-            },
-            "console": "integratedTerminal"
-        },
-        {
-            "name": "GitBook: Test auth",
-            "type": "python",
-            "request": "launch",
-            "program": "${workspaceRoot}/.venv/bin/docops-gitbook",
-            "args": [
-                "--whoami"
-            ],
-            "env": {
-              "DOCOPS_DEBUG": "1"
-            },
-            "console": "integratedTerminal",
-        }
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Gloss: No config",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceRoot}/.venv/bin/docops-gloss-terms",
+      "args": ["examples"],
+      "env": {
+        "DOCOPS_DEBUG": "1"
+      },
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Gloss: No config (verbose)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceRoot}/.venv/bin/docops-gloss-terms",
+      "args": ["-v", "examples"],
+      "env": {
+        "DOCOPS_DEBUG": "1"
+      },
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Gloss: Test config",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceRoot}/.venv/bin/docops-gloss-terms",
+      "args": ["-c", "data/configs", "examples"],
+      "env": {
+        "DOCOPS_DEBUG": "1"
+      },
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Gloss: Test config (quiet)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceRoot}/.venv/bin/docops-gloss-terms",
+      "args": ["-c", "data/configs", "-q", "examples"],
+      "env": {
+        "DOCOPS_DEBUG": "1"
+      },
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Gloss: Test config (verbose)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceRoot}/.venv/bin/docops-gloss-terms",
+      "args": ["-c", "data/configs", "-v", "examples"],
+      "env": {
+        "DOCOPS_DEBUG": "1"
+      },
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "GitBook: Test auth",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceRoot}/.venv/bin/docops-gitbook",
+      "args": ["--whoami"],
+      "env": {
+        "DOCOPS_DEBUG": "1"
+      },
+      "console": "integratedTerminal"
+    }
+  ]
 }

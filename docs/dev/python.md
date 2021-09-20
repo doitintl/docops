@@ -94,7 +94,8 @@ same pattern.
 
 <!-- Add link references below this line (sorted ascending) -->
 
-[auto-env]: https://marketplace.visualstudio.com/items?itemName=whinarn.python-auto-venv
+[auto-env]:
+  https://marketplace.visualstudio.com/items?itemName=whinarn.python-auto-venv
 [doitintl]: https://github.com/doitintl
 [pep-420]: https://www.python.org/dev/peps/pep-0420/
 [poetry-docs]: https://python-poetry.org/docs/basic-usage/

@@ -72,3 +72,20 @@ docops-gloss-terms = "doitintl.docops.gloss.cli.terms:run"
 
 [tool.black]
 line-length = 79
+
+[tool.pydocstyle]
+ignore = [
+  # For now, while still in alpha, ignore all lint errors about missing
+  # docstrings
+  "D100",
+  "D102",
+  "D105",
+  "D107",
+  "D104",
+  "D103",
+  "D101",
+  # The rest are miscelaneous choices
+  "D212",
+  "D415",
+  "D400"
+]

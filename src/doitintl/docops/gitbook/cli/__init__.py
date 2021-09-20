@@ -21,7 +21,8 @@
 # SOFTWARE.
 
 
-"""DoiT GitBook Client
+"""
+DoiT GitBook Client
 
 Usage:
   {entry_point} [options] (-h, --help)
@@ -55,6 +56,7 @@ from doitintl.docops.gitbook import exceptions
 
 cmd_path = pathlib.PurePath(sys.argv[0])
 cmd_name = cmd_path.name
+
 
 def test_env():
     client = api.Client()

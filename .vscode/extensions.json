@@ -1,27 +1,27 @@
 // Recommended VSCode extensions
 // ============================================================================
 {
-    "recommendations": [
-        "bierner.github-markdown-preview",
-        "bierner.markdown-checkbox",
-        "bierner.markdown-emoji",
-        "bierner.markdown-preview-github-styles",
-        "cschleiden.vscode-github-actions",
-        "davidanson.vscode-markdownlint",
-        "eamodio.gitlens",
-        "editorconfig.editorconfig",
-        "magicstack.magicpython",
-        "me-dutour-mathieu.vscode-github-actions",
-        "ms-python.python",
-        "ms-python.vscode-pylance",
-        "ms-vscode.makefile-tools",
-        "pascalreitermann93.vscode-yaml-sort",
-        "redhat.vscode-yaml",
-        "remimarsal.prettier-now",
-        "streetsidesoftware.code-spell-checker",
-        "tamasfe.even-better-toml",
-        "whinarn.python-auto-venv",
-        "xshrim.txt-syntax",
-        "yzhang.markdown-all-in-one"
-    ]
+  "recommendations": [
+    "bierner.github-markdown-preview",
+    "bierner.markdown-checkbox",
+    "bierner.markdown-emoji",
+    "bierner.markdown-preview-github-styles",
+    "cschleiden.vscode-github-actions",
+    "davidanson.vscode-markdownlint",
+    "eamodio.gitlens",
+    "editorconfig.editorconfig",
+    "magicstack.magicpython",
+    "me-dutour-mathieu.vscode-github-actions",
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "ms-vscode.makefile-tools",
+    "pascalreitermann93.vscode-yaml-sort",
+    "redhat.vscode-yaml",
+    "streetsidesoftware.code-spell-checker",
+    "tamasfe.even-better-toml",
+    "whinarn.python-auto-venv",
+    "xshrim.txt-syntax",
+    "yzhang.markdown-all-in-one",
+    "esbenp.prettier-vscode"
+  ]
 }

@@ -1,7 +1,7 @@
 # Glossary Utilities
 
-*A collection of utilities for the creation and maintenance of technical
-glossaries*
+_A collection of utilities for the creation and maintenance of technical
+glossaries_
 
 > 📝 &nbsp;&nbsp;**Note**
 >
@@ -100,7 +100,7 @@ instructions are processed in the order they are read (file-by-file).
 Each `.dgloss.conf` instruction takes the form of a line using the following
 syntax:
 
-```
+```text
 COMMAND OPTION ARGUMENT
 ```
 

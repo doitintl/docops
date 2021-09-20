@@ -25,13 +25,13 @@
 
 .DEFAULT_GOAL = help
 
-VENV       := $(shell poetry env info --path)
-PATH       := $(VENV)/bin:$(PATH)
-INIT_STAMP := init.stamp
-LOG_DIR    := tests/logs
-TEST_DIR   := tests/rules
+VENV         := $(shell poetry env info --path)
+PATH         := $(VENV)/bin:$(PATH)
+INIT_STAMP   := init.stamp
+LOG_DIR      := tests/logs
+TEST_DIR     := tests/rules
 
-MAKE_TESTS = $(MAKE) -C . -f
+MAKE_TESTS    = $(MAKE) -C . -f
 
 .PHONY: help # Print this help message and exit
 help:

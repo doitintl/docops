@@ -32,8 +32,8 @@ RULES_FILE     := $(subst $(RULES_DIR),,$(MAKEFILE_LIST))
 RULES          := $(basename $(RULES_FILE))
 CMD_LOG_DIR    := $(LOG_DIR)/$(RULES_DIR)/$(RULES)
 
-COLOR_MAKEFILE :=\e[0;36m$(MAKEFILE)\e[0;00m
-COLOR_TEST      =\e[0;35m$@\e[0;00m
+COLOR_MAKEFILE := \e[0;36m$(MAKEFILE)\e[0;00m
+COLOR_TEST      = \e[0;35m$@\e[0;00m
 PRINT_MAKE_CMD  = @ printf "make -f $(COLOR_MAKEFILE) $(COLOR_TEST)\n"
 LOGFILE         = $(CMD_LOG_DIR)/$@.log
 

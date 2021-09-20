@@ -25,6 +25,7 @@ import charset_normalizer
 
 from doitintl import docops
 
+
 def decode_bytes(bytes, filename=None):
     charset_data = charset_normalizer.from_bytes(bytes).best()
     return get_str(charset_data, filename)

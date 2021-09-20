@@ -22,7 +22,8 @@
 
 
 # TODO: Colorize this output
-"""Find terms that may be candidates for inclusion in a glossary
+"""
+Find terms that may be candidates for inclusion in a glossary
 
 Usage:
 
