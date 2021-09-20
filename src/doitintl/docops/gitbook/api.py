@@ -24,6 +24,7 @@
 import os
 
 import apiclient
+import apiclient.exceptions
 
 from doitintl.docops.gitbook import cache
 from doitintl.docops.gitbook import exceptions
@@ -67,7 +68,10 @@ class Client(apiclient.APIClient):
         if results:
             uid, title, baseDomain = results[0]
         else:
-            user = self.get("https://api-beta.gitbook.com/v1/user")
+            try:
+                user = self.get("https://api-beta.gitbook.com/v1/user")
+            except apiclient.exceptions.APIClientError as err:
+                raise exceptions.ClientError(err)
             uid = user["uid"]
             title = user["title"]
             baseDomain = user["baseDomain"]

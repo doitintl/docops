@@ -71,5 +71,6 @@ reset:
 .PHONY: test # Run project tests
 test: init
 	rm -rf "$(LOG_DIR)"
-	poetry run $(MAKE_TESTS) $(TEST_DIR)/docops-gitbook.mk
-	poetry run $(MAKE_TESTS) $(TEST_DIR)/docops-gloss-terms.mk
+	poetry run $(MAKE_TESTS) $(TEST_DIR)/pkg/poetry.mk
+	poetry run $(MAKE_TESTS) $(TEST_DIR)/cli/docops-gitbook.mk
+	poetry run $(MAKE_TESTS) $(TEST_DIR)/cli/docops-gloss-terms.mk

@@ -23,7 +23,7 @@
 
 .DEFAULT_GOAL = test
 
-CMD            := docops-gloss-terms
+CMD            := docops-gloss-terms --disable-ansi
 CMP_DOCS       := examples/gitbook/cmp-docs
 TEST_CONFIG    := data/configs/test
 
@@ -31,7 +31,7 @@ MAKEFILE       := $(lastword $(MAKEFILE_LIST))
 RULES_DIR      := $(dir $(MAKEFILE))
 RULES_FILE     := $(subst $(RULES_DIR),,$(MAKEFILE_LIST))
 RULES          := $(basename $(RULES_FILE))
-CMD_LOG_DIR    := $(LOG_DIR)/$(RULES)
+CMD_LOG_DIR    := $(LOG_DIR)/$(RULES_DIR)/$(RULES)
 
 COLOR_MAKEFILE :=\e[0;36m$(MAKEFILE)\e[0;00m
 COLOR_TEST      =\e[0;35m$@\e[0;00m
@@ -86,26 +86,8 @@ test-cli-no-config-quiet: test-cli-no-config-verbose
 	$(CMD) -q -o table $(CMP_DOCS) \
 	    > $(LOGFILE)
 
-# TODO: This rule seems to pass if there's an error output
-# Trick the program into thinking it's running in a TTY so that it will
-# colorize output if configured to do so. Then, replace the start of any ANSI
-# escape secquence with the UUID. If we can successfully `grep` for that UUID,
-# then the `--disable-ansi` option failed.
-.PHONY: test-cli-disable-ansi
-test-cli-disable-ansi: test-cli-no-config-quiet
-	$(PRINT_MAKE_CMD)
-	@ # Generate UUID for ANSI test to avoid accidentally matching terms (e.g.,
-	@ # when pointing the command at it's own source directory)
-	uuid="$$(uuidgen)" && \
-	if socat - EXEC:"$(CMD) --disable-ansi \
-	        $(CMP_DOCS)",pty,setsid,ctty | \
-	        perl -pe "s/\033.*/$${uuid}/g" | \
-	        grep "$${uuid}"; then\
-	    false; \
-	fi > $(LOGFILE)
-
 .PHONY: test-cli-config
-test-cli-config: test-cli-disable-ansi
+test-cli-config: test-cli-no-config-quiet
 	$(PRINT_MAKE_CMD)
 	$(CMD) -c $(TEST_CONFIG) -o table $(CMP_DOCS) \
 	    > $(LOGFILE)

@@ -39,6 +39,7 @@
         "pylama",
         "pylance",
         "pylint",
+        "PYPI",
         "pytagcloud",
         "pythonautovenv",
         "reformatter",

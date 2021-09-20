@@ -23,13 +23,13 @@
 
 .DEFAULT_GOAL = test
 
-CMD            := docops-gitbook
+CMD            := docops-gitbook --disable-ansi
 
 MAKEFILE       := $(lastword $(MAKEFILE_LIST))
 RULES_DIR      := $(dir $(MAKEFILE))
 RULES_FILE     := $(subst $(RULES_DIR),,$(MAKEFILE_LIST))
 RULES          := $(basename $(RULES_FILE))
-CMD_LOG_DIR    := $(LOG_DIR)/$(RULES)
+CMD_LOG_DIR    := $(LOG_DIR)/$(RULES_DIR)/$(RULES)
 
 COLOR_MAKEFILE :=\e[0;36m$(MAKEFILE)\e[0;00m
 COLOR_TEST      =\e[0;35m$@\e[0;00m
