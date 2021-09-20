@@ -86,6 +86,7 @@
       "extensions.json": "jsonc"
     },
     "extensions": [
+      "cschleiden.vscode-github-actions",
       "davidanson.vscode-markdownlint",
       "editorconfig.editorconfig",
       "fvclaus.sort-json-array",
