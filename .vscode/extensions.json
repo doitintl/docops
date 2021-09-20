@@ -1,0 +1,19 @@
+// Recommended VSCode extensions
+// ============================================================================
+{
+  "recommendations": [
+    "cschleiden.vscode-github-actions",
+    "dansnow.vscode-dockerfilelint",
+    "davidanson.vscode-markdownlint",
+    "eamodio.gitlens",
+    "editorconfig.editorconfig",
+    "esbenp.prettier-vscode",
+    "foxundermoon.shell-format",
+    "jeff-hykin.better-dockerfile-syntax",
+    "me-dutour-mathieu.vscode-github-actions",
+    "ms-azuretools.vscode-docker",
+    "omartawfik.github-actions-vscode",
+    "streetsidesoftware.code-spell-checker",
+    "yzhang.markdown-all-in-one"
+  ]
+}

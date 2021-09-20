@@ -1,0 +1,73 @@
+// Configuration for CSpell
+// https://github.com/streetsidesoftware/cspell
+// ============================================================================
+//
+// VSCode extension: streetsidesoftware.code-spell-checker
+{
+  "version": "0.2",
+  "language": "en-US",
+  // https://streetsidesoftware.github.io/cspell/docs/dictionaries/
+  "dictionaries": [
+    // General
+    "companies",
+    "softwareTerms",
+    "misc",
+    // Programming
+    "typescript",
+    "node",
+    "php",
+    "go",
+    "python",
+    "powershell",
+    "html",
+    "css",
+    "cpp",
+    "csharp",
+    "latex",
+    "bash",
+    "fonts",
+    "filetypes",
+    "npm"
+  ],
+  // TODO: Experiment with taking some of these out again now we have added
+  // TODO: some dictionaries to the mix
+  "words": [
+    "autoremove",
+    "azuretools",
+    "buildx",
+    "crey",
+    "cschleiden",
+    "dansnow",
+    "dansnow",
+    "davidanson",
+    "devcontainer",
+    "devcontainers",
+    "dind",
+    "dockerfilelint",
+    "dockerfilelint",
+    "docops",
+    "doitintl",
+    "dutour",
+    "eamodio",
+    "EDITMSG",
+    "editorconfig",
+    "ensurepath",
+    "esbenp",
+    "foxundermoon",
+    "foxundermoon",
+    "ghcr",
+    "gitlens",
+    "hykin",
+    "kasperhesthaven",
+    "markdownlint",
+    "mathieu",
+    "MOBY",
+    "noninteractive",
+    "NONROOT",
+    "nosborn",
+    "omartawfik",
+    "pipx",
+    "socat",
+    "yzhang"
+  ]
+}

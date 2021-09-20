@@ -1,0 +1,63 @@
+name: Push
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  lint-checks:
+    name: Lint checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: kasperhesthaven/setup-editorconfig-checker@v1.2.0
+        if: always()
+      - uses: streetsidesoftware/cspell-action@v1.0.1
+      - uses: nosborn/github-action-markdown-cli@v2.0.0
+        if: always()
+        with:
+          files: .
+          config_file: .markdownlint.yaml
+      - uses: creyD/prettier_action@v4.0
+        if: always()
+        with:
+          prettier_options: --check .
+      - uses: luke142367/Docker-Lint-Action@v1.0.0
+        if: always()
+        with:
+          target: src/Dockerfile
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  build-deploy:
+    name: Build image for Python ${{ matrix.py-version }}
+    runs-on: ubuntu-latest
+    # Absolutely must not deploy if there are lint failures
+    needs: lint-checks
+    strategy:
+      matrix:
+        py-version: ['3.8', '3.9']
+    env:
+      IMAGE_BASENAME: doitintl/docops/python
+    steps:
+      - uses: actions/checkout@v2
+      - uses: docker/setup-buildx-action@v1
+      - uses: docker/login-action@v1
+        if: github.event_name != 'pull_request'
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/metadata-action@v3
+        id: meta
+        with:
+          images: ghcr.io/${{ env.IMAGE_BASENAME }}-${{ matrix.py-version }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/build-push-action@v2
+        with:
+          context: src
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          build-args: VARIANT=${{ matrix.py-version }}
+          secrets: GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
