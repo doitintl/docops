@@ -11,6 +11,7 @@
         "eamodio.gitlens",
         "editorconfig.editorconfig",
         "magicstack.magicpython",
+        "me-dutour-mathieu.vscode-github-actions",
         "ms-python.python",
         "ms-python.vscode-pylance",
         "ms-vscode.makefile-tools",
