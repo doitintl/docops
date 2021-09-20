@@ -14,6 +14,7 @@
         "ms-python.python",
         "ms-python.vscode-pylance",
         "ms-vscode.makefile-tools",
+        "pascalreitermann93.vscode-yaml-sort",
         "redhat.vscode-yaml",
         "remimarsal.prettier-now",
         "streetsidesoftware.code-spell-checker",

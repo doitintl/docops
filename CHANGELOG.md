@@ -17,6 +17,21 @@ This project uses [semantic versioning][semver].
 
 ADD UNRELEASED CHANGES HERE UNTIL THE NEXT RELEASE IS MADE
 
+**Breaking changes:**
+
+- The `--row-limit` option has been renamed `--term-imit` (to be agnostic to
+  output type).
+
+- The `--show-formats` option has been renamed to
+  `--show-table-formats`, in keeping with the new `--show-output-types`
+  option (see below).
+
+**Enhancements:**
+
+- Added the `--output-type` and `--show-output-types` options. At the
+  moment, the only additional option this gives you is to turn off table
+  output.
+
 -->
 
 ## 1.x

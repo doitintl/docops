@@ -209,12 +209,14 @@ class TermAnalyzer:
         self._load_pkg_corpus()
         self._scan_dir()
 
-    def print_ranks(self):
+    def print_table(self):
+        if docops.verbose:
+            print("Table format: {self.docops.table_format}")
         headers = ["Rank", "Base term"]
         con = sqlite3.connect(self._config.cache.get_db_path())
         cur = con.cursor()
         table_rows = []
-        for row in cur.execute(self._SELECT_DELTAS_QUERY, [docops.row_limit]):
+        for row in cur.execute(self._SELECT_DELTAS_QUERY, [docops.term_limit]):
             lemma, delta = row
             rank = round(math.log(delta))
             table_rows.append([rank, lemma])

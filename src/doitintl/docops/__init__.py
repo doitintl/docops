@@ -22,7 +22,10 @@
 
 
 import os
+from posixpath import dirname
+import sys
 import pathlib
+import inspect
 
 from importlib.metadata import distribution
 
@@ -42,14 +45,47 @@ def get_pkg_path(path):
     return path
 
 
+# The path to the root Python source code directory for this module
+src_path = pathlib.Path(__file__).parent
+
+# The paths to the addition files shipped with this package
 editorconfig_path = get_pkg_path(".editorconfig")
 data_path = get_pkg_path("data")
 
+debug = False
 verbose = False
 quiet = False
 disable_ansi = False
-row_limit = 100
+term_limit = 50
 table_format = "simple"
+
+# TODO: Document this in the developer ops and integrate it into the
+# `launch.json`config
+if os.environ.get("DOCOPS_DEBUG", None):
+    debug = True
+
+# The standard UNIX file-parsing error outputs are:
+#
+#     file_name:line:column: message
+#     file_name:line: message
+
+
+# TODO: Make more use of this function
+def print_debug(msg):
+    fn_name = None
+    caller = inspect.currentframe().f_back
+    frame = inspect.getframeinfo(caller)
+    path = pathlib.Path(frame.filename)
+    path = path.relative_to(src_path)
+    line_num = frame.lineno
+    fn_name = frame.function
+    caller = caller.f_back
+    # Format the text using a lighter shade (if supported)
+    context = f"\x1b[00;2m{path}:{line_num} {fn_name} -\x1b[0m"
+    msg = f"\x1b[00;1m{msg}\x1b[0m\n"
+    output = f"{context} {msg}"
+    sys.stderr.write(output)
+    sys.stderr.flush()
 
 
 class Error(Exception):
@@ -61,7 +97,7 @@ class Error(Exception):
         if no_prefix:
             return self.err
         error_type = self.get_error_type()
-        return f"<fg=red>{error_type}</>: {self.err}"
+        return f"<error>{error_type}</error>: {self.err}"
 
     def get_error_type(self):
         error_type = self.__class__.__name__
@@ -69,6 +105,11 @@ class Error(Exception):
         error_type = inflection.humanize(error_type)
         error_type = error_type.upper()
         return error_type
+
+
+class NotImplementedError(Exception):
+
+    pass
 
 
 class ProgramError(Error):
@@ -105,16 +146,12 @@ class ParseError(ConfigurationError):
         self._parse_errors = parse_errors
 
     def __str__(self):
-        # The standard UNIX file-parsing error outputs are:
-        #
-        #     file_name:line:column: message
-        #     file_name:line: message
         output = ""
         for parse_error in self._parse_errors:
             filename, line_num, msg = parse_error
             output = output + f"{filename}:{line_num}: {msg}\n"
         if verbose:
             error_type = self.get_error_type()
-            output = f"<fg=red>{error_type}</>:\n\n{output}"
+            output = f"<error{error_type}</error>:\n\n{output}"
         output = output.strip()
         return output

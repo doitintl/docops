@@ -62,24 +62,31 @@ test-cli-help: test-cli-version
 	$(CMD) --help \
 	    > $(LOGFILE)
 
+.PHONY: test-cli-no-output
+test-cli-table-type: test-cli-row-limit
+	$(PRINT_MAKE_CMD)
+	$(CMD) (CMP_DOCS) \
+	    > $(LOGFILE)
+
 .PHONY: test-cli-no-config
 test-cli-no-config: test-cli-help
 	$(PRINT_MAKE_CMD)
-	$(CMD) $(CMP_DOCS) \
+	$(CMD) -o table $(CMP_DOCS) \
 	    > $(LOGFILE)
 
 .PHONY: test-cli-no-config-verbose
 test-cli-no-config-verbose: test-cli-no-config
 	$(PRINT_MAKE_CMD)
-	$(CMD) -v $(CMP_DOCS) \
+	$(CMD) -v -o table $(CMP_DOCS) \
 	    > $(LOGFILE)
 
 .PHONY: test-cli-no-config-quiet
 test-cli-no-config-quiet: test-cli-no-config-verbose
 	$(PRINT_MAKE_CMD)
-	$(CMD) -q $(CMP_DOCS) \
+	$(CMD) -q -o table $(CMP_DOCS) \
 	    > $(LOGFILE)
 
+# TODO: This rule seems to pass if there's an error output
 # Trick the program into thinking it's running in a TTY so that it will
 # colorize output if configured to do so. Then, replace the start of any ANSI
 # escape secquence with the UUID. If we can successfully `grep` for that UUID,
@@ -100,41 +107,47 @@ test-cli-disable-ansi: test-cli-no-config-quiet
 .PHONY: test-cli-config
 test-cli-config: test-cli-disable-ansi
 	$(PRINT_MAKE_CMD)
-	$(CMD) -c $(TEST_CONFIG) $(CMP_DOCS) \
+	$(CMD) -c $(TEST_CONFIG) -o table $(CMP_DOCS) \
 	    > $(LOGFILE)
 
 .PHONY: test-cli-config-verbose
 test-cli-config-verbose: test-cli-config
 	$(PRINT_MAKE_CMD)
-	$(CMD) -v -c $(TEST_CONFIG) $(CMP_DOCS) \
+	$(CMD) -v -c $(TEST_CONFIG) -o table $(CMP_DOCS) \
 	    > $(LOGFILE)
 
 .PHONY: test-cli-config-quiet
 test-cli-config-quiet: test-cli-config-verbose
 	$(PRINT_MAKE_CMD)
-	$(CMD) -q -c $(TEST_CONFIG) $(CMP_DOCS) \
+	$(CMD) -q -c $(TEST_CONFIG) -o table $(CMP_DOCS) \
 	    > $(LOGFILE)
 
 .PHONY: test-cli-row-limit
 test-cli-row-limit: test-cli-config-quiet
 	$(PRINT_MAKE_CMD)
-	$(CMD) -l 10 $(CMP_DOCS) \
+	$(CMD) -l 10 -o table $(CMP_DOCS) \
 	    > $(LOGFILE)
 
 .PHONY: test-cli-table-type
 test-cli-table-type: test-cli-row-limit
 	$(PRINT_MAKE_CMD)
-	$(CMD) -t github $(CMP_DOCS) \
+	$(CMD) -o table -t github $(CMP_DOCS) \
+	    > $(LOGFILE)
+
+.PHONY: test-cli-show-output-types
+test-cli-show-output-types: test-cli-table-type
+	$(PRINT_MAKE_CMD)
+	$(CMD) --show-output-types \
 	    > $(LOGFILE)
 
 .PHONY: test-cli-show-formats
-test-cli-show-formats: test-cli-table-type
+test-cli-show-table-formats: test-cli-show-output-types
 	$(PRINT_MAKE_CMD)
-	$(CMD) --show-formats \
+	$(CMD) --show-table-formats \
 	    > $(LOGFILE)
 
 .PHONY: test-cli-print-cache
-test-cli-print-cache: test-cli-show-formats
+test-cli-print-cache: test-cli-show-table-formats
 	$(PRINT_MAKE_CMD)
 	$(CMD) --print-cache \
         > $(LOGFILE)

@@ -1,5 +1,12 @@
 [tool.poetry]
+name = "doitintl-docops"
+version = "1.0.0"
+description = "Python library and CLI tools for doing DocOps at DoiT"
 authors = ["DoiT International <engineering@doit-intl.com>"]
+homepage = "https://github.com/doitintl/docops"
+repository = "https://github.com/doitintl/docops-python"
+readme = "README.md"
+keywords = [ "ci-cd", "docs", "docops", "glossaries", "nlp", "qa-automation"]
 classifiers = [
   "Development Status :: 2 - Pre-Alpha",
   "Environment :: Console",
@@ -21,15 +28,10 @@ classifiers = [
   "Topic :: Text Processing",
   "Topic :: Utilities",
 ]
-description = "Python library and CLI tools for doing DocOps at DoiT"
-homepage = "https://github.com/doitintl/docops"
-include = ["CHANGELOG.md", "LICENSE", "docs", "data", ".editorconfig"]
-keywords = [ "ci-cd", "docs", "docops", "glossaries", "nlp", "qa-automation"]
-name = "doitintl-docops"
-packages = [{ include = "doitintl", "from" = "src" }]
-readme = "README.md"
-repository = "https://github.com/doitintl/docops-python"
-version = "1.0.0"
+packages = [
+  { include = "doitintl", "from" = "src" },
+]
+include = ["CHANGELOG.md", "LICENSE", "docs", "data"]
 
 
 [tool.poetry.dependencies]
@@ -43,6 +45,8 @@ nltk = "^3.6.2"
 pastel = "^0.2.1"
 python = "^3.8"
 tabulate = "^0.8.9"
+pygame = "^2.0.1"
+simplejson = "^3.17.5"
 
 
 [tool.poetry.dev-dependencies]

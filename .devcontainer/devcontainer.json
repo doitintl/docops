@@ -7,20 +7,20 @@
   "settings": {
     // Markdown All in One
     // VSCode extension: yzhang.markdown-all-in-one
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     "markdown.extension.italic.indicator": "_",
     "markdown.extension.toc.levels": "2..6",
     "markdown.extension.toc.updateOnSave": true,
     // markdownlint
     // VSCode extension: davidanson.vscode-markdownlint
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     "markdownlint.run": "onSave",
     "markdownlint.ignore": [
-        "LICENSE"
-    ]
+      "LICENSE"
+    ],
     // Python
     // VSCode extension: ms-python.python
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     "python.analysis.logLevel": "Information",
     "python.formatting.provider": "black",
     "python.languageServer": "Pylance",
@@ -39,12 +39,12 @@
     "python.linting.pylintEnabled": false,
     // Python Auto Venv
     // VSCode extension: ywhinarn.python-auto-venv
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     "pythonautovenv.autoInstallVenv": true,
     "pythonautovenv.enable": true,
     // GitLens — Git supercharged
     // VSCode extension: eamodio.gitlens
-    // ----------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // Disable inline author information. This feature is confusing because
     // it essentially inserts fake lines to display this information, which
     // can easily disguise missing empty lines between code blocks.
@@ -55,12 +55,11 @@
     "gitlens.showWhatsNewAfterUpgrades": false,
     // EditorConfig for VS Code
     // VSCode extension: editorconfig.editorconfig
-    // ----------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     "editorconfig.generateAuto": false,
     // YAML
     // VSCode extension: redhat.vscode-yaml
-    // ----------------------------------------------------------------------
-    "redhat.telemetry.enabled": false,
+    // ------------------------------------------------------------------------
     "yaml.format.printWidth": 79,
     "yaml.format.singleQuote": true,
     // Even Better TOML
@@ -68,7 +67,12 @@
     "evenBetterToml.formatter.columnWidth": 79,
     "evenBetterToml.formatter.reorderKeys": true,
     // VSCode settings
-    // ----------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // Set up formatting configurations
+    "editor.defaultFormatter": "remimarsal.prettier-now",
+    "[python]": {
+      "editor.defaultFormatter": "ms-python.python"
+    },
     // This isn't possible to set in EditorConfig yet, so we set it here
     // See: https://github.com/editorconfig/editorconfig/issues/269
     "files.insertFinalNewline": true,
@@ -80,6 +84,23 @@
       "cspell.json": "jsonc",
       "devcontainer.json": "jsonc",
       "extensions.json": "jsonc"
-    }
+    },
+    "extensions": [
+      "davidanson.vscode-markdownlint",
+      "editorconfig.editorconfig",
+      "fvclaus.sort-json-array",
+      "ms-python.python",
+      "ms-python.vscode-pylance",
+      "omartawfik.github-actions-vscode",
+      "redhat.vscode-yaml",
+      "remimarsal.prettier-now",
+      "richie5um2.vscode-sort-json",
+      "stkb.rewrap",
+      "streetsidesoftware.code-spell-checker",
+      "tamasfe.even-better-toml",
+      "whinarn.python-auto-venv",
+      "xshrim.txt-syntax",
+      "yzhang.markdown-all-in-one"
+    ]
   }
 }

@@ -9,6 +9,9 @@
             "args": [
                 "examples"
             ],
+            "env": {
+              "DOCOPS_DEBUG": "1"
+            },
             "console": "integratedTerminal"
         },
         {
@@ -20,6 +23,9 @@
                 "-v",
                 "examples"
             ],
+            "env": {
+              "DOCOPS_DEBUG": "1"
+            },
             "console": "integratedTerminal"
         },
         {
@@ -32,6 +38,9 @@
                 "data/configs",
                 "examples"
             ],
+            "env": {
+              "DOCOPS_DEBUG": "1"
+            },
             "console": "integratedTerminal"
         },
         {
@@ -45,6 +54,9 @@
                 "-q",
                 "examples"
             ],
+            "env": {
+              "DOCOPS_DEBUG": "1"
+            },
             "console": "integratedTerminal"
         },
         {
@@ -58,6 +70,9 @@
                 "-v",
                 "examples"
             ],
+            "env": {
+              "DOCOPS_DEBUG": "1"
+            },
             "console": "integratedTerminal"
         },
         {
@@ -68,6 +83,9 @@
             "args": [
                 "--whoami"
             ],
+            "env": {
+              "DOCOPS_DEBUG": "1"
+            },
             "console": "integratedTerminal",
         }
     ]
