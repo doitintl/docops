@@ -54,10 +54,16 @@
     // Prettier - Code Formatter
     // VSCode extension: esbenp.prettier-vscode
     // ------------------------------------------------------------------------
+    "prettier.enable": true,
+    "prettier.requireConfig": true,
+    "prettier.useEditorConfig": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     // Set up overrides
     "[python]": {
       "editor.defaultFormatter": "ms-python.python"
+    },
+    "[markdown]": {
+      "editor.defaultFormatter": "yzhang.markdown-all-in-one"
     },
     // EditorConfig for VS Code
     // VSCode extension: editorconfig.editorconfig

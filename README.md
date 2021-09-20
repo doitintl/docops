@@ -44,11 +44,11 @@ each release page has links to multiple release assets.
 <!-- Link references go below this line, sorted ascending --->
 
 [dev-python]:
-  https://github.com/doitintl/docops-python/blob/main/docs/dev/python.md
+ https://github.com/doitintl/docops-python/blob/main/docs/dev/python.md
 [pip]: https://pip.pypa.io/en/stable/
 [pypi-project]: https://pypi.org/project/ddoit-docops
 [releases]: https://github.com/doitintl/docops-python/releases
 [user-gitbook]:
-  https://github.com/doitintl/docops-python/blob/main/docs/user/gitbook.md
+ https://github.com/doitintl/docops-python/blob/main/docs/user/gitbook.md
 [user-gloss]:
-  https://github.com/doitintl/docops-python/blob/main/docs/user/gloss.md
+ https://github.com/doitintl/docops-python/blob/main/docs/user/gloss.md

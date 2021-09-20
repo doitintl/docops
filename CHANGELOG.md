@@ -42,9 +42,9 @@ _Released on 2021-09-19 ([view source and package files][1.0.0])_
 
 **Breaking changes:**
 
-- This project has been renamed from `doit-gloss-utils` to
-  `doitintl-docops`, and a previously unreleased `doit-gitbook-client`
-  package has been merged into the project.
+- This project has been renamed from `doit-gloss-utils` to `doitintl-docops`,
+  and a previously unreleased `doit-gitbook-client` package has been merged
+  into the project.
 
   The top-level Python [namespace package][pep-420] name is now called
   `doitintl`. The previously named `gloss` module is now
@@ -57,9 +57,8 @@ _Released on 2021-09-19 ([view source and package files][1.0.0])_
 
 **Enhancements:**
 
-- Added `--whoami` functionality to the `docops-gitbook` CLI tool (i.e.,
-  to demonstrate that authentication worked by showing you your own user
-  details)
+- Added `--whoami` functionality to the `docops-gitbook` CLI tool (i.e., to
+  demonstrate that authentication worked by showing you your own user details)
 
 - Lowered required Python version to 3.8.
 

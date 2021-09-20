@@ -46,31 +46,31 @@ test-cli-init: $(CMD_LOG_DIR)
 test-cli-no-args: test-cli-init
 	$(PRINT_MAKE_CMD)
 	$(CMD) || true \
-	    > $(LOGFILE)
+		> $(LOGFILE)
 
 .PHONY: test-cli-version
 test-cli-version: test-cli-no-args
 	$(PRINT_MAKE_CMD)
 	$(CMD) --version \
-	    > $(LOGFILE)
+		> $(LOGFILE)
 
 .PHONY: test-cli-help
 test-cli-help: test-cli-version
 	$(PRINT_MAKE_CMD)
 	$(CMD) --help \
-	    > $(LOGFILE)
+		> $(LOGFILE)
 
 .PHONY: test-cli-test-env
 test-cli-test-env: test-cli-help
 	$(PRINT_MAKE_CMD)
 	$(CMD) --test-env \
-	    > $(LOGFILE)
+		> $(LOGFILE)
 
 .PHONY: test-cli-no-config-verbose
 test-cli-whoami: test-cli-test-env
 	$(PRINT_MAKE_CMD)
 	$(CMD) --whoami \
-	    > $(LOGFILE)
+		> $(LOGFILE)
 
 .PHONY: test
 test: test-cli-whoami

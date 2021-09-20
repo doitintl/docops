@@ -16,7 +16,10 @@ max_line_length = 79
 trim_trailing_whitespace = true
 
 [*.py]
-indent_size = 4
+indent_size = off
+
+[*.md]
+indent_size = off
 
 [Makefile]
 indent_size = 4
@@ -25,6 +28,9 @@ indent_style = tab
 [*.mk]
 indent_size = 4
 indent_style = tab
+
+[poetry.lock]
+max_line_length = off
 
 [COMMIT_EDITMSG]
 max_line_length = 72

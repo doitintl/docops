@@ -28,6 +28,7 @@
 VENV         := $(shell poetry env info --path)
 PATH         := $(VENV)/bin:$(PATH)
 INIT_STAMP   := init.stamp
+# TODO: Rename directory to CI to match GitHub workflows
 LOG_DIR      := tests/logs
 TEST_DIR     := tests/rules
 
@@ -38,9 +39,9 @@ help:
 	@ echo "Usage:"
 	@ echo
 	@ @grep -E '^.PHONY:' $(MAKEFILE_LIST) | \
-	    grep "#" | sed 's,.*: ,,' | \
-	    awk 'BEGIN {FS = " # "}; {printf "  make %s,%s\n", $$1, $$2}' | \
-	    column -t -s ','
+		grep "#" | sed 's,.*: ,,' | \
+		awk 'BEGIN {FS = " # "}; {printf "  make %s,%s\n", $$1, $$2}' | \
+		column -t -s ','
 
 $(INIT_STAMP):
 	mkdir -p examples/gitbook/cmp-docs
@@ -68,9 +69,18 @@ reset:
 	rm -rf "$(VENV)"
 	rm -rf "$(INIT_STAMP)"
 
-.PHONY: test # Run project tests
+# TODO: Move all linting tools here too so the whole CI workflow can be done
+# TODO: locally and repeatably
+
+# TODO: Can't get this output to agree with VSCode, so disabling for now
+# .PHONY: analysis # Run static analysis
+# analysis: init
+# 	poetry run prospector --profile .prospector.yaml .
+
+.PHONY: test # Build and test the package
 test: init
 	rm -rf "$(LOG_DIR)"
+	@ # TODO: Split the Poetry stuff into a different build step
 	poetry run $(MAKE_TESTS) $(TEST_DIR)/pkg/poetry.mk
 	poetry run $(MAKE_TESTS) $(TEST_DIR)/cli/docops-gitbook.mk
 	poetry run $(MAKE_TESTS) $(TEST_DIR)/cli/docops-gloss-terms.mk

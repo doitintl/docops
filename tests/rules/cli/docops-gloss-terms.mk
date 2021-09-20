@@ -48,103 +48,103 @@ test-cli-init: $(CMD_LOG_DIR)
 test-cli-no-args: test-cli-init
 	$(PRINT_MAKE_CMD)
 	$(CMD) || true \
-	    > $(LOGFILE)
+		> $(LOGFILE)
 
 .PHONY: test-cli-version
 test-cli-version: test-cli-no-args
 	$(PRINT_MAKE_CMD)
 	$(CMD) --version \
-	    > $(LOGFILE)
+		> $(LOGFILE)
 
 .PHONY: test-cli-help
 test-cli-help: test-cli-version
 	$(PRINT_MAKE_CMD)
 	$(CMD) --help \
-	    > $(LOGFILE)
+		> $(LOGFILE)
 
 .PHONY: test-cli-no-output
 test-cli-table-type: test-cli-row-limit
 	$(PRINT_MAKE_CMD)
 	$(CMD) (CMP_DOCS) \
-	    > $(LOGFILE)
+		> $(LOGFILE)
 
 .PHONY: test-cli-no-config
 test-cli-no-config: test-cli-help
 	$(PRINT_MAKE_CMD)
 	$(CMD) -o table $(CMP_DOCS) \
-	    > $(LOGFILE)
+		> $(LOGFILE)
 
 .PHONY: test-cli-no-config-verbose
 test-cli-no-config-verbose: test-cli-no-config
 	$(PRINT_MAKE_CMD)
 	$(CMD) -v -o table $(CMP_DOCS) \
-	    > $(LOGFILE)
+		> $(LOGFILE)
 
 .PHONY: test-cli-no-config-quiet
 test-cli-no-config-quiet: test-cli-no-config-verbose
 	$(PRINT_MAKE_CMD)
 	$(CMD) -q -o table $(CMP_DOCS) \
-	    > $(LOGFILE)
+		> $(LOGFILE)
 
 .PHONY: test-cli-config
 test-cli-config: test-cli-no-config-quiet
 	$(PRINT_MAKE_CMD)
 	$(CMD) -c $(TEST_CONFIG) -o table $(CMP_DOCS) \
-	    > $(LOGFILE)
+		> $(LOGFILE)
 
 .PHONY: test-cli-config-verbose
 test-cli-config-verbose: test-cli-config
 	$(PRINT_MAKE_CMD)
 	$(CMD) -v -c $(TEST_CONFIG) -o table $(CMP_DOCS) \
-	    > $(LOGFILE)
+		> $(LOGFILE)
 
 .PHONY: test-cli-config-quiet
 test-cli-config-quiet: test-cli-config-verbose
 	$(PRINT_MAKE_CMD)
 	$(CMD) -q -c $(TEST_CONFIG) -o table $(CMP_DOCS) \
-	    > $(LOGFILE)
+		> $(LOGFILE)
 
 .PHONY: test-cli-row-limit
 test-cli-row-limit: test-cli-config-quiet
 	$(PRINT_MAKE_CMD)
 	$(CMD) -l 10 -o table $(CMP_DOCS) \
-	    > $(LOGFILE)
+		> $(LOGFILE)
 
 .PHONY: test-cli-table-type
 test-cli-table-type: test-cli-row-limit
 	$(PRINT_MAKE_CMD)
 	$(CMD) -o table -t github $(CMP_DOCS) \
-	    > $(LOGFILE)
+		> $(LOGFILE)
 
 .PHONY: test-cli-show-output-types
 test-cli-show-output-types: test-cli-table-type
 	$(PRINT_MAKE_CMD)
 	$(CMD) --show-output-types \
-	    > $(LOGFILE)
+		> $(LOGFILE)
 
 .PHONY: test-cli-show-formats
 test-cli-show-table-formats: test-cli-show-output-types
 	$(PRINT_MAKE_CMD)
 	$(CMD) --show-table-formats \
-	    > $(LOGFILE)
+		> $(LOGFILE)
 
 .PHONY: test-cli-print-cache
 test-cli-print-cache: test-cli-show-table-formats
 	$(PRINT_MAKE_CMD)
 	$(CMD) --print-cache \
-        > $(LOGFILE)
+		> $(LOGFILE)
 
 .PHONY: test-cli-delete-cache
 test-cli-delete-cache: test-cli-print-cache
 	$(PRINT_MAKE_CMD)
 	$(CMD) --delete-cache \
-	    > $(LOGFILE)
+		> $(LOGFILE)
 
 .PHONY: test-cli-show-warnings
 test-cli-show-warnings: test-cli-delete-cache
 	$(PRINT_MAKE_CMD)
 	$(CMD) --show-warnings $(CMP_DOCS) \
-	    > $(LOGFILE)
+		> $(LOGFILE)
 
 .PHONY: test
 test: test-cli-show-warnings

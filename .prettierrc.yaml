@@ -10,13 +10,7 @@
 
 bracketSameLine: true
 bracketSpacing: false
-formatOnSave: true
 proseWrap: 'always'
-requireConfig: false
 semi: true
 singleQuote: true
 trailingComma: all
-
-# By setting this, the rest of the options in this file should be picked up by
-# `.editorconfig` automatically
-editorconfig: true

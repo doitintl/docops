@@ -21,9 +21,9 @@
 # SOFTWARE.
 
 
-.DEFAULT_GOAL = test
+.DEFAULT_GOAL   = test
 
-CMD            := poetry
+CMD	           := poetry
 
 # TODO: DRY OUT THIS BOILERPLATE TEXT
 MAKEFILE       := $(lastword $(MAKEFILE_LIST))
@@ -44,19 +44,19 @@ PHONY: test-cli-poetry-check
 test-cli-poetry-check: $(CMD_LOG_DIR)
 	$(PRINT_MAKE_CMD)
 	$(CMD) check --no-ansi \
-	    > $(LOGFILE)
+		> $(LOGFILE)
 
 .PHONY: test-cli-poetry-build
 test-cli-poetry-build: test-cli-poetry-check
 	$(PRINT_MAKE_CMD)
 	$(CMD) build --no-ansi \
-	    > $(LOGFILE)
+		> $(LOGFILE)
 
 # .PHONY: test-cli-poetry-publish-dry-run
 # test-cli-poetry-publish-dry-run: test-cli-poetry-build
 # 	#(PRINT_MAKE_CMD)
 # 	$(CMD) publish --dry-run --no-ansi \
-# 	    > $(LOGFILE)
+# 		> $(LOGFILE)
 
 .PHONY: test
 test: test-cli-poetry-build

@@ -19,59 +19,55 @@ autodetect: false
 # Module-specific configurations
 # -----------------------------------------------------------------------------
 
+# For the full list, see:
+# http://prospector.landscape.io/en/master/supported_tools.html
+
 # https://www.pylint.org/
-# http://prospector.landscape.io/en/master/supported_tools.html#id1
 pylint:
   run: true
 
 # https://pep8.readthedocs.io/
-# http://prospector.landscape.io/en/master/supported_tools.html#id2
 pep8:
   run: true
 
 # https://launchpad.net/pyflakes
-# http://prospector.landscape.io/en/master/supported_tools.html#id3
 pyflakes:
   run: true
 
 # https://github.com/PyCQA/mccabe
-# http://prospector.landscape.io/en/master/supported_tools.html#id4
 mccabe:
   run: true
 
 # https://github.com/landscapeio/dodgy
-# http://prospector.landscape.io/en/master/supported_tools.html#id5
 dodgy:
   run: true
 
 # https://github.com/PyCQA/pydocstyle
-# http://prospector.landscape.io/en/master/supported_tools.html#id6
 pep257:
   run: true
 
-# http://prospector.landscape.io/en/master/supported_tools.html#profile-validator
+# Provided by prospector itself
 profile-validator:
   run: true
 
 # https://github.com/regebro/pyroma
-# http://prospector.landscape.io/en/master/supported_tools.html#id7
 pyroma:
   run: true
 
 # https://github.com/jendrikseipp/vulture
-# http://prospector.landscape.io/en/master/supported_tools.html#id8
-vulture: true
+vulture:
+  run: true
 
+# Use pyflakes instead
 # https://github.com/timothycrosley/frosted
-# http://prospector.landscape.io/en/master/supported_tools.html#id9
 frosted:
-  run: false # Use pyflakes instead
+  run: false
 
-# https://github.com/python/mypy
+# This project is not ready for static typing
 # https://github.com/python/mypy
 mypy:
-  run: false # This project is not ready for static typing
+  run: false
 
 # https://github.com/PyCQA/bandit
-# http://prospector.landscape.io/en/master/supported_tools.html#id11
-bandit: true
+bandit:
+  run: true
