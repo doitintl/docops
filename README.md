@@ -1,5 +1,6 @@
-# DoiT DocOps Devcontainers
+# DoiT DocOps Containers
 
-*Docker container images for use with other DocOps projects*
+_Docker containers for use with other DocOps projects and GitHub Action
+workflows_
 
 > 🚧&nbsp;&nbsp;**This repository is under construction**
