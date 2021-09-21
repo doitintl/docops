@@ -46,7 +46,7 @@ each release page has links to multiple release assets.
 [dev-python]:
  https://github.com/doitintl/docops-python/blob/main/docs/dev/python.md
 [pip]: https://pip.pypa.io/en/stable/
-[pypi-project]: https://pypi.org/project/ddoit-docops
+[pypi-project]: https://pypi.org/project/doit-docops
 [releases]: https://github.com/doitintl/docops-python/releases
 [user-gitbook]:
  https://github.com/doitintl/docops-python/blob/main/docs/user/gitbook.md
