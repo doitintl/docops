@@ -39,8 +39,7 @@ src/doitintl/__init__.py
 # Temporary build files
 # -----------------------------------------------------------------------------
 
-# Dummy files used by Make to indicate that a specific task has been completed
-# Cf. https://www.technovelty.org/tips/the-stamp-idiom-with-make.html
+# Files used by Make to indicate that a specific task has been completed
 *.stamp
 
 # The current Makefile tests redirect command output to log files in this

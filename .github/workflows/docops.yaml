@@ -1,0 +1,35 @@
+name: DocOps
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  terms:
+    name: Review
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/doitintl/docops/python-3.8:main
+      options: --user runner
+    steps:
+      - uses: actions/checkout@v2
+      - run: pipx install doitintl-docops
+      - run: docops-gloss-terms --quiet .
+      - uses: streetsidesoftware/cspell-action@v1.0.1
+        if: always()
+      - uses: get-woke/woke-action@v0
+        if: always()
+        with:
+          fail-on-error: true
+      - uses: nosborn/github-action-markdown-cli@v2.0.0
+        if: always()
+        with:
+          files: .
+          config_file: .markdownlint.yaml
+      - uses: gaurav-nelson/github-action-markdown-link-check@v1
+        if: always()
+        with:
+          use-quiet-mode: yes
+          use-verbose-mode: yes
+          config-file: .markdown-link-check.json
