@@ -23,12 +23,44 @@
 ARG VARIANT
 FROM mcr.microsoft.com/vscode/devcontainers/python:0-${VARIANT}
 
+RUN cat /etc/group
+
+# The `runner` user is for GitHub Actions
+RUN useradd --create-home runner
+
+RUN cat /etc/group
+
+RUN usermod -aG pipx runner
+RUN usermod -aG nvm runner
+
+RUN cat /etc/group
+
+
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
-  apt-get install -y -q --no-install-recommends sqlite3 socat uuid-runtime && \
+  apt-get install -y -q --no-install-recommends \
+  nodejs npm ruby sqlite3 socat uuid-runtime && \
   rm -rf /var/lib/apt/lists/*
 
+RUN cat /etc/group
+
+# The `chef-utils` line is needed for compatibility with the available version
+# of Ruby and can be taken out once no longer required
+RUN npm install -g cspell markdown-link-check && \
+  gem install chef-utils -v 16.6.14 &&  \
+  gem install mdl
+
+RUN cat /etc/group
+
+USER runner
+RUN python3 -m pip install \
+  --user --no-cache-dir --no-warn-script-location pipx && \
+  python3 -m pipx ensurepath
+
+RUN cat /etc/group
+
 USER vscode
-RUN python3 -m pip install --no-cache-dir --no-warn-script-location pipx && \
+RUN python3 -m pip install \
+  --user --no-cache-dir --no-warn-script-location pipx && \
   python3 -m pipx ensurepath && \
   pipx install poetry
