@@ -2,7 +2,7 @@
 // ============================================================================
 {
   "name": "Python 3",
-  "image": "ghcr.io/doitintl/docops/containers/python-3.8:main",
+  "image": "ghcr.io/doitintl/docops/python-3.8:main",
   "remoteUser": "vscode",
   "settings": {
     // Markdown All in One
