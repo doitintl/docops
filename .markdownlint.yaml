@@ -8,7 +8,7 @@
 # Default state for all rules
 default: true
 
-#  Line length
+# Line length
 # https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md#md013
 MD013:
   # Number of characters
