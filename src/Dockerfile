@@ -23,18 +23,10 @@
 ARG VARIANT
 FROM mcr.microsoft.com/vscode/devcontainers/python:0-${VARIANT}
 
-RUN cat /etc/group
-
 # The `runner` user is for GitHub Actions
-RUN useradd --create-home runner
-
-RUN cat /etc/group
-
-RUN usermod -aG pipx runner
-RUN usermod -aG nvm runner
-
-RUN cat /etc/group
-
+RUN useradd --create-home runner && \
+  usermod -aG pipx runner && \
+  usermod -aG nvm runner
 
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
@@ -42,22 +34,17 @@ RUN apt-get update && \
   nodejs npm ruby sqlite3 socat uuid-runtime && \
   rm -rf /var/lib/apt/lists/*
 
-RUN cat /etc/group
-
 # The `chef-utils` line is needed for compatibility with the available version
 # of Ruby and can be taken out once no longer required
 RUN npm install -g cspell markdown-link-check && \
   gem install chef-utils -v 16.6.14 &&  \
-  gem install mdl
-
-RUN cat /etc/group
+  gem install mdl && \
+  curl -sSfL https://git.io/getwoke | sh -s -- -b /usr/local/bin
 
 USER runner
 RUN python3 -m pip install \
   --user --no-cache-dir --no-warn-script-location pipx && \
   python3 -m pipx ensurepath
-
-RUN cat /etc/group
 
 USER vscode
 RUN python3 -m pip install \
