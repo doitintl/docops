@@ -20,6 +20,13 @@ This project uses [semantic versioning][semver].
 
 ADD UNRELEASED CHANGES HERE UNTIL THE NEXT RELEASE IS MADE
 
+**Fixes:**
+
+- Fixed "Created cache" message which was still printed even when the `--quiet`
+  option was used.
+
+- Fixed repository URL in package metadata.
+
 -->
 
 ## 2.x

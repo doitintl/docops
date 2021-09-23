@@ -82,7 +82,8 @@ class Cache:
         cache_path = self.get_cache_path()
         if not os.path.isdir(cache_path):
             cache_path.mkdir(parents=True, exist_ok=True)
-            self._print(f"<fg=green>Created cache</>: {cache_path}")
+            if not docops.quiet:
+                self._print(f"<fg=green>Created cache</>: {cache_path}")
 
     def delete_cache(self):
         cache_path = self.get_cache_path()

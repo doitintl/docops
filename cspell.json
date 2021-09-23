@@ -18,6 +18,7 @@
     "softwareTerms",
     "typescript"
   ],
+  "ignorePaths": [".git/*", "poetry.lock"],
   // TODO: Experiment with taking some of these out again now we have added
   // TODO: some dictionaries to the mix
   "words": [
