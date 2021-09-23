@@ -39,19 +39,19 @@ jobs:
   #         python-version: ${{ matrix.py }}
   #     - run: make analysis
   tests:
-    name: Tests on Python ${{ matrix.py }}
+    name: Tests on Python ${{ matrix.py-version }}
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/doitintl/docops/containers/python-${{ matrix.py }}:main
-      options: --user root
+      image: ghcr.io/doitintl/docops/python-${{ matrix.py-version }}:main
+      options: --user runner
     strategy:
       matrix:
-        py: ['3.8', '3.9']
+        py-version: ['3.8', '3.9']
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
-          python-version: ${{ matrix.py }}
+          python-version: ${{ matrix.py-version }}
       - run: make test
         env:
           GITBOOK_API_TOKEN: ${{ secrets.GITBOOK_API_TOKEN }}
@@ -59,5 +59,5 @@ jobs:
       - uses: actions/upload-artifact@v2
         if: always()
         with:
-          name: logs-python-${{ matrix.py }}
+          name: logs-python-${{ matrix.py-version }}
           path: tests/logs
