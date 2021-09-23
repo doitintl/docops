@@ -4,6 +4,8 @@ This project uses [semantic versioning][semver].
 
 **Table of contents:**
 
+- [2.x](#2x)
+  - [2.0.0](#200)
 - [1.x](#1x)
   - [1.0.0](#100)
 - [0.x](#0x)
@@ -13,13 +15,22 @@ This project uses [semantic versioning][semver].
 [semver]: https://semver.org/
 
 <!--
+
 ## Unreleased
 
 ADD UNRELEASED CHANGES HERE UNTIL THE NEXT RELEASE IS MADE
 
+-->
+
+## 2.x
+
+### 2.0.0
+
+_Released on 2021-09-23 ([view source and package files][2.0.0])_
+
 **Breaking changes:**
 
-- The `--row-limit` option has been renamed `--term-imit` (to be agnostic to
+- The `--row-limit` option has been renamed `--term-limit` (to be agnostic to
   output type).
 
 - The `--show-formats` option has been renamed to
@@ -34,10 +45,10 @@ ADD UNRELEASED CHANGES HERE UNTIL THE NEXT RELEASE IS MADE
 
 **Fixes**:
 
-- The `data` directory is now shipped alongside the Python modules, meaning
-  that it is available locally when installing the package.
+- The `data` directory is now shipped alongside the Python modules, which is
+  now available locally when installing the package.
 
--->
+[2.0.0]: https://github.com/doitintl/docops-utils/releases/tag/2.0.0
 
 ## 1.x
 

@@ -3,7 +3,7 @@
 _A collection of utilities for the creation and maintenance of technical
 glossaries_
 
-> 📝 &nbsp;&nbsp;**Note**
+> 📝&nbsp;&nbsp;**Note**
 >
 > The glossary utilities do not currently have any documentation besides the
 > sparse information on this page. We will add more detailed documentation at a

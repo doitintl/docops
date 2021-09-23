@@ -16,9 +16,9 @@ You can install the [doitintl-docops][pypi-project] package using [Pip][pip]:
 ```console
 $ pip install doitintl-docops
 Collecting doit-docops
-  Downloading doitintl_docops-1.0.0-py3-none-any.whl (175 kB)
+  Downloading doitintl_docops-2.0.0-py3-none-any.whl (175 kB)
 [...]
-Successfully installed doitintl_docops-1.0.0
+Successfully installed doitintl_docops-2.0.0
 ```
 
 The [project releases][releases] page has a complete list of all releases and
@@ -27,7 +27,7 @@ each release page has links to multiple release assets.
 
 ## Documentation
 
-> 📝 **Note**
+> 📝&nbsp;&nbsp;**Note**
 >
 > Documentation is sparse at the moment because this project is still in the
 > early stages of development.

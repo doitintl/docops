@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "doitintl-docops"
-version = "1.0.0"
+version = "2.0.0"
 description = "Python library and CLI tools for doing DocOps at DoiT"
 authors = ["DoiT International <engineering@doit-intl.com>"]
 homepage = "https://github.com/doitintl/docops"
 repository = "https://github.com/doitintl/docops-python"
 readme = "README.md"
-keywords = [ "ci-cd", "docs", "docops", "glossaries", "nlp", "qa-automation"]
+keywords = [ "ci-cd", "docs", "docops", "glossaries", "nlp", "qa-automation" ]
 classifiers = [
   "Development Status :: 2 - Pre-Alpha",
   "Environment :: Console",
@@ -42,9 +42,8 @@ inflection = "^0.5.1"
 nltk = "^3.6.2"
 pastel = "^0.2.1"
 python = "^3.8"
-tabulate = "^0.8.9"
-pygame = "^2.0.1"
 simplejson = "^3.17.5"
+tabulate = "^0.8.9"
 
 
 [tool.poetry.dev-dependencies]

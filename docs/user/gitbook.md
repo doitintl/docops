@@ -2,7 +2,7 @@
 
 _A client library and CLI tool for the GitBook API_
 
-> 📝 **Note**
+> 📝&nbsp;&nbsp;**Note**
 >
 > The GitBook client is still being developed and has barely any functionality
 > at the moment.

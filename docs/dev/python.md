@@ -1,6 +1,6 @@
 # Python Development
 
-> 📝 **Note**
+> 📝&nbsp;&nbsp;**Note**
 >
 > This development documentation is incomplete. More information will be added
 > later.
@@ -56,7 +56,7 @@ copy of the repository).
 See the [Poetry documentation][poetry-docs] for more information about how to
 use the tool.
 
-> 💡 **TIP**
+> 💡&nbsp;&nbsp;**TIP**
 >
 > If you are using [Microsoft Visual Code][vscode] (VSCode), the [Python Auto
 > Venv][auto-env] extension will automatically activate your Python virtual

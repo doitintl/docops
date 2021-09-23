@@ -85,6 +85,7 @@
     "pylance",
     "pylint",
     "PYPI",
+    "pyproject",
     "pyroma",
     "pytagcloud",
     "pythonautovenv",
