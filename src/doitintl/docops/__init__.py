@@ -36,21 +36,9 @@ __dist__ = distribution("doitintl-docops")
 __version__ = __dist__.version
 
 
-def get_pkg_path(path):
-    pkg_root_path = "../../../"
-    path = os.path.join(pkg_root_path, path)
-    path = resource_filename(__name__, path)
-    path = os.path.abspath(path)
-    path = pathlib.Path(path)
-    return path
-
-
 # The path to the root Python source code directory for this module
 src_path = pathlib.Path(__file__).parent
-
-# The paths to the addition files shipped with this package
-editorconfig_path = get_pkg_path(".editorconfig")
-data_path = get_pkg_path("data")
+data_path = src_path.joinpath("data")
 
 debug = False
 verbose = False

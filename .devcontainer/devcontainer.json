@@ -94,23 +94,30 @@
     }
   },
   "extensions": [
+    "bierner.github-markdown-preview",
     "cschleiden.vscode-github-actions",
     "davidanson.vscode-markdownlint",
+    "eamodio.gitlens",
     "editorconfig.editorconfig",
+    "esbenp.prettier-vscode",
+    "foxundermoon.shell-format",
     "fvclaus.sort-json-array",
+    "magicstack.magicpython",
     "me-dutour-mathieu.vscode-github-actions",
     "ms-python.python",
     "ms-python.vscode-pylance",
+    "ms-vscode.makefile-tools",
     "omartawfik.github-actions-vscode",
+    "pascalreitermann93.vscode-yaml-sort",
     "redhat.vscode-yaml",
     "remimarsal.prettier-now",
     "richie5um2.vscode-sort-json",
     "stkb.rewrap",
     "streetsidesoftware.code-spell-checker",
     "tamasfe.even-better-toml",
+    "timonwong.shellcheck",
     "whinarn.python-auto-venv",
     "xshrim.txt-syntax",
-    "yzhang.markdown-all-in-one",
-    "esbenp.prettier-vscode"
+    "yzhang.markdown-all-in-one"
   ]
 }

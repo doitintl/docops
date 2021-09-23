@@ -24,8 +24,8 @@
 .DEFAULT_GOAL   = test
 
 CMD            := docops-gloss-terms --disable-ansi
-CMP_DOCS       := examples/gitbook/cmp-docs
-TEST_CONFIG    := data/configs/test
+CMP_DOCS       := tests/examples/gitbook/cmp-docs
+TEST_CONFIG    := tests/config
 
 MAKEFILE       := $(lastword $(MAKEFILE_LIST))
 RULES_DIR      := $(dir $(MAKEFILE))

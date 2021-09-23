@@ -32,6 +32,11 @@ ADD UNRELEASED CHANGES HERE UNTIL THE NEXT RELEASE IS MADE
   moment, the only additional option this gives you is to turn off table
   output.
 
+**Fixes**:
+
+- The `data` directory is now shipped alongside the Python modules, meaning
+  that it is available locally when installing the package.
+
 -->
 
 ## 1.x
@@ -70,7 +75,7 @@ _Released on 2021-09-19 ([view source and package files][1.0.0])_
   instead of GitHub emoji syntax.
 
 [pep-420]: https://www.python.org/dev/peps/pep-0420/
-[1.0.0]: https://github.com/doitintl/docops-python/releases/tag/1.0.0
+[1.0.0]: https://github.com/doitintl/docops-utils/releases/tag/1.0.0
 
 ## 0.x
 
@@ -144,7 +149,7 @@ _Released on 2021-09-15 (tag no longer available)_
 
 - Fixed the `dgloss-analyze-terms --help` output.
 
-[readme]: https://github.com/doitintl/docops-gloss-utils
+[readme]: https://github.com/doitintl/docops-utils/
 [stop words]: https://en.wikipedia.org/wiki/Stop_word
 
 ### 0.0.0

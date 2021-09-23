@@ -29,8 +29,10 @@ VENV         := $(shell poetry env info --path)
 PATH         := $(VENV)/bin:$(PATH)
 INIT_STAMP   := init.stamp
 # TODO: Rename directory to CI to match GitHub workflows
-LOG_DIR      := tests/logs
-TEST_DIR     := tests/rules
+TESTS_DIR    := tests
+LOG_DIR      := $(TESTS_DIR)/logs
+TEST_DIR     := $(TESTS_DIR)/rules
+EXAMPLES_DIR := $(TESTS_DIR)/examples
 
 MAKE_TESTS    = $(MAKE) -C . -f
 
@@ -44,7 +46,7 @@ help:
 		column -t -s ','
 
 $(INIT_STAMP):
-	mkdir -p examples/gitbook/cmp-docs
+	mkdir -p $(EXAMPLES_DIR)/gitbook/cmp-docs
 	git submodule update --init --recursive
 	poetry update
 	@ echo

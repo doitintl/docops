@@ -6,7 +6,7 @@
       "type": "python",
       "request": "launch",
       "program": "${workspaceRoot}/.venv/bin/docops-gloss-terms",
-      "args": ["examples"],
+      "args": ["tests/examples"],
       "env": {
         "DOCOPS_DEBUG": "1"
       },
@@ -17,7 +17,7 @@
       "type": "python",
       "request": "launch",
       "program": "${workspaceRoot}/.venv/bin/docops-gloss-terms",
-      "args": ["-v", "examples"],
+      "args": ["-v", "tests/examples"],
       "env": {
         "DOCOPS_DEBUG": "1"
       },
@@ -28,7 +28,7 @@
       "type": "python",
       "request": "launch",
       "program": "${workspaceRoot}/.venv/bin/docops-gloss-terms",
-      "args": ["-c", "data/configs", "examples"],
+      "args": ["-c", "tests/config", "tests/examples"],
       "env": {
         "DOCOPS_DEBUG": "1"
       },
@@ -39,7 +39,7 @@
       "type": "python",
       "request": "launch",
       "program": "${workspaceRoot}/.venv/bin/docops-gloss-terms",
-      "args": ["-c", "data/configs", "-q", "examples"],
+      "args": ["-c", "tests/config", "-q", "tests/examples"],
       "env": {
         "DOCOPS_DEBUG": "1"
       },
@@ -50,7 +50,7 @@
       "type": "python",
       "request": "launch",
       "program": "${workspaceRoot}/.venv/bin/docops-gloss-terms",
-      "args": ["-c", "data/configs", "-v", "examples"],
+      "args": ["-c", "tests/config", "-v", "tests/examples"],
       "env": {
         "DOCOPS_DEBUG": "1"
       },
