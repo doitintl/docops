@@ -1,4 +1,4 @@
-# DoiT DocOps Python Package
+# DoiT DocOps Utilities
 
 _Python library and CLI tools for doing DocOps at DoiT_
 
