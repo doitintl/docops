@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "doitintl-docops"
-version = "2.0.0"
+version = "2.0.1"
 description = "Python library and CLI tools for doing DocOps at DoiT"
 authors = ["DoiT International <engineering@doit-intl.com>"]
 homepage = "https://github.com/doitintl/docops/"

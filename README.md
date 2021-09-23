@@ -11,14 +11,14 @@ _Python library and CLI tools for doing DocOps at DoiT_
 
 ## Install
 
-You can install the [doitintl-docops][pypi-project] package using [Pip][pip]:
+Install the [doitintl-docops][pypi-project] package using [Pip][pip]:
 
 ```console
 $ pip install doitintl-docops
 Collecting doit-docops
-  Downloading doitintl_docops-2.0.0-py3-none-any.whl (175 kB)
+  Downloading doitintl_docops-2.0.1-py3-none-any.whl (175 kB)
 [...]
-Successfully installed doitintl_docops-2.0.0
+Successfully installed doitintl_docops-2.0.1
 ```
 
 The [project releases][releases] page has a complete list of all releases and

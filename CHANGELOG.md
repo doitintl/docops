@@ -5,6 +5,7 @@ This project uses [semantic versioning][semver].
 **Table of contents:**
 
 - [2.x](#2x)
+  - [2.0.1](#201)
   - [2.0.0](#200)
 - [1.x](#1x)
   - [1.0.0](#100)
@@ -20,6 +21,14 @@ This project uses [semantic versioning][semver].
 
 ADD UNRELEASED CHANGES HERE UNTIL THE NEXT RELEASE IS MADE
 
+-->
+
+## 2.x
+
+### 2.0.1
+
+_Released on 2021-09-23 ([view source and package files][2.0.1])_
+
 **Fixes:**
 
 - Fixed "Created cache" message which was still printed even when the `--quiet`
@@ -27,9 +36,7 @@ ADD UNRELEASED CHANGES HERE UNTIL THE NEXT RELEASE IS MADE
 
 - Fixed repository URL in package metadata.
 
--->
-
-## 2.x
+[2.0.1]: https://github.com/doitintl/docops-utils/releases/tag/2.0.1
 
 ### 2.0.0
 
