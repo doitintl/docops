@@ -1,7 +1,6 @@
 # Configuration for gitignore
 # =============================================================================
 
-
 # Python files
 # -----------------------------------------------------------------------------
 
@@ -21,7 +20,6 @@ dist/
 
 src/doitintl/__init__.py
 
-
 # VSCode configuration files
 -------------------------------------------------------------------------------
 
@@ -34,7 +32,6 @@ src/doitintl/__init__.py
 # Ignore files that are symlinked from the `docops-common` repository
 .vsocde/cspell.json
 .vscode/dictionary.txt
-
 
 # Temporary build files
 # -----------------------------------------------------------------------------
@@ -50,9 +47,11 @@ src/doitintl/__init__.py
 # for Git history.
 test/logs/
 
-
 # Miscellaneous files
 # -----------------------------------------------------------------------------
 
-# Ignore all logs
+# Log files
 *.log
+
+# Git submodules
+tests/clones

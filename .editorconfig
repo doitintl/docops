@@ -21,6 +21,12 @@ indent_size = off
 [*.md]
 indent_size = off
 
+[*.sh]
+indent_size = 4
+
+[Dockerfile]
+indent_size = 4
+
 [Makefile]
 indent_size = 4
 indent_style = tab
