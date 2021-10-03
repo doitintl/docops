@@ -1,5 +1,3 @@
-// Recommended VSCode extensions
-// ============================================================================
 {
   "recommendations": [
     "bierner.github-markdown-preview",
@@ -11,16 +9,27 @@
     "eamodio.gitlens",
     "editorconfig.editorconfig",
     "esbenp.prettier-vscode",
+    "foxundermoon.shell-format",
+    "fvclaus.sort-json-array",
+    "magicstack.magicpython",
     "me-dutour-mathieu.vscode-github-actions",
+    "ms-azuretools.vscode-docker",
     "ms-python.python",
     "ms-python.vscode-pylance",
     "ms-vscode.makefile-tools",
+    "omartawfik.github-actions-vscode",
     "pascalreitermann93.vscode-yaml-sort",
     "redhat.vscode-yaml",
+    "remimarsal.prettier-now",
+    "richie5um2.vscode-sort-json",
+    "stkb.rewrap",
     "streetsidesoftware.code-spell-checker",
     "tamasfe.even-better-toml",
+    "timonwong.shellcheck",
     "whinarn.python-auto-venv",
     "xshrim.txt-syntax",
-    "yzhang.markdown-all-in-one"
+    "yzhang.markdown-all-in-one",
+    "piyush-bhatt.base16-terminal",
+    "jsynowiec.vscode-insertdatestring"
   ]
 }
