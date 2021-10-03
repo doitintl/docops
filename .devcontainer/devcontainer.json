@@ -1,6 +1,4 @@
 {
-  "build": {
-    "dockerfile": "Dockerfile"
-  },
+  "image": "ghcr.io/doitintl/docops-utils/devcontainer:main",
   "remoteUser": "vscode"
 }
