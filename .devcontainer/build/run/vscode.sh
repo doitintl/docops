@@ -16,6 +16,10 @@ PROFILE_PYTHON="/tmp/build/dotfiles/profile/python.sh"
 (echo && cat "${BASHRC_DIRCOLORS}") >>"${HOME}/.bashrc"
 (echo && cat "${BASHRC_PATH}") >>"${HOME}/.bashrc"
 
+# https://github.com/koalaman/shellcheck/wiki/SC1091
+# shellcheck disable=SC1091
+. "${HOME}/.bashrc"
+
 # VS Code
 # -----------------------------------------------------------------------------
 
@@ -36,6 +40,7 @@ curl -fsSL "${INSTALL_BREW}" >/tmp/install-homebrew.sh
 chmod 755 /tmp/install-homebrew.sh
 /tmp/install-homebrew.sh
 
+# Configure the environment for Homebrew
 (echo && cat "${PROFILE_BREW}") >>"${HOME}/.profile"
 # https://github.com/koalaman/shellcheck/wiki/SC1090
 # shellcheck disable=SC1090
@@ -46,12 +51,18 @@ brew doctor
 # Python
 # -----------------------------------------------------------------------------
 
+# Set the Python version for install and copy it to `~/.profile` for use when
+# configuring the Python environment
+BREW_PY=3.9
+(echo && echo "export BREW_PY=${BREW_PY}") >>"${HOME}/.profile"
+
+brew install "python@${BREW_PY}"
+
+# Configure the environment for Python
 (echo && cat "${PROFILE_PYTHON}") >>"${HOME}/.profile"
-# https://github.com/koalaman/shellcheck/wiki/SC1090
 # shellcheck disable=SC1090
 . "${PROFILE_PYTHON}"
 
-brew install "python@${BREW_PY}"
 brew install pipx
 
 pipx install poetry
@@ -92,6 +103,13 @@ brew install tidy-html5
 
 npm dedupe
 npm prune
+npm cache clean --force
 rm "${HOME}/package-lock.json"
 
-brew cleanup -s
+brew autoremove
+rm -rf "$(brew --cache)"
+
+# Removing this directory will significantly reduce the image size and not
+# break any of the installed packages. However, doing so will essentially break
+# Homebrew (as a package manager) inside the running container.
+# rm -rf "$(brew--prefix)/Homebrew/Library/Taps"

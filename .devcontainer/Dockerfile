@@ -12,6 +12,8 @@ RUN apt-get update && \
     apt-get auto-remove && \
     rm -rf /var/lib/apt/lists/*
 
+# TODO: Move the whole build script into the Dockerfile
+# If we do this, we can take advantage of hadolint's warnings
 COPY build /tmp/build
 USER vscode
 RUN /tmp/build/run/vscode.sh

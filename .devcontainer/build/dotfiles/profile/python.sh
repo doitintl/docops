@@ -1,7 +1,5 @@
 # shellcheck shell=sh
 
-export BREW_PY="3.9"
-
 BREW_PREFIX="$(brew --prefix)"
 
 export PATH="${BREW_PREFIX}/opt/python@${BREW_PY}/libexec/bin:${PATH}"

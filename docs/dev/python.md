@@ -58,9 +58,9 @@ use the tool.
 
 > 💡&nbsp;&nbsp;**TIP**
 >
-> If you are using [Microsoft Visual Code][vscode] (VSCode), the [Python Auto
-> Venv][auto-env] extension will automatically activate your Python virtual
-> environment every time you open a new terminal.
+> If you are using [Microsoft Visual Code][vscode] (VSCode), the
+> [Python][vscode-python] extension will automatically activate your Python
+> virtual environment every time you open a new terminal.
 
 <!---
 TODO: Replace this next paragraph with instructions for using `make reset`
@@ -94,8 +94,8 @@ same pattern.
 
 <!-- Add link references below this line (sorted ascending) -->
 
-[auto-env]:
-  https://marketplace.visualstudio.com/items?itemName=whinarn.python-auto-venv
+[vscode-python]:
+  https://marketplace.visualstudio.com/items?itemName=ms-python.python
 [doitintl]: https://github.com/doitintl
 [home]: https://github.com/doitintl/docops-python
 [pep-420]: https://www.python.org/dev/peps/pep-0420/

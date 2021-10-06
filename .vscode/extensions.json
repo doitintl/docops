@@ -29,7 +29,7 @@
     "esbenp.prettier-vscode",
     "get-woke.vscode-woke",
     "viktorzetterstrom.non-breaking-space-highlighter",
-    "whinarn.python-auto-venv",
-    "tetradresearch.vscode-h2o"
+    "tetradresearch.vscode-h2o",
+    "exiasr.hadolint"
   ]
 }
