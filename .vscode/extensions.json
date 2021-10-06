@@ -28,6 +28,9 @@
     "piyush-bhatt.base16-terminal",
     "jsynowiec.vscode-insertdatestring",
     "esbenp.prettier-vscode",
-    "get-woke.vscode-woke"
+    "get-woke.vscode-woke",
+    "viktorzetterstrom.non-breaking-space-highlighter",
+    "whinarn.python-auto-venv",
+    "tetradresearch.vscode-h2o"
   ]
 }

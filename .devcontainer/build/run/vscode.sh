@@ -1,5 +1,8 @@
 #!/bin/sh -e
 
+# TODO: Move all of this inside the `Dockerfile`
+# This will allow me to take advantage of the `Dockerfile` linting tools
+
 HOME="/home/vscode"
 
 # Shell
@@ -20,7 +23,7 @@ VSCODE_CONFIG="${HOME}/.config/vscode-dev-containers"
 
 # Disable first run notice message
 mkdir -p "${VSCODE_CONFIG}"
-touch "${VSCODE_CONFIG}first-run-notice-already-displayed"
+touch "${VSCODE_CONFIG}/first-run-notice-already-displayed"
 
 # Homebrew
 # -----------------------------------------------------------------------------
