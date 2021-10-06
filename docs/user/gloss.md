@@ -37,9 +37,8 @@ Usage:
 
 #### Example uses
 
-As an example, you can run the term analyzer on all text files within the
-[examples directory][examples_dir] and print the top 10 candidate terms, like
-this:
+As an example, you can run the term analyzer on all text files within a
+repository and print the top 10 candidate terms, like this:
 
 ```console
 $ docops-gloss-terms --row-limit=10 examples/
@@ -60,13 +59,11 @@ Scanning target directory: examples
     10  ]
 ```
 
-The [examples directory][examples_dir] has no configuration file (i.e., only
-the [default values](#syntax) are set). This example demonstrates how noisy the
-output can be without configuring the analyzer.
+However, this example was run with no configuration file and demonstrates how
+noisy the output can be without configuring the analyzer.
 
-You can re-analyze the [examples directory][examples_dir] using the [test
-configuration directory][test_dir] to see how a relatively simple
-[configuration file][config file] can improve the results:
+If you reanalyze the same repository with configuration file, you can improve
+the results with relatively little effort:
 
 ```console
 $ docops-gloss-terms --config-dir=data/configs/test/ --row-limit=10 examples/
@@ -176,8 +173,6 @@ The current list of valid instructions are:
 
 <!-- Link references go below this line, sorted ascending --->
 
-[config file]: ../../tests/config/.dgloss.conf
-[examples_dir]: ../../tests/examples
 [home]: https://github.com/doitintl/docops-python
 [leeds_corpora]: http://corpus.leeds.ac.uk/list.html
 [nltk_corpora]: http://www.nltk.org/nltk_data/
