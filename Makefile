@@ -32,7 +32,8 @@ INIT_STAMP   := init.stamp
 TESTS_DIR    := tests
 LOG_DIR      := $(TESTS_DIR)/logs
 TEST_DIR     := $(TESTS_DIR)/rules
-EXAMPLES_DIR := $(TESTS_DIR)/examples
+CLONES_DIR   := $(TESTS_DIR)/clones
+
 
 MAKE_TESTS    = $(MAKE) -C . -f
 
@@ -46,8 +47,6 @@ help:
 		column -t -s ','
 
 $(INIT_STAMP):
-	mkdir -p $(EXAMPLES_DIR)/gitbook/cmp-docs
-	git submodule update --init --recursive
 	poetry update
 	@ echo
 	poetry install
@@ -79,7 +78,12 @@ reset:
 # analysis: init
 # 	poetry run prospector --profile .prospector.yaml .
 
-.PHONY: test # Build and test the package
+.PHONY: clones # Clone test repositories
+clones:
+	cd $(CLONES_DIR) && \
+		git clone --depth 1 https://github.com/doitintl/cmp-docs.git
+
+.PHONY: test # Build and test the project
 test: init
 	rm -rf "$(LOG_DIR)"
 	@ # TODO: Split the Poetry stuff into a different build step

@@ -1,4 +1,0 @@
-[submodule "tests/examples/gitbook/cmp-docs"]
-  path = tests/examples/gitbook/cmp-docs
-  shallow = true
-  url = https://github.com/doitintl/cmp-docs.git
