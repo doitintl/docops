@@ -1,0 +1,90 @@
+name: DocOps
+
+# This workflow will run for every push to the `main` branch. It will also run
+# for every push on a PR.
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  checks:
+    name: Docs checks
+    runs-on: ubuntu-latest
+    # All of the steps in this job run inside a custom DocOps container. We use
+    # the lowest supported Python version provided by the DoiT DocOps container
+    # images. See <https://github.com/doitintl/docops-containers> for more
+    # information.
+    container:
+      image: ghcr.io/doitintl/docops/python-3.8:main
+      options: --user root
+    steps:
+      # Check out the target repository
+      - uses: actions/checkout@v2
+
+      # Third-party tooling
+      # -----------------------------------------------------------------------
+      # The rest of the steps in this job are performed by third-party actions.
+      # If the functionality they provide proves useful, the tooling will be
+      # integrated directly into the the DoiT DevOps containers.
+      #
+      # Bringing the functionality in-house will give us the ability to
+      # configure shared defaults, give us more options for customization in
+      # general, and allow us to use the output for QA automation (e.g.,
+      # creating issues when changes are landed that change the lint status
+      # from passing to failing).
+
+      # Runs EditorConfig (https://editorconfig.org/) on the source files,
+      # reading config from the the `.editorconfig` file at the root of the
+      # repository.
+      - uses: kasperhesthaven/setup-editorconfig-checker@v1.2.0
+        if: always()
+      - run: editorconfig-checker
+
+      # Runs Prettier (https://prettier.io/) on the source files, reading
+      # config from the `.prettierrc.yaml` and `.prettierignore` files at the
+      # root of the repository.
+      #
+      # Note: Prettier has been configured to ignore Markdown files, which are
+      # handled separately.
+      - uses: actionsx/prettier@v2
+        if: always()
+        with:
+          args: --check .
+
+      # Runs cSpell <https://github.com/streetsidesoftware/cspell> on the
+      # source files, reading configuration from a file named `cspell.json` at
+      # the root of the repository (if it exists).
+      - uses: zwaldowski/cspell-action@v1
+        if: always()
+        with:
+          config: .cspell.json
+          paths: '**/*'
+          unique: true
+
+      # This is third-party action that uses tries to detect non-inclusive
+      # language. See <https://github.com/get-woke/woke> for more information.
+      - uses: get-woke/woke-action@v0
+        if: always()
+        with:
+          fail-on-error: true
+
+      # This is a third party action that uses markdownlint
+      # <https://github.com/markdownlint/markdownlint> to check for syntax and
+      # stylistic errors in any Markdown files present. This action will read
+      # from a file named `.markdownlint.yaml` at the root of the repository.
+      - uses: nosborn/github-action-markdown-cli@v2.0.0
+        if: always()
+        with:
+          files: .
+
+      # This is a third-party action that uses markdown-link-check
+      # <https://github.com/tcort/markdown-link-check> to scan for broken links
+      # in any Markdown files present. This action can be configured with a
+      # file named `.markdown-link-check.json` at the root of the repository.
+      - uses: gaurav-nelson/github-action-markdown-link-check@v1
+        if: always()
+        with:
+          config-file: .mlc.json
+          use-quiet-mode: yes

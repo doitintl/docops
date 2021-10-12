@@ -1,80 +1,14 @@
-// Configuration for creating a VSCode devcontainer
-// ============================================================================
 {
-  "name": "Docker in Docker",
-  "dockerFile": "Dockerfile",
-  "runArgs": ["--init", "--privileged"],
-  "mounts": ["source=dind-var-lib-docker,target=/var/lib/docker,type=volume"],
-  "overrideCommand": false,
-  "remoteUser": "vscode",
-  "settings": {
-    // Markdown All in One
-    // VSCode extension: yzhang.markdown-all-in-one
-    // ------------------------------------------------------------------------
-    "markdown.extension.italic.indicator": "_",
-    "markdown.extension.toc.levels": "2..6",
-    "markdown.extension.toc.updateOnSave": true,
-    // markdownlint
-    // VSCode extension: davidanson.vscode-markdownlint
-    // ------------------------------------------------------------------------
-    "markdownlint.run": "onSave",
-    "markdownlint.ignore": ["LICENSE"],
-    // GitLens — Git supercharged
-    // VSCode extension: eamodio.gitlens
-    // ------------------------------------------------------------------------
-    // Disable inline author information. This feature is confusing because
-    // it essentially inserts fake lines to display this information, which
-    // can easily disguise missing empty lines between code blocks.
-    "gitlens.codeLens.authors.enabled": false,
-    "gitlens.codeLens.recentChange.enabled": false,
-    // Disable annoying pop-up screens
-    "gitlens.showWelcomeOnInstall": false,
-    "gitlens.showWhatsNewAfterUpgrades": false,
-    // Prettier - Code Formatter
-    // VSCode extension: esbenp.prettier-vscode
-    // ------------------------------------------------------------------------
-    "prettier.enable": true,
-    "prettier.requireConfig": true,
-    "prettier.useEditorConfig": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    // Set up overrides
-    "[markdown]": {
-      "editor.defaultFormatter": "yzhang.markdown-all-in-one"
-    },
-    // EditorConfig for VS Code
-    // VSCode extension: editorconfig.editorconfig
-    // ------------------------------------------------------------------------
-    "editorconfig.generateAuto": false,
-    // YAML
-    // VSCode extension: redhat.vscode-yaml
-    // ------------------------------------------------------------------------
-    "yaml.format.printWidth": 79,
-    "yaml.format.singleQuote": true,
-    // VSCode settings
-    // ------------------------------------------------------------------------
-    // This isn't possible to set in EditorConfig yet, so we set it here
-    // See: https://github.com/editorconfig/editorconfig/issues/269
-    "files.insertFinalNewline": true,
-    "files.trimFinalNewlines": true,
-    // Allow JSON comments in VSCode configuration files
-    "files.associations": {
-      "cspell.json": "jsonc",
-      "devcontainer.json": "jsonc",
-      "extensions.json": "jsonc"
-    }
+  // --------------------------------------------------------------------------
+  // Point `image` to a published image, once available
+  // "image": "",
+  // --------------------------------------------------------------------------
+  // If no published image is available, bootstrap the devcontainer with the
+  // `Dockerfile` in this repository
+  "build": {
+    "dockerfile": "Dockerfile"
   },
-  "extensions": [
-    "cschleiden.vscode-github-actions",
-    "davidanson.vscode-markdownlint",
-    "editorconfig.editorconfig",
-    "esbenp.prettier-vscode",
-    "esbenp.prettier-vscode",
-    "me-dutour-mathieu.vscode-github-actions",
-    "ms-azuretools.vscode-docker",
-    "omartawfik.github-actions-vscode",
-    "streetsidesoftware.code-spell-checker",
-    "yzhang.markdown-all-in-one",
-    "foxundermoon.shell-format",
-    "dansnow.vscode-dockerfilelint"
-  ]
+  // --------------------------------------------------------------------------
+  "remoteUser": "vscode",
+  "userEnvProbe": "interactiveShell"
 }

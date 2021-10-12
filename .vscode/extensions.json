@@ -1,5 +1,3 @@
-// Recommended VSCode extensions
-// ============================================================================
 {
   "recommendations": [
     "cschleiden.vscode-github-actions",
@@ -8,8 +6,10 @@
     "eamodio.gitlens",
     "editorconfig.editorconfig",
     "esbenp.prettier-vscode",
+    "exiasr.hadolint",
     "foxundermoon.shell-format",
     "jeff-hykin.better-dockerfile-syntax",
+    "jsynowiec.vscode-insertdatestring",
     "me-dutour-mathieu.vscode-github-actions",
     "ms-azuretools.vscode-docker",
     "omartawfik.github-actions-vscode",

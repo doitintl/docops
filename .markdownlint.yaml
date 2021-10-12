@@ -1,18 +1,5 @@
-# Configuration for markdownlint
-# https://github.com/DavidAnson/markdownlint
-# =============================================================================
-
-# Example config file:
-# https://github.com/DavidAnson/markdownlint/blob/main/schema/
-
 # Default state for all rules
 default: true
-
-#  Line length
-# https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md#md013
-MD013:
-  # Number of characters
-  line_length: 79
 
 # Dollar signs used before commands without showing output
 # https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md#md014

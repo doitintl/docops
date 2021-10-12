@@ -1,9 +1,3 @@
-# Configuration for EditorConfig
-# https://github.com/editorconfig/editorconfig-core-js
-# ============================================================================
-
-# VSCode extension: editorconfig.editorconfig
-
 root = true
 
 [*]
