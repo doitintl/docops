@@ -2,7 +2,6 @@
 
 _Python library and CLI tools for doing DocOps at DoiT_
 
-[![VS Code][action-vscode-img]][action-vscode]
 [![DocOps][action-docops-img]][action-docops]
 [![Tests][action-tests-img]][action-tests]
 
@@ -10,8 +9,6 @@ _Python library and CLI tools for doing DocOps at DoiT_
 [action-docops]: https://github.com/doitintl/docops-utils/actions/workflows/docops.yaml
 [action-tests-img]: https://github.com/doitintl/docops-utils/actions/workflows/tests.yaml/badge.svg
 [action-tests]: https://github.com/doitintl/docops-utils/actions/workflows/tests.yaml
-[action-vscode-img]: https://github.com/doitintl/docops-utils/actions/workflows/vscode.yaml/badge.svg
-[action-vscode]: https://github.com/doitintl/docops-utils/actions/workflows/vscode.yaml
 
 **Table of contents:**
 
