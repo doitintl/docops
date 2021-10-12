@@ -1,4 +1,4 @@
-name: Devcontainer
+name: VS Code
 on:
   pull_request:
   push:
@@ -6,8 +6,8 @@ on:
       - main
 
 jobs:
-  changes:
-    name: 'Detect changes'
+  test-changes:
+    name: Test devcontainer changes
     runs-on: ubuntu-latest
     outputs:
       devcontainer: ${{ steps.filter.outputs.devcontainer }}
@@ -17,14 +17,14 @@ jobs:
       - uses: dorny/paths-filter@v2
         id: filter
         with:
+          list-files: ''
           filters: |
             devcontainer:
               - '.devcontainer/**'
   build:
-    name: 'Build image'
-    needs: changes
-    if: ${{ needs.changes.outputs.devcontainer == 'true' }}
-    # Pin to the same version as the VS Code devcontainer
+    name: Build devcontainer
+    needs: test-changes
+    if: ${{ needs.test-changes.outputs.devcontainer == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

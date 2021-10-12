@@ -1,4 +1,4 @@
-name: Python support
+name: Tests
 on:
   pull_request:
   push:
@@ -6,8 +6,16 @@ on:
       - main
 
 jobs:
-  run:
-    name: Using version ${{ matrix.version }}
+  static-analysis:
+    name: Static analysis
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: jpetrucciani/black-check@master
+        if: always()
+  execution:
+    needs: static-analysis
+    name: Python ${{ matrix.version }} execution
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/doitintl/docops/python-${{ matrix.version }}:main

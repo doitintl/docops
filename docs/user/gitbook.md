@@ -72,11 +72,10 @@ accidental exposure.
 
 - The official [GitBook developer docs][gitbook-docs]
 
+[gitbook-docs]: https://developer.gitbook.com/
+
 ---
 
 🏠 [Home][home]
 
-<!-- Link references go below this line, sorted ascending --->
-
-[gitbook-docs]: https://developer.gitbook.com/
 [home]: https://github.com/doitintl/docops-python

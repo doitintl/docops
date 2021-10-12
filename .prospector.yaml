@@ -1,11 +1,5 @@
-# Configuration for Prospector
-# http://prospector.landscape.io/
-# =============================================================================
-
-# For configuration options, see:
-# http://prospector.landscape.io/en/master/profiles.html
-
 # Global configurations
+# http://prospector.landscape.io/en/master/profiles.html
 # -----------------------------------------------------------------------------
 
 strictness: verylow
@@ -17,10 +11,8 @@ member-warnings: true
 autodetect: false
 
 # Module-specific configurations
-# -----------------------------------------------------------------------------
-
-# For the full list, see:
 # http://prospector.landscape.io/en/master/supported_tools.html
+# -----------------------------------------------------------------------------
 
 # https://www.pylint.org/
 pylint:
@@ -46,10 +38,6 @@ dodgy:
 pep257:
   run: true
 
-# Provided by prospector itself
-profile-validator:
-  run: true
-
 # https://github.com/regebro/pyroma
 pyroma:
   run: true
@@ -70,4 +58,8 @@ mypy:
 
 # https://github.com/PyCQA/bandit
 bandit:
+  run: true
+
+# Internal check to validate this file
+profile-validator:
   run: true

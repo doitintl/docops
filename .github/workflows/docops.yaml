@@ -9,8 +9,8 @@ on:
       - main
 
 jobs:
-  terms:
-    name: Review
+  checks:
+    name: Docs checks
     runs-on: ubuntu-latest
     # All of the steps in this job run inside a custom DocOps container. We use
     # the lowest supported Python version provided by the DoiT DocOps container
@@ -18,21 +18,10 @@ jobs:
     # information.
     container:
       image: ghcr.io/doitintl/docops/python-3.8:main
-      options: --user runner
+      options: --user root
     steps:
       # Check out the target repository
       - uses: actions/checkout@v2
-
-      # DoiT tooling
-      # -----------------------------------------------------------------------
-      # Install the latest version of the DoiT DocOps Utilities from the Python
-      # Package Index (PyPI). See <https://github.com/doitintl/docops-utils>
-      # for more details.
-      - run: pipx install doitintl-docops
-      # Run a basic glossary terms analysis. This feature is still in active
-      # development, so the output from this command is only informational
-      # purposes only. This step should never fail.
-      - run: docops-gloss-terms --quiet .
 
       # Third-party tooling
       # -----------------------------------------------------------------------
@@ -46,11 +35,33 @@ jobs:
       # creating issues when changes are landed that change the lint status
       # from passing to failing).
 
+      # Runs EditorConfig (https://editorconfig.org/) on the source files,
+      # reading config from the the `.editorconfig` file at the root of the
+      # repository.
+      - uses: kasperhesthaven/setup-editorconfig-checker@v1.2.0
+        if: always()
+      - run: editorconfig-checker
+
+      # Runs Prettier (https://prettier.io/) on the source files, reading
+      # config from the `.prettierrc.yaml` and `.prettierignore` files at the
+      # root of the repository.
+      #
+      # Note: Prettier has been configured to ignore Markdown files, which are
+      # handled separately.
+      - uses: actionsx/prettier@v2
+        if: always()
+        with:
+          args: --check .
+
       # Runs cSpell <https://github.com/streetsidesoftware/cspell> on the
       # source files, reading configuration from a file named `cspell.json` at
       # the root of the repository (if it exists).
-      - uses: streetsidesoftware/cspell-action@v1.0.1
+      - uses: zwaldowski/cspell-action@v1
         if: always()
+        with:
+          config: .cspell.json
+          paths: '**/*'
+          unique: true
 
       # This is third-party action that uses tries to detect non-inclusive
       # language. See <https://github.com/get-woke/woke> for more information.
@@ -67,7 +78,6 @@ jobs:
         if: always()
         with:
           files: .
-          config_file: .markdownlint.yaml
 
       # This is a third-party action that uses markdown-link-check
       # <https://github.com/tcort/markdown-link-check> to scan for broken links
@@ -76,6 +86,5 @@ jobs:
       - uses: gaurav-nelson/github-action-markdown-link-check@v1
         if: always()
         with:
+          config-file: .mlc.json
           use-quiet-mode: yes
-          use-verbose-mode: yes
-          config-file: .markdown-link-check.json

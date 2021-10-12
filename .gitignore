@@ -29,10 +29,6 @@ src/doitintl/__init__.py
 # we can already do that in the `devcontainer.json` file.
 .vscode/settings.json
 
-# Ignore files that are symlinked from the `docops-common` repository
-.vsocde/cspell.json
-.vscode/dictionary.txt
-
 # Temporary build files
 # -----------------------------------------------------------------------------
 

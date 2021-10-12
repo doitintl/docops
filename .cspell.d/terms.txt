@@ -1,0 +1,14 @@
+awk
+dgbc
+dgloss
+fg
+IIF
+mkdir
+mpoetry
+posixpath
+printf
+punkt
+ROWID
+sed
+sqlite
+tablefmt

@@ -1,0 +1,12 @@
+CLI
+CMP
+dl
+fn
+gz
+ipm
+nlp
+nltk
+OSI
+POSIX
+txt
+uid

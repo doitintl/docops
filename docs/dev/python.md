@@ -18,6 +18,9 @@ This project uses [Poetry][poetry] for packaging and dependency management. You
 should have [Poetry installed][poetry-install] if you want to contribute to the
 Python code in this repository.
 
+[poetry]: https://python-poetry.org/
+[poetry-install]: https://python-poetry.org/docs/#installation
+
 ## Virtual environment
 
 If you have Poetry installed, you can set up your Python [virtual
@@ -76,6 +79,11 @@ rm -rf "/workspaces/docops-python/.venv"
 rm -rf "init.stamp"
 ```
 
+[poetry-venv]: https://python-poetry.org/docs/managing-environments/
+[poetry-docs]: https://python-poetry.org/docs/basic-usage/
+[vscode]: https://code.visualstudio.com/
+[vscode-python]: https://marketplace.visualstudio.com/items?itemName=ms-python.python
+
 ## Packaging
 
 ### The DoiT International namespace
@@ -88,19 +96,11 @@ This method allows any other [DoiT International](https://github.com/doitintl)
 projects to contribute modules to the `doitintl` namespace by following the
 same pattern.
 
+[pep-420]: https://www.python.org/dev/peps/pep-0420/
+[doitintl]: https://github.com/doitintl
+
 ---
 
 🏠 [Home][home]
 
-<!-- Add link references below this line (sorted ascending) -->
-
-[vscode-python]:
-  https://marketplace.visualstudio.com/items?itemName=ms-python.python
-[doitintl]: https://github.com/doitintl
 [home]: https://github.com/doitintl/docops-python
-[pep-420]: https://www.python.org/dev/peps/pep-0420/
-[poetry-docs]: https://python-poetry.org/docs/basic-usage/
-[poetry-install]: https://python-poetry.org/docs/#installation
-[poetry-venv]: https://python-poetry.org/docs/managing-environments/
-[poetry]: https://python-poetry.org/
-[vscode]: https://code.visualstudio.com/

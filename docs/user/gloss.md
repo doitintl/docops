@@ -167,15 +167,13 @@ The current list of valid instructions are:
 
 - Regular expressions are parsed by the Python [re][re_module] module.
 
+[leeds_corpora]: http://corpus.leeds.ac.uk/list.html
+[nltk]: https://www.nltk.org/
+[nltk_corpora]: http://www.nltk.org/nltk_data/
+[re_module]: https://docs.python.org/3/library/re.html
+
 ---
 
 🏠 [Home][home]
 
-<!-- Link references go below this line, sorted ascending --->
-
 [home]: https://github.com/doitintl/docops-python
-[leeds_corpora]: http://corpus.leeds.ac.uk/list.html
-[nltk_corpora]: http://www.nltk.org/nltk_data/
-[nltk]: https://www.nltk.org/
-[re_module]: https://docs.python.org/3/library/re.html
-[test_dir]: ../../tests/config

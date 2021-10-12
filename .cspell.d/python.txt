@@ -1,0 +1,9 @@
+env
+envs
+mccabe
+pep
+py
+roma
+sys
+venv
+virtualenvs

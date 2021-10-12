@@ -1,9 +1,3 @@
-# Configuration for EditorConfig
-# https://github.com/editorconfig/editorconfig-core-js
-# ============================================================================
-
-# VSCode extension: editorconfig.editorconfig
-
 root = true
 
 [*]
@@ -20,6 +14,7 @@ indent_size = off
 
 [*.md]
 indent_size = off
+max_line_length = off
 
 [*.sh]
 indent_size = 4

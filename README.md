@@ -11,8 +11,10 @@ _Python library and CLI tools for doing DocOps at DoiT_
 
 ## Install
 
-Install the [doitintl-docops][pypi-project] package using [Pip][pip]:
+The [doitintl-docops][pypi-project] package is published to [PyPI][pypi] and
+you can install it using [Pip][pip], like so:
 
+<!-- cspell:disable -->
 ```console
 $ pip install doitintl-docops
 Collecting doit-docops
@@ -20,10 +22,15 @@ Collecting doit-docops
 [...]
 Successfully installed doitintl_docops-2.0.1
 ```
+<!-- cspell:emable -->
 
 The [project releases][releases] page has a complete list of all releases and
-the corresponding release notes. If you prefer to install the package manually,
 each release page has links to multiple release assets.
+
+[pypi-project]: https://pypi.org/project/doitintl-docops
+[pypi]: https://pypi.org/
+[pip]: https://pip.pypa.io/en/stable/
+[releases]: https://github.com/doitintl/docops-python/releases
 
 ## Documentation
 
@@ -41,14 +48,6 @@ each release page has links to multiple release assets.
 
 - [Python development][dev-python]
 
-<!-- Link references go below this line, sorted ascending --->
-
-[dev-python]:
- https://github.com/doitintl/docops-python/blob/main/docs/dev/python.md
-[pip]: https://pip.pypa.io/en/stable/
-[pypi-project]: https://pypi.org/project/doitintl-docops
-[releases]: https://github.com/doitintl/docops-python/releases
-[user-gitbook]:
- https://github.com/doitintl/docops-python/blob/main/docs/user/gitbook.md
-[user-gloss]:
- https://github.com/doitintl/docops-python/blob/main/docs/user/gloss.md
+[user-gloss]: https://github.com/doitintl/docops-python/blob/main/docs/user/gloss.md
+[user-gitbook]: https://github.com/doitintl/docops-python/blob/main/docs/user/gitbook.md
+[dev-python]: https://github.com/doitintl/docops-python/blob/main/docs/dev/python.md
