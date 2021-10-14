@@ -1,7 +1,6 @@
 # DoiT DocOps Containers
 
-_Docker containers for use with other DocOps projects and GitHub Action
-workflows_
+_VS Code and GitHub containers for doing DocOps at DoiT_
 
 [![DocOps][action-docops-img]][action-docops]
 [![Docker][action-docker-img]][action-docker]
