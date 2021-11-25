@@ -1,2 +1,2 @@
-ARG VARIANT
-FROM mcr.microsoft.com/vscode/devcontainers/python:0-${VARIANT}
+# https://hub.docker.com/_/microsoft-vscode-devcontainers
+FROM mcr.microsoft.com/vscode/devcontainers/base:debian
