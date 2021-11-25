@@ -1,12 +1,23 @@
 root = true
 
 [*]
-end_of_line = lf
-trim_trailing_whitespace = true
-insert_final_newline = true
 charset = utf-8
+end_of_line = lf
+indent_size = 2
+indent_style = space
+insert_final_newline = true
+max_line_length = 79
+trim_trailing_whitespace = true
+
+[*.md]
+indent_size = off
+max_line_length = off
+
+[*.sh]
+indent_size = 4
 
 [*.py]
-max_line_length = 79
-indent_style = space
 indent_size = 4
+
+[COMMIT_EDITMSG]
+max_line_length = 72
