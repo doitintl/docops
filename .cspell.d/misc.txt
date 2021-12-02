@@ -1,4 +1,0 @@
-lemmatization
-lemmatize
-lemmatizer
-titleize
