@@ -1,5 +1,4 @@
 {
   "image": "ghcr.io/doitintl/docops/containers/dev:main",
-  "remoteUser": "vscode",
-  "userEnvProbe": "interactiveShell"
+  "remoteUser": "vscode"
 }
