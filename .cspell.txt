@@ -1,4 +1,5 @@
 chmod
+cli
 CPPFLAGS
 dedupe
 DL

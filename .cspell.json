@@ -4,9 +4,6 @@
   "caseSensitive": false,
   "allowCompoundWords": true,
   "minWordLength": 2,
-  "dictionaries": ["custom-abbr", "custom-terms"],
-  "dictionaryDefinitions": [
-    {"name": "custom-abbr", "path": ".cspell.d/abbr.txt"},
-    {"name": "custom-terms", "path": ".cspell.d/terms.txt"}
-  ]
+  "dictionaries": ["custom-abbr"],
+  "dictionaryDefinitions": [{"name": "custom", "path": ".cspell.txt"}]
 }
