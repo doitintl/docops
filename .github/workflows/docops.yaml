@@ -9,8 +9,8 @@ on:
       - main
 
 jobs:
-  checks:
-    name: Docs checks
+  qa:
+    name: Docs QA
     runs-on: ubuntu-latest
     # All of the steps in this job run inside a custom DocOps container. We use
     # the lowest supported Python version provided by the DoiT DocOps container

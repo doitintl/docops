@@ -9,6 +9,5 @@
   //   "dockerfile": "Dockerfile"
   // },
   // --------------------------------------------------------------------------
-  "remoteUser": "vscode",
-  "userEnvProbe": "interactiveShell"
+  "remoteUser": "vscode"
 }

@@ -1,0 +1,15 @@
+pull_request_rules:
+  - name: Ready to merge
+    conditions:
+      - and:
+          - label=ready-to-merge
+          - check-success=Docs QA
+          - check-success~=^Test changed files
+      - or:
+          - check-success~=^Build images
+          - check-skipped~=^Build images
+    actions:
+      merge:
+        method: rebase
+        rebase_fallback: null
+        strict: true
