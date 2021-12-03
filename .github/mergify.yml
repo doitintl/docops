@@ -1,12 +1,18 @@
 pull_request_rules:
   - name: Ready to merge
     conditions:
-      - label=ready-to-merge
-      - check-success=Docs QA
-      - check-success=Static analysis
-      - check-success~=^Python
-      - check-success~=^Scrutinizer
-      - check-success~=^LGTM
+      - and:
+          - label=ready-to-merge
+          - check-success=Docs QA
+          - check-success=Static analysis
+          - check-success~=^Python
+          - check-success~=^Scrutinizer
+          - check-success~=^Sourcery
+          - check-success~=^restyled
+      - or:
+          - check-success~=^LGTM
+          - check-neutral~=^LGTM
+          - check-skipped~=^LGTM
     actions:
       merge:
         method: rebase
