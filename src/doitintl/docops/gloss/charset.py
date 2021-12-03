@@ -38,10 +38,9 @@ def decode_file(filename):
 
 
 def get_str(charset_data, filename=None):
-    err_msg = "Unable to decode character data"
     if not charset_data:
+        err_msg = "Unable to decode character data"
         if filename:
             err_msg += f": {filename}"
         raise docops.EncodingError(err_msg)
-    text = str(charset_data)
-    return text
+    return str(charset_data)

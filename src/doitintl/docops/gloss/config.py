@@ -126,11 +126,10 @@ class Configuration(UserDict):
                 if not docops.quiet:
                     self._print(f"<fg=blue>Installing corpus</>: {name}")
                 dl.download(name, quiet=True)
-            else:
-                if dl.is_stale(name):
-                    if not docops.quiet:
-                        self._print(f"<fg=blue>Updating corpus</>: {name}")
-                    dl.update(quiet=True)
+            elif dl.is_stale(name):
+                if not docops.quiet:
+                    self._print(f"<fg=blue>Updating corpus</>: {name}")
+                dl.update(quiet=True)
         self.lemmatizer = stem.WordNetLemmatizer()
 
     # TODO: Instead of scanning the whole directory tree to build up the

@@ -91,6 +91,5 @@ class Cache:
             shutil.rmtree(cache_path)
             if docops.verbose:
                 self._print(f"<fg=green>Deleted cache</>: {cache_path}")
-        else:
-            if docops.verbose:
-                self._print("<fg=yellow>No cache file to delete</>")
+        elif docops.verbose:
+            self._print("<fg=yellow>No cache file to delete</>")

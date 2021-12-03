@@ -281,12 +281,8 @@ def run():
             raise docops.CliError(err)
         command = TermsCommand(args)
         exit_code = command.run()
-    except KeyboardInterrupt:
+    except (KeyboardInterrupt, BrokenPipeError):
         # Exit silently when the the user terminates the program early
-        pass
-    except BrokenPipeError:
-        # Exit silently when the pipe is broken (e.g., when piped to a program
-        # like `head`)
         pass
     except docops.Error as err:
         printer.print(str(err), sys.stderr)
