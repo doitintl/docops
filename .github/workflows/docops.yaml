@@ -87,4 +87,6 @@ jobs:
         if: always()
         with:
           config-file: .markdown-link-check.json
+          use-verbose-mode: yes
           use-quiet-mode: yes
+          check-modified-files-only: no
