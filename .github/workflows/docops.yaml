@@ -86,5 +86,5 @@ jobs:
       - uses: gaurav-nelson/github-action-markdown-link-check@v1
         if: always()
         with:
-          config-file: .mlc.json
+          config-file: .markdown-link-check.json
           use-quiet-mode: yes
