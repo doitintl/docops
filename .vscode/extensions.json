@@ -1,23 +1,24 @@
 {
   "recommendations": [
+    "codezombiech.gitignore",
+    "david-reis.crashacters",
     "davidanson.vscode-markdownlint",
     "editorconfig.editorconfig",
+    "esbenp.prettier-vscode",
     "foxundermoon.shell-format",
+    "get-woke.vscode-woke",
     "magicstack.magicpython",
     "ms-python.vscode-pylance",
     "ms-vscode.makefile-tools",
     "redhat.vscode-yaml",
+    "sandcastle.whitespace",
+    "sourcery.sourcery",
     "stkb.rewrap",
     "streetsidesoftware.code-spell-checker",
     "tamasfe.even-better-toml",
-    "timonwong.shellcheck",
-    "yzhang.markdown-all-in-one",
-    "esbenp.prettier-vscode",
-    "get-woke.vscode-woke",
-    "viktorzetterstrom.non-breaking-space-highlighter",
     "tetradresearch.vscode-h2o",
-    "david-reis.crashacters",
-    "codezombiech.gitignore",
-    "sandcastle.whitespace"
+    "timonwong.shellcheck",
+    "viktorzetterstrom.non-breaking-space-highlighter",
+    "yzhang.markdown-all-in-one"
   ]
 }
