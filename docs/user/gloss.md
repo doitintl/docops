@@ -1,13 +1,10 @@
 # Glossary Utilities
 
-_A collection of utilities for the creation and maintenance of technical
-glossaries_
+_A collection of utilities for the creation and maintenance of technical glossaries_
 
 > 📝&nbsp;&nbsp;**Note**
 >
-> The glossary utilities do not currently have any documentation besides the
-> sparse information on this page. We will add more detailed documentation at a
-> later date.
+> The glossary utilities do not currently have any documentation besides the sparse information on this page. We will add more detailed documentation at a later date.
 
 **Table of contents:**
 
@@ -37,8 +34,7 @@ Usage:
 
 #### Example uses
 
-As an example, you can run the term analyzer on all text files within a
-repository and print the top 10 candidate terms, like this:
+As an example, you can run the term analyzer on all text files within a repository and print the top 10 candidate terms, like this:
 
 ```console
 $ docops-gloss-terms --row-limit=10 examples/
@@ -59,11 +55,9 @@ Scanning target directory: examples
     10  ]
 ```
 
-However, this example was run with no configuration file and demonstrates how
-noisy the output can be without configuring the analyzer.
+However, this example was run with no configuration file and demonstrates how noisy the output can be without configuring the analyzer.
 
-If you reanalyze the same repository with configuration file, you can improve
-the results with relatively little effort:
+If you reanalyze the same repository with configuration file, you can improve the results with relatively little effort:
 
 ```console
 $ docops-gloss-terms --config-dir=data/configs/test/ --row-limit=10 examples/
@@ -86,16 +80,13 @@ Scanning target directory: examples
 
 ## Configuration files
 
-The term analyzer will scan the target directory (or the configuration
-directory instead, if specified) top-down for any file named `.dgloss.conf`.
+The term analyzer will scan the target directory (or the configuration directory instead, if specified) top-down for any file named `.dgloss.conf`.
 
-The `.dgloss.conf` files can list any number of configuration instructions. The
-instructions are processed in the order they are read (file-by-file).
+The `.dgloss.conf` files can list any number of configuration instructions. The instructions are processed in the order they are read (file-by-file).
 
 ### Syntax
 
-Each `.dgloss.conf` instruction takes the form of a line using the following
-syntax:
+Each `.dgloss.conf` instruction takes the form of a line using the following syntax:
 
 ```text
 COMMAND OPTION ARGUMENT
@@ -103,8 +94,7 @@ COMMAND OPTION ARGUMENT
 
 All three components of the instruction are required.
 
-Lines beginning with `#` are treated as comments and will be ignored. Empty
-lines will also be ignored.
+Lines beginning with `#` are treated as comments and will be ignored. Empty lines will also be ignored.
 
 The current list of valid instructions are:
 
@@ -149,21 +139,15 @@ The current list of valid instructions are:
 
 ### Notes
 
-- For the time being, the only supported word frequency reference corpus is
-  `leeds`.
+- For the time being, the only supported word frequency reference corpus is `leeds`.
 
-  The `leeds` corpus is an English language word frequency corpus taken from
-  the _University of Leeds_ [Centre for Translation Studies
-  corpora][leeds_corpora].
+  The `leeds` corpus is an English language word frequency corpus taken from the _University of Leeds_ [Centre for Translation Studies corpora][leeds_corpora].
 
   In the future, this package may provide alternative word frequency corpora.
 
-- Any languages in the [Natural Language Toolkit][nltk] (NLTK) `stopwords`
-  corpus are supported. See the [NLTK Corpora][nltk_corpora] page for more
-  information.
+- Any languages in the [Natural Language Toolkit][nltk] (NLTK) `stopwords` corpus are supported. See the [NLTK Corpora][nltk_corpora] page for more information.
 
-  This software was written to process English text, so you probably want to
-  specify `english` if you wish to ignore stop words.
+  This software was written to process English text, so you probably want to specify `english` if you wish to ignore stop words.
 
 - Regular expressions are parsed by the Python [re][re_module] module.
 

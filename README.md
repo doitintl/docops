@@ -13,8 +13,7 @@ _Python library and CLI tools for doing DocOps at DoiT_
 
 ## Install
 
-The [doitintl-docops][pypi-project] package is published to [PyPI][pypi] and
-you can install it using [Pip][pip], like so:
+The [doitintl-docops][pypi-project] package is published to [PyPI][pypi] and you can install it using [Pip][pip], like so:
 
 <!-- cspell:disable -->
 ```console
@@ -26,15 +25,13 @@ Successfully installed doitintl_docops-2.0.1
 ```
 <!-- cspell:emable -->
 
-The [project releases][releases] page has a complete list of all releases and
-each release page has links to multiple release assets.
+The [project releases][releases] page has a complete list of all releases and each release page has links to multiple release assets.
 
 ## Documentation
 
 > 📝&nbsp;&nbsp;**Note**
 >
-> Documentation is sparse at the moment because this project is still in the
-> early stages of development.
+> Documentation is sparse at the moment because this project is still in the early stages of development.
 
 ### Users
 
