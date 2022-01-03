@@ -10,6 +10,7 @@ fg
 fn
 gz
 IIF
+img
 ipm
 lemmatization
 lemmatize
@@ -21,6 +22,7 @@ nlp
 nltk
 OSI
 pep
+PIL
 POSIX
 posixpath
 printf

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "doitintl-docops"
-version = "2.0.1"
+version = "2.1.0"
 description = "Python library and CLI tools for doing DocOps at DoiT"
 authors = ["DoiT International <engineering@doit-intl.com>"]
 homepage = "https://github.com/doitintl/docops/"
@@ -45,6 +45,7 @@ pastel = "^0.2.1"
 python = "^3.8"
 simplejson = "^3.17.5"
 tabulate = "^0.8.9"
+Pillow = "^9.0.0"
 
 [tool.poetry.dev-dependencies]
 bandit = "^1.7.0"
@@ -58,6 +59,7 @@ pylama = "^7.7.1"
 pylint = "^2.10.2"
 pyroma = "^3.2"
 vulture = "^2.3"
+reorder-python-imports = "^2.6.0"
 
 [build-system]
 build-backend = "poetry.core.masonry.api"
@@ -67,6 +69,7 @@ requires = ["poetry-core>=1.0.0"]
 [tool.poetry.scripts]
 docops-gitbook = "doitintl.docops.gitbook.cli:run"
 docops-gloss-terms = "doitintl.docops.gloss.cli.terms:run"
+docops-screenshots = "doitintl.docops.screenshots.cli:run"
 
 [tool.black]
 line-length = 79

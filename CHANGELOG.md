@@ -21,6 +21,11 @@ This project uses [semantic versioning][semver].
 
 ADD UNRELEASED CHANGES HERE UNTIL THE NEXT RELEASE IS MADE
 
+**Enhancements:**
+
+- Added new `docops-screenshots` program, which can frame screenshots with a
+  drop shadow.
+
 -->
 
 ## 2.x
