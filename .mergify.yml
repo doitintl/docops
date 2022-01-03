@@ -1,0 +1,20 @@
+pull_request_rules:
+  - name: Ready to merge
+    conditions:
+      - and:
+          - label=ready-to-merge
+          - check-success~=^Docs QA
+          - check-success~=^Static analysis
+          - check-success~=^Python
+          - check-success~=^restyled
+          - check-success~=^GitGuardian
+          - check-success~=^Scrutinizer
+      - or:
+          - check-success~=^LGTM
+          - check-neutral~=^LGTM
+          - check-skipped~=^LGTM
+    actions:
+      merge:
+        method: rebase
+        rebase_fallback: null
+        strict: true
