@@ -5,6 +5,7 @@ This project uses [semantic versioning][semver].
 **Table of contents:**
 
 - [2.x](#2x)
+  - [2.1.0](#210)
   - [2.0.1](#201)
   - [2.0.0](#200)
 - [1.x](#1x)
@@ -21,18 +22,23 @@ This project uses [semantic versioning][semver].
 
 ADD UNRELEASED CHANGES HERE UNTIL THE NEXT RELEASE IS MADE
 
-**Enhancements:**
-
-- Added new `docops-screenshots` program, which can frame screenshots with a
-  drop shadow.
-
-**Fixes:**
-
-- NLTK now downloads the required `omw-1.4` dataset.
-
 -->
 
 ## 2.x
+
+### 2.1.0
+
+_Released on 2021-01-03 ([view source and package files][2.1.0])_
+
+**Enhancements:**
+
+- Added new `docops-screenshots` program, which can frame screenshots with a drop shadow.
+
+**Fixes:**
+
+- The newer version of NLTK now downloads the required `omw-1.4` dataset.
+
+[2.1.0]: https://github.com/doitintl/docops-utils/releases/tag/2.1.0
 
 ### 2.0.1
 
