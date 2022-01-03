@@ -26,6 +26,10 @@ ADD UNRELEASED CHANGES HERE UNTIL THE NEXT RELEASE IS MADE
 - Added new `docops-screenshots` program, which can frame screenshots with a
   drop shadow.
 
+**Fixes:**
+
+- NLTK now downloads the required `omw-1.4` dataset.
+
 -->
 
 ## 2.x

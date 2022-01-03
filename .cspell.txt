@@ -20,6 +20,7 @@ mkdir
 mpoetry
 nlp
 nltk
+omw
 OSI
 pep
 PIL
