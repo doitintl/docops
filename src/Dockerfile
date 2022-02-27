@@ -12,11 +12,16 @@ ARG VARIANT
 ENV USE_EMOJI=false
 ENV PIPX_HOME=/usr/local/pix
 ENV PIPX_BIN_DIR=/usr/local/bin
-ENV PATH=$PIPX_BIN_DIR:$PATH
+
+# rustup
+# ENV RUSTUP_HOME=/usr/local/rustup
+# ENV CARGO_HOME=/usr/local/cargo
+# ENV CARGO_BIN_DIR=/usr/local/cargo/bin
+# ENV PATH=$CARGO_BIN_DIR:$PATH
 
 COPY . /tmp/checkout
-RUN cd /tmp/checkout && \
-  ./bootstrap.sh && \
-  make $VARIANT && \
-  make clean && \
+WORKDIR /tmp/checkout
+RUN ./bootstrap.sh && \
+  make -f build/rules/devcontainer.mk $VARIANT && \
+  ./clean.sh && \
   rm -rf /tmp/checkout

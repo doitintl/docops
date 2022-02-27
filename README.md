@@ -2,7 +2,7 @@
 
 _VS Code and GitHub containers for doing DocOps at DoiT_
 
-[![CI status][action-ci-img]][action-ci]
+[![CICD status][action-cicd-img]][action-cicd]
 
-[action-ci-img]: https://github.com/doitintl/docops-containers/actions/workflows/ci.yaml/badge.svg
-[action-ci]: https://github.com/doitintl/docops-containers/actions/workflows/ci.yaml
+[action-cicd-img]: https://github.com/doitintl/docops-containers/actions/workflows/cicd.yaml/badge.svg
+[action-cicd]: https://github.com/doitintl/docops-containers/actions/workflows/cicd.yaml

@@ -11,6 +11,6 @@ export DEBIAN_FRONTEND
 APT_GET_OPTS='-y --no-install-recommends'
 
 apt-get update
-apt-get install ${APT_GET_OPTS} build-essential
 
-echo finished
+# https://www.gnu.org/software/make/
+apt-get install ${APT_GET_OPTS} make make-doc

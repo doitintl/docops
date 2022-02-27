@@ -1,4 +1,4 @@
-name: CI
+name: CICD
 
 on:
   pull_request:
@@ -7,13 +7,23 @@ on:
       - main
 
 jobs:
+  checks:
+    name: Checks
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/doitintl/docops-containers/dev:main
+    steps:
+      - uses: actions/checkout@v2
+      - run: make checks
   build:
     name: Build ${{ matrix.image }}
+    needs: checks
     runs-on: ubuntu-latest
     strategy:
       matrix:
         image: [dev, dev-python]
     steps:
+      # TODO: Add file changed test back again
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
@@ -32,24 +42,30 @@ jobs:
         id: build
         with:
           build-args: VARIANT=${{ matrix.image }}
+          context: src
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           push: ${{ github.event_name != 'pull_request' }}
-  status:
+
+  notify:
+    name: Notification
     needs: build
-    name: Status alert
+    if: always() && github.event_name != 'pull_request'
     runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/doitintl/docops-containers/dev:main
     steps:
       - uses: actions/checkout@v2
+      - uses: martialonline/workflow-status@v2
+        id: check
       - uses: ravsamhq/notify-slack-action@v1
-        if: always() && github.event_name != 'pull_request'
         env:
-          STATUS: '{workflow} <{run_url}|{status_message}>'
+          STATUS: '{workflow} workflow <{run_url}|{status_message}>'
           COMMIT: for commit `<{commit_url}|{commit_sha}>`
           BRANCH: on branch `{branch}`
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         with:
-          status: ${{ job.status }}
+          status: ${{ steps.check.outputs.status }}
           notification_title: ''
           message_format: ${{ env.STATUS }} ${{ env.COMMIT }} ${{ env.BRANCH }}
           footer: <{repo_url}|{repo}>
