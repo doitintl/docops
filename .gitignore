@@ -1,6 +1,1 @@
-# VSCode configuration files
--------------------------------------------------------------------------------
-
-# Don't commit this, because it gets automatically modified by VS Code in ways
-# that are specific to the user's environment
 .vscode/settings.json

@@ -5,5 +5,5 @@
   "allowCompoundWords": true,
   "minWordLength": 2,
   "dictionaries": ["custom-abbr"],
-  "dictionaryDefinitions": [{"name": "custom", "path": ".cspell.txt"}]
+  "dictionaryDefinitions": [{"name": "custom", "path": ".dict.txt"}]
 }

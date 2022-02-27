@@ -1,13 +1,9 @@
 pull_request_rules:
   - name: Ready to merge
     conditions:
-      - and:
-          - label=ready-to-merge
-          - check-success=Docs QA
-          - check-success~=^Test changed files
-      - or:
-          - check-success~=^Build images
-          - check-skipped~=^Build images
+      - label=ready-to-merge
+      - check-success~=^Build
+      - check-success~=GitGuardian
     actions:
       merge:
         method: rebase
