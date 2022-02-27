@@ -7,5 +7,4 @@ pull_request_rules:
     actions:
       merge:
         method: rebase
-        rebase_fallback: null
-        strict: true
+        rebase_fallback: none

@@ -1,13 +1,6 @@
 {
-  // --------------------------------------------------------------------------
-  // Point `image` to a published image, once available
-  "image": "ghcr.io/doitintl/docops/containers/dev:main",
-  // --------------------------------------------------------------------------
-  // If no published image is available, bootstrap the devcontainer with the
-  // `Dockerfile` in this repository
-  // "build": {
-  //   "dockerfile": "Dockerfile"
-  // },
-  // --------------------------------------------------------------------------
+  "image": "ghcr.io/doitintl/docops-containers/dev:main",
+  "settings": {},
+  "extensions": [],
   "remoteUser": "vscode"
 }

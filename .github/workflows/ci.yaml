@@ -35,3 +35,22 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           push: ${{ github.event_name != 'pull_request' }}
+  status:
+    needs: build
+    name: Status alert
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ravsamhq/notify-slack-action@v1
+        if: always() && github.event_name != 'pull_request'
+        env:
+          STATUS: '{workflow} <{run_url}|{status_message}>'
+          COMMIT: for commit `<{commit_url}|{commit_sha}>`
+          BRANCH: on branch `{branch}`
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        with:
+          status: ${{ job.status }}
+          notification_title: ''
+          message_format: ${{ env.STATUS }} ${{ env.COMMIT }} ${{ env.BRANCH }}
+          footer: <{repo_url}|{repo}>
+          notify_when: success,warning,failure
