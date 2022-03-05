@@ -1,0 +1,16 @@
+{
+  "recommendations": [
+    "dansnow.vscode-dockerfilelint",
+    "davidanson.vscode-markdownlint",
+    "editorconfig.editorconfig",
+    "esbenp.prettier-vscode",
+    "foxundermoon.shell-format",
+    "jeff-hykin.better-dockerfile-syntax",
+    "ms-azuretools.vscode-docker",
+    "streetsidesoftware.code-spell-checker",
+    "yzhang.markdown-all-in-one",
+    "timonwong.shellcheck",
+    "david-reis.crashacters",
+    "sandcastle.whitespace"
+  ]
+}
