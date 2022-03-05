@@ -1,4 +1,9 @@
 {
-  "image": "ghcr.io/doitintl/docops/containers/dev:main",
+  // "image": "ghcr.io/doitintl/docops/containers/dev:main",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "settings": {},
+  "extensions": [],
   "remoteUser": "vscode"
 }

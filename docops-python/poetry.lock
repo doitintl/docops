@@ -260,7 +260,7 @@ python-versions = ">=3.5"
 
 [[package]]
 name = "ipython"
-version = "7.31.1"
+version = "7.30.1"
 description = "IPython: Productive Interactive Computing"
 category = "dev"
 optional = false
@@ -873,7 +873,7 @@ python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "200252f4baf4c2755580ede59531697f70de8a72587390c5d770cfd3491c4b02"
+content-hash = "e43e206a473f1da8d87feb5a3717bca179ce2270b90d589832c752f408f46582"
 
 [metadata.files]
 api-client = [
@@ -971,8 +971,8 @@ inflection = [
     {file = "inflection-0.5.1.tar.gz", hash = "sha256:1a29730d366e996aaacffb2f1f1cb9593dc38e2ddd30c91250c6dde09ea9b417"},
 ]
 ipython = [
-    {file = "ipython-7.31.1-py3-none-any.whl", hash = "sha256:55df3e0bd0f94e715abd968bedd89d4e8a7bce4bf498fb123fed4f5398fea874"},
-    {file = "ipython-7.31.1.tar.gz", hash = "sha256:b5548ec5329a4bcf054a5deed5099b0f9622eb9ea51aaa7104d215fece201d8c"},
+    {file = "ipython-7.30.1-py3-none-any.whl", hash = "sha256:fc60ef843e0863dd4e24ab2bb5698f071031332801ecf8d1aeb4fb622056545c"},
+    {file = "ipython-7.30.1.tar.gz", hash = "sha256:cb6aef731bf708a7727ab6cde8df87f0281b1427d41e65d62d4b68934fa54e97"},
 ]
 isort = [
     {file = "isort-5.10.1-py3-none-any.whl", hash = "sha256:6f62d78e2f89b4500b080fe3a81690850cd254227f27f75c3a0c491a1f351ba7"},
