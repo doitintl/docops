@@ -1,8 +1,5 @@
 {
-  "image": "mcr.microsoft.com/vscode/devcontainers/base:debian",
-  // "build": {
-  //   "dockerfile": "Dockerfile"
-  // },
+  "image": "ghcr.io/doitintl/docops-containers/dev:main",
   "settings": {},
   "extensions": [],
   "remoteUser": "vscode"
