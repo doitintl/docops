@@ -1,0 +1,36 @@
+name: Packaging
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  static-analysis:
+    name: Static analysis
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: jpetrucciani/black-check@master
+        if: always()
+  execution:
+    needs: static-analysis
+    name: Python ${{ matrix.version }} tests
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/doitintl/docops/python-${{ matrix.version }}:main
+      options: --user runner
+    strategy:
+      matrix:
+        version: ['3.8', '3.9']
+    steps:
+      - uses: actions/checkout@v2
+      - run: make test
+        env:
+          GITBOOK_API_TOKEN: ${{ secrets.GITBOOK_API_TOKEN }}
+          POETRY_PYPI_TOKEN_PYPI: ${{ secrets.POETRY_PYPI_TOKEN_PYPI }}
+      - uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: logs-python-${{ matrix.version }}
+          path: tests/logs

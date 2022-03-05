@@ -1,0 +1,93 @@
+[tool.poetry]
+name = "doitintl-docops"
+version = "2.1.0"
+description = "Python library and CLI tools for doing DocOps at DoiT"
+authors = ["DoiT International <engineering@doit-intl.com>"]
+homepage = "https://github.com/doitintl/docops/"
+repository = "https://github.com/doitintl/docops-utils/"
+readme = "README.md"
+keywords = [ "ci-cd", "docs", "docops", "glossaries", "nlp", "qa-automation" ]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Environment :: Console",
+  "Intended Audience :: Information Technology",
+  "License :: OSI Approved :: Apache Software License",
+  "License :: OSI Approved :: MIT License",
+  "License :: Other/Proprietary License",
+  "Natural Language :: English",
+  "Operating System :: POSIX",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3",
+  "Topic :: Software Development :: Documentation",
+  "Topic :: Software Development :: Quality Assurance",
+  "Topic :: Software Development :: Testing",
+  "Topic :: Text Processing :: Indexing",
+  "Topic :: Text Processing :: Linguistic",
+  "Topic :: Text Processing",
+  "Topic :: Text Processing",
+  "Topic :: Utilities",
+]
+packages = [
+  { include = "doitintl", "from" = "src" },
+]
+
+# cSpell:disable
+[tool.poetry.dependencies]
+api-client = "^1.3.1"
+appdirs = "^1.4.4"
+charset-normalizer = "^2.0.4"
+docopt = "^0.6.2"
+inflect = "^5.3.0"
+inflection = "^0.5.1"
+nltk = "^3.6.2"
+pastel = "^0.2.1"
+python = "^3.8"
+simplejson = "^3.17.5"
+tabulate = "^0.8.9"
+Pillow = "^9.0.0"
+
+[tool.poetry.dev-dependencies]
+bandit = "^1.7.0"
+black = { version = "^21.7b0", allow-prereleases = true }
+flake8 = "^3.9.2"
+ipython = "^7.27.0"
+prospector = "^1.5.1"
+pycodestyle = "^2.7.0"
+pydocstyle = "^6.1.1"
+pylama = "^7.7.1"
+pylint = "^2.10.2"
+pyroma = "^3.2"
+vulture = "^2.3"
+reorder-python-imports = "^2.6.0"
+
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core>=1.0.0"]
+# cSpell:enable
+
+[tool.poetry.scripts]
+docops-gitbook = "doitintl.docops.gitbook.cli:run"
+docops-gloss-terms = "doitintl.docops.gloss.cli.terms:run"
+docops-screenshots = "doitintl.docops.screenshots.cli:run"
+
+[tool.black]
+line-length = 79
+
+# cSpell:disable-next-line
+[tool.pydocstyle]
+ignore = [
+  # For now, while still in alpha, ignore all lint errors about missing
+  # docstrings
+  "D100",
+  "D102",
+  "D105",
+  "D107",
+  "D104",
+  "D103",
+  "D101",
+  # The rest are miscellaneous choices
+  "D212",
+  "D415",
+  "D400"
+]

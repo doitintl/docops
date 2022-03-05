@@ -1,0 +1,10 @@
+{
+  "version": "0.2",
+  "language": "en-US",
+  "caseSensitive": false,
+  "allowCompoundWords": true,
+  "minWordLength": 2,
+  "ignorePaths": ["poetry.lock"],
+  "dictionaries": ["custom"],
+  "dictionaryDefinitions": [{"name": "custom", "path": ".cspell.txt"}]
+}
