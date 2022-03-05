@@ -11,7 +11,7 @@ jobs:
     name: Checks
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/doitintl/docops-containers/dev:main
+      image: ghcr.io/doitintl/docops/devcontainer:main
     steps:
       - uses: actions/checkout@v2
       - run: cd docops-containers && make check
