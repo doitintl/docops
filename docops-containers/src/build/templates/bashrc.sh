@@ -8,7 +8,9 @@ eval "$(dircolors -p |
     dircolors /dev/stdin)" || true
 
 # Configure Git
-git config pull.rebase true
+git config --global 'pull.rebase' 'true'
+git config --global 'push.default' 'current'
+git config --global 'branch.autosetuprebase' 'always'
 
 # Source `.profile` (for `PATH` additions) without causing an infinite loop
 # https://github.com/koalaman/shellcheck/wiki/SC1091
