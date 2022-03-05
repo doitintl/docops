@@ -9,9 +9,7 @@ BOLD=[1m
 RESET=[0m
 
 BUILD_DIR=$(dirname "${0}")
-RULES_DIR="rules"
-DEVCONTAINER_RULES="${BUILD_DIR}/${RULES_DIR}/devcontainer.mk"
-INSTALL_RULES="${BUILD_DIR}/${RULES_DIR}/install.mk"
+RULES="${BUILD_DIR}/rules.mk"
 
 get_targets() {
     file="${1}"
@@ -21,7 +19,7 @@ get_targets() {
 
 format_targets() {
     basename="${1}"
-    command="make -f ${RULES_DIR}/${basename} \x1b${BOLD}\1\x1b${RESET}"
+    command="make -f ${BUILD_DIR}/${basename} \x1b${BOLD}\1\x1b${RESET}"
     sed -E "s,(.*),  ${command}," </dev/stdin
 
 }
@@ -42,17 +40,15 @@ check_sort() {
 print_targets() {
     file="${1}"
     basename="$(basename "${file}")"
-    echo "Available targets for \`${basename}\` file:"
+    stem="$(echo "${basename}" | cut -f 1 -d '.')"
+    echo "Available ${stem}:"
     echo
     get_targets "${file}" | sort |
         format_targets "${basename}"
 }
 
 if test "${1}" = "--check"; then
-    check_sort "${DEVCONTAINER_RULES}"
-    check_sort "${INSTALL_RULES}"
+    check_sort "${RULES}"
 else
-    print_targets "${DEVCONTAINER_RULES}"
-    echo
-    print_targets "${INSTALL_RULES}"
+    print_targets "${RULES}"
 fi

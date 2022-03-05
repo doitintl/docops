@@ -9,23 +9,19 @@
 # POSIX locale
 LC_ALL = C
 
-RULES_DIR := $(dir $(lastword $(MAKEFILE_LIST)))
-INSTALL_RULES = $(RULES_DIR)/install.mk
+SRC_DIR := $(subst /,,$(dir $(lastword $(MAKEFILE_LIST))))
+BUILD_DIR := $(SRC_DIR)/build
+TMP_DIR := $(BUILD_DIR)/tmp
+RULES := $(BUILD_DIR)/rules.mk
 
-INSTALL = $(MAKE) --no-print-directory -f $(INSTALL_RULES)
+MAKE_RULES := $(MAKE) --no-print-directory -f $(RULES)
 
-# Targets
-# =============================================================================
-
-# dev
-# -----------------------------------------------------------------------------
-
-DEV_DEPS = \
+BUILD_DEPS = \
 	bashrc \
 	brok \
 	build-essential \
-	cspell \
 	codespell \
+	cspell \
 	dockerfilelint \
 	doitintl-docops \
 	ec \
@@ -41,6 +37,7 @@ DEV_DEPS = \
 	optipng \
 	pandoc \
 	parallel \
+	poetry \
 	prettier \
 	proselint \
 	shellcheck \
@@ -49,21 +46,28 @@ DEV_DEPS = \
 	vale \
 	yamllint
 
-.PHONY: dev
-dev:
-	@ $(INSTALL) $(DEV_DEPS)
-
-# dev-python
-# -----------------------------------------------------------------------------
-
-DEV_PYTHON_DEPS = poetry
-
-.PHONY: dev-python
-dev-python: dev
-	@ $(INSTALL) $(DEV_PYTHON_DEPS)
-
-# Default goal
+# Targets
 # =============================================================================
 
-# Clears the default goal, causing an error if no target is specified
-.DEFAULT_GOAL =
+.DEFAULT_GOAL := build
+
+.PHONY: list
+list:
+	@$(BUILD_DIR)/list.sh
+
+.PHONY: list
+list-check:
+	@$(BUILD_DIR)/list.sh --check
+
+.PHONY: build
+build: $(BUILD_DEPS)
+
+.PHONY: clean
+clean:
+	rm -rf $(TMP_DIR)
+
+# Pattern rules
+# =============================================================================
+
+%:
+	@ $(MAKE_RULES) $@
