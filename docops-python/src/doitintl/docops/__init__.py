@@ -37,18 +37,63 @@ __version__ = __dist__.version
 
 
 # The path to the root Python source code directory for this module
-src_path = pathlib.Path(__file__).parent
-data_path = src_path.joinpath("data")
+_src_path = pathlib.Path(__file__).parent
+_data_path = _src_path.joinpath("data")
 
-verbose = False
-quiet = False
-disable_ansi = False
-term_limit = 50
-table_format = "simple"
+_debug = False
+_verbose = False
+_more_verbose = False
+_max_verbose = False
+_quiet = False
+_disable_ansi = False
+_term_limit = 50
+_table_format = "grid"
+
+# TODO: Ugh this whole thing needs some serious refactoring
+
+
+def _get_data_path():
+    return _data_path
+
+
+def _get_debug():
+    return _debug
+
+
+def _get_verbose():
+    return _verbose
+
+
+def _get_more_verbose():
+    return _verbose or _more_verbose
+
+
+def _get_max_verbose():
+    return _verbose or _more_verbose or _max_verbose
+
+
+def _get_quiet():
+    return _quiet
+
+
+def _get_disable_ansi():
+    return _disable_ansi
+
+
+def _get_term_limit():
+    return _term_limit
+
+
+def _get_table_format():
+    return _table_format
+
 
 # TODO: Document this in the developer ops and integrate it into the
+
+_debug = False
 # `launch.json`config
-debug = bool(os.environ.get("DOCOPS_DEBUG", None))
+if os.environ.get("DOCOPS_DEBUG", None):
+    _debug = True
 
 # The standard UNIX file-parsing error outputs are:
 #
@@ -57,33 +102,32 @@ debug = bool(os.environ.get("DOCOPS_DEBUG", None))
 
 
 # TODO: Make more use of this function
-def print_debug(msg):
-    fn_name = None
-    caller = inspect.currentframe().f_back
-    frame = inspect.getframeinfo(caller)
-    path = pathlib.Path(frame.filename)
-    path = path.relative_to(src_path)
-    line_num = frame.lineno
-    fn_name = frame.function
-    caller = caller.f_back
-    # Format the text using a lighter shade (if supported)
-    context = f"\x1b[00;2m{path}:{line_num} {fn_name} -\x1b[0m"
-    msg = f"\x1b[00;1m{msg}\x1b[0m\n"
-    output = f"{context} {msg}"
-    sys.stderr.write(output)
-    sys.stderr.flush()
+# def print_debug(msg):
+#     fn_name = None
+#     caller = inspect.currentframe().f_back
+#     frame = inspect.getframeinfo(caller)
+#     path = pathlib.Path(frame.filename)
+#     path = path.relative_to(src_path)
+#     line_num = frame.lineno
+#     fn_name = frame.function
+#     caller = caller.f_back
+#     # Format the text using a lighter shade (if supported)
+#     context = f"\x1b[00;2m{path}:{line_num} {fn_name} -\x1b[0m"
+#     msg = f"\x1b[00;1m{msg}\x1b[0m\n"
+#     output = f"{context} {msg}"
+#     sys.stderr.write(output)
+#     sys.stderr.flush()
 
 
 class Error(Exception):
 
-    err = None
+    no_prefix = None
 
-    def __str__(self, no_prefix=False):
-        self.err = super().__str__()
-        if no_prefix:
-            return self.err
+    def get_prefix(self):
+        if self.no_prefix:
+            return ""
         error_type = self.get_error_type()
-        return f"<error>{error_type}</error>: {self.err}"
+        return f"<error>{error_type}</error>: "
 
     def get_error_type(self):
         error_type = self.__class__.__name__
@@ -113,31 +157,11 @@ class UserError(Error):
 
 
 class CliError(UserError):
-    def __str__(self):
-        # Let docopt print it's own error without an error prefix
-        return super().__str__(no_prefix=True)
+    # Let docopt print it's own error without an error prefix
+    def get_prefix(self):
+        return None
 
 
 class ConfigurationError(UserError):
 
     pass
-
-
-class ParseError(ConfigurationError):
-
-    _parse_errors = None
-
-    def __init__(self, parse_errors=[]):
-        super().__init__()
-        self._parse_errors = parse_errors
-
-    def __str__(self):
-        output = ""
-        for parse_error in self._parse_errors:
-            filename, line_num, msg = parse_error
-            output += f"{filename}:{line_num}: {msg}\n"
-        if verbose:
-            error_type = self.get_error_type()
-            output = f"<error{error_type}</error>:\n\n{output}"
-        output = output.strip()
-        return output

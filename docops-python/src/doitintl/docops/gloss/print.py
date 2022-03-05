@@ -22,6 +22,8 @@
 
 
 import sys
+import time
+import re
 
 import pastel
 
@@ -33,10 +35,12 @@ from doitintl import docops
 
 class Printer(pastel.Pastel):
 
-    MAX_LINE_LENGTH = 79
-
     # TODO: Make use of these throughout the code
-    STYLES = {
+    _STYLES = {
+        "info": {
+            "fg": "blue",
+            "options": None,
+        },
         "success": {
             "fg": "green",
             "options": None,
@@ -77,14 +81,14 @@ class Printer(pastel.Pastel):
 
     def __init__(self):
         super().__init__()
-        self.with_colors(not docops.disable_ansi)
+        self.with_colors(not docops._disable_ansi)
         self._configure_styles()
 
     def _configure_styles(self):
-        for name, kwargs in self.STYLES.items():
+        for name, kwargs in self._STYLES.items():
             self.add_style(name, **kwargs)
 
-    def print(self, msg, file=sys.stdout):
-        msg = self.colorize(str(msg))
-        msg = f"{msg}\n"
-        file.write(msg)
+    def print(self, prefix, suffix="", file=sys.stdout):
+        formatted_prefix = self.colorize(str(prefix))
+        file.write(formatted_prefix)
+        file.write(f"{suffix}\n")

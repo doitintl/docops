@@ -45,13 +45,18 @@ pastel = "^0.2.1"
 python = "^3.8"
 simplejson = "^3.17.5"
 tabulate = "^0.8.9"
-Pillow = "^9.0.0"
+stopwordsiso = "^0.6.1"
+pytextrank = "^3.2.1"
+pyate = "^0.5.3"
+en-core-web-sm = {url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.1.0/en_core_web_sm-3.1.0.tar.gz#egg=en_core_web_sm"}
+docutils = "^0.17.1"
+
 
 [tool.poetry.dev-dependencies]
 bandit = "^1.7.0"
 black = { version = "^21.7b0", allow-prereleases = true }
 flake8 = "^3.9.2"
-ipython = "^7.31.1"
+ipython = "^7.27.0"
 prospector = "^1.5.1"
 pycodestyle = "^2.7.0"
 pydocstyle = "^6.1.1"
@@ -59,7 +64,8 @@ pylama = "^7.7.1"
 pylint = "^2.10.2"
 pyroma = "^3.2"
 vulture = "^2.3"
-reorder-python-imports = "^2.6.0"
+pip = "^21.2.4"
+ipykernel = "^6.4.1"
 
 [build-system]
 build-backend = "poetry.core.masonry.api"
@@ -68,26 +74,12 @@ requires = ["poetry-core>=1.0.0"]
 
 [tool.poetry.scripts]
 docops-gitbook = "doitintl.docops.gitbook.cli:run"
-docops-gloss-terms = "doitintl.docops.gloss.cli.terms:run"
-docops-screenshots = "doitintl.docops.screenshots.cli:run"
+docops-gloss = "doitintl.docops.gloss.cli:run"
 
 [tool.black]
 line-length = 79
 
 # cSpell:disable-next-line
 [tool.pydocstyle]
-ignore = [
-  # For now, while still in alpha, ignore all lint errors about missing
-  # docstrings
-  "D100",
-  "D102",
-  "D105",
-  "D107",
-  "D104",
-  "D103",
-  "D101",
-  # The rest are miscellaneous choices
-  "D212",
-  "D415",
-  "D400"
-]
+# Ignore all of the comment errors for now, unti the project matures a little
+ignore = "D100, D101, D102, D103, D104, D105, D106, D107, D213, D400, D415"

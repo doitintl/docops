@@ -18,8 +18,8 @@ autodetect: false
 pylint:
   run: true
 
-# https://pep8.readthedocs.io/
-pep8:
+# https://pycodestyle.pycqa.org/en/latest/
+pycodestyle:
   run: true
 
 # https://launchpad.net/pyflakes
@@ -35,7 +35,7 @@ dodgy:
   run: true
 
 # https://github.com/PyCQA/pydocstyle
-pep257:
+pydocstyle:
   run: true
 
 # https://github.com/regebro/pyroma

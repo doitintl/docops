@@ -1,0 +1,109 @@
+# Python regular expression reference:
+# https://docs.python.org/3/library/re.html
+
+use:
+  corpus: leeds
+
+ignore:
+  case: true
+  stopwords: 'english'
+  term-literals:
+    - click
+    - http
+    - new
+    - text-align
+    - page
+    - td
+    - endhint
+    - hint
+    - see
+    - use
+    - like
+    - info
+    - email
+    - add
+    - following
+    - please
+    - need
+    - next
+    - required
+    - button
+    - icon
+    - number
+    - note
+    - information
+    - assets
+    - change
+    - table
+    - time
+    - clicking
+    - existing
+    - side
+    - may
+    - column
+    - tab
+    - example
+    - give
+    - list
+    - within
+    - want
+    - edit
+    - go
+    - able
+    - one
+    - day
+    - appear
+    - additional
+    - specific
+    - first
+    - asset
+    - left
+    - setting
+    - must
+    - also
+    - detail
+    - finally
+    - right-hand
+    - two
+    - id
+    - based
+    - left-hand
+    - save
+    - successfully
+    - text
+    - via
+    - wa
+    - top
+    - well
+    - help
+    - menu
+    - show
+    - corner
+    - let
+    - look
+    - per
+    - used
+    - displayed
+    - many
+    - navigation
+    - result
+    - hash
+    - sha256
+    - default
+    - optional
+    - using
+    - self
+    - def
+    - import
+    - lemma
+    - main
+    - get
+  term-regexes:
+    - 'n\Wt'
+    # Ignore lemmas without any letters in them
+    - '^[^a-zA-Z]+$'
+    # Ignore lemmas that are a single letter
+    - '^[a-zA-Z]$'
+    # Ignore irrelevant filenames
+    - '.*\.png$'
+    - '.*\.gitbook/assets.*'

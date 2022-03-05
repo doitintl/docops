@@ -1,48 +1,18 @@
-# Python files
-# -----------------------------------------------------------------------------
-
-# Bytecode caches
 __pycache__
-
-# The Python virtual environment created by Poetry
 .venv/
-
-# The distribution directory used by Poetry when creating Python packages for
-# upload
+.vscode/dictionary.txt
+.vscode/settings.json
+.vsocde/cspell.json
+*.log
+*.stamp
 dist/
+test/logs/
+tests/clones
+tests/examples/gitbook
+tmp/
 
 # The `doitintl` directory is an implicate namespace package
 # <https://www.python.org/dev/peps/pep-0420/> and must not contain a top-level
 # `__init__.py` file
 
 src/doitintl/__init__.py
-
-# VSCode configuration files
--------------------------------------------------------------------------------
-
-# Don't commit this, because it gets automatically modified by VS Code in ways
-# that are specific to the user's environment
-.vscode/settings.json
-
-# Temporary build files
-# -----------------------------------------------------------------------------
-
-# Files used by Make to indicate that a specific task has been completed
-*.stamp
-
-# The current Makefile tests redirect command output to log files in this
-# directory to avoid generating too much output (which can cause the # GitHub
-# action runners to exhaust their memory.
-#
-# These logs are useful for developers to check when testing, but not relevant
-# for Git history.
-test/logs/
-
-# Miscellaneous files
-# -----------------------------------------------------------------------------
-
-# Log files
-*.log
-
-# Git submodules
-tests/clones

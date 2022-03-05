@@ -8,16 +8,23 @@ _A collection of utilities for the creation and maintenance of technical glossar
 
 **Table of contents:**
 
-- [Use](#use)
-  - [CLI tool](#cli-tool)
+- [Usage](#usage)
+  - [CLI program](#cli-program)
     - [Example uses](#example-uses)
 - [Configuration files](#configuration-files)
-  - [Syntax](#syntax)
-  - [Notes](#notes)
+- [Configuration options](#configuration-options)
+  - [Use](#use)
+    - [Corpus](#corpus)
+  - [Ignore](#ignore)
+    - [Case](#case)
+    - [Stowords](#stowords)
+    - [Term literals](#term-literals)
+    - [Term regexes](#term-regexes)
+- [Example configuration file](#example-configuration-file)
 
-## Use
+## Usage
 
-### CLI tool
+### CLI program
 
 You can invoke the CLI program with this command:
 
@@ -57,7 +64,7 @@ Scanning target directory: examples
 
 However, this example was run with no configuration file and demonstrates how noisy the output can be without configuring the analyzer.
 
-If you reanalyze the same repository with configuration file, you can improve the results with relatively little effort:
+You can re-analyze the [examples directory][examples_dir] using the [test configuration directory][test_dir] to see how a relatively simple [configuration file][config_file] can improve the results:
 
 ```console
 $ docops-gloss-terms --config-dir=data/configs/test/ --row-limit=10 examples/
@@ -78,83 +85,152 @@ Scanning target directory: examples
      9  service
 ```
 
+[config_file]: ../../tests/config/.dgloss.conf
+[examples_dir]: ../../tests/examples
+[test_dir]: ../../tests/config
+
 ## Configuration files
 
-The term analyzer will scan the target directory (or the configuration directory instead, if specified) top-down for any file named `.dgloss.conf`.
+The term analyzer will scan the target directory (or the configuration directory instead, if specified) top-down for any file named one of the following:
 
-The `.dgloss.conf` files can list any number of configuration instructions. The instructions are processed in the order they are read (file-by-file).
+- `.dgloss.yaml`
+- `.dgloss.yml`
+- `dgloss.yaml`
+- `dgloss.yml`
 
-### Syntax
+The configuration files can list any number of configuration instructions. The instructions are processed in the order they are read (file-by-file).
 
-Each `.dgloss.conf` instruction takes the form of a line using the following syntax:
+## Configuration options
 
-```text
-COMMAND OPTION ARGUMENT
+Each configuration file must be valid [YAML][yaml].
+
+Unknown YAML keys are silently ignored.
+
+Additionally, as is standard with YAML, empty lines and lines beginning with `#` are also ignored.
+
+[yaml]: [https://en.wikipedia.org/wiki/YAML]
+
+### Use
+
+The top level `use` key can take one child key.
+
+#### Corpus
+
+The `corpus` key can take the value of any supported word frequency reference
+corpus name.
+
+Example configuration:
+
+```yaml
+use:
+  corpus: leeds
 ```
 
-All three components of the instruction are required.
-
-Lines beginning with `#` are treated as comments and will be ignored. Empty lines will also be ignored.
-
-The current list of valid instructions are:
-
-<table>
-  <tr>
-    <th>Command</th>
-    <th width="20%">Argument</th>
-    <th>Default</th>
-    <th>Description</th>
-  </tr>
-  <tr>
-    <td><code>Use&nbsp;corpus&nbsp;&lt;ARGUMENT&gt;</code></td>
-    <td>Any supported corpora name</td>
-    <td><code>leeds</code></td>
-    <td>Use the specified corpus as a word frequency reference</td>
-  </tr>
-  <tr>
-    <td><code>ignore&nbsp;case&nbsp;&lt;ARGUMENT&gt;</code></td>
-    <td><code>true</code> or <code>false</code></td>
-    <td><code>true</code></td>
-    <td>Whether or not to ignore word case</td>
-  </tr>
-  <tr>
-    <td><code>ignore&nbsp;stopwords&nbsp;&lt;ARGUMENT&gt;</td>
-    <td>Any supported language name</td>
-    <td>None</td>
-    <td>Ignore common stop words for the specified language</td>
-  </tr>
-  <tr>
-    <td><code>ignore&nbsp;literal&nbsp;&lt;ARGUMENT&gt;</td>
-    <td>Any string</td>
-    <td>None</td>
-    <td>Ignore any terms that exactly match the specified string</td>
-  </tr>
-  <tr>
-    <td><code>ignore&nbsp;regex&nbsp;&lt;ARGUMENT&gt;</td>
-    <td>Any regular expression</td>
-    <td>None</td>
-    <td>Ignore any terms that match the specified regular expression</td>
-  </tr>
-</table>
-
-### Notes
-
-- For the time being, the only supported word frequency reference corpus is `leeds`.
-
-  The `leeds` corpus is an English language word frequency corpus taken from the _University of Leeds_ [Centre for Translation Studies corpora][leeds_corpora].
-
-  In the future, this package may provide alternative word frequency corpora.
-
-- Any languages in the [Natural Language Toolkit][nltk] (NLTK) `stopwords` corpus are supported. See the [NLTK Corpora][nltk_corpora] page for more information.
-
-  This software was written to process English text, so you probably want to specify `english` if you wish to ignore stop words.
-
-- Regular expressions are parsed by the Python [re][re_module] module.
+For the time being, the only supported corpus is `leeds`, which is an English
+language word frequency corpus taken from the _University of Leeds_ [Centre for
+Translation Studies corpora][leeds_corpora]. In the future, this package may
+provide additional word frequency corpora.
 
 [leeds_corpora]: http://corpus.leeds.ac.uk/list.html
-[nltk]: https://www.nltk.org/
+
+### Ignore
+
+The top level `ignore` key can take several child keys.
+
+#### Case
+
+The `case` key can be set to `true` or `false` and indicates whether or not to
+ignore word case during analysis.
+
+Example configuration:
+
+```yaml
+ignore:
+  case: true
+```
+
+The default value is `true`.
+
+#### Stowords
+
+The `stopwords` key can be any supported language name.
+
+Any languages in the [Natural Language Toolkit][nltk] (NLTK) stopwords corpus
+are supported. See the [NLTK Corpora][nltk_corpora] page for more information.
+
+This software was written to process English text, so you probably want to
+specify `english` if you wish to ignore stop words.
+
+Example configuration:
+
+```yaml
+ignore:
+  stopwords: 'english'
+```
+
+The default value is `english`.
+
 [nltk_corpora]: http://www.nltk.org/nltk_data/
+[nltk]: https://www.nltk.org/
+
+#### Term literals
+
+The `term-literals` key takes a list of literal strings. The analyzer will ignore
+any terms that exactly match the specified string.
+
+Example configuration:
+
+```yaml
+ignore:
+  term-literals:
+      - foo
+      - bar
+      - baz
+```
+
+#### Term regexes
+
+The `regexes` key takes a list of [regular expressions][regexes]. The analyzer
+will ignore any terms that match the specified regular expression.
+
+Example configuration:
+
+```yaml
+ignore:
+  term-regexes:
+    # Ignore terms without any letters
+    - '^[^a-zA-Z]+$'
+    # Ignore terms that are a single letter
+    - '^[a-zA-Z]$'
+```
+
+Regular expressions are parsed by the Python [re][re_module] module.
+
+[regexes]: https://en.wikipedia.org/wiki/Regular_expression
 [re_module]: https://docs.python.org/3/library/re.html
+
+## Example configuration file
+
+If you combined all of the [configuration option]((#configuration-options))
+examples above, the full configuration file would look like this:
+
+```yaml
+use:
+  corpus: leeds
+
+ignore:
+  case: true
+  stopwords: 'english'
+  term-literals:
+    - foo
+    - bar
+    - baz
+  term-regexes:
+    # Ignore terms without any letters
+    - '^[^a-zA-Z]+$'
+    # Ignore terms that are a single letter
+    - '^[a-zA-Z]$'
+```
 
 ---
 

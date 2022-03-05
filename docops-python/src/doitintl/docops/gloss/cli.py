@@ -21,9 +21,7 @@
 # SOFTWARE.
 
 
-# TODO: Colorize this output
-"""
-Find terms that may be candidates for inclusion in a glossary
+"""Find terms that may be candidates for inclusion in a glossary
 
 Usage:
 
@@ -61,14 +59,15 @@ This program will:
 Basic options:
 
   -h, --help               Print this help message and exit
-
   --version                Print the software version number and exit
 
-  -v, --verbose            Display verbose output messages
+  --disable-ansi           Disable ANSI escape code formatting
+
+  -v, --verbose            Print verbose output messages
+  --more-verbose           Print more verbose output messages
+  --max-verbose            Print the maxmimum number of verbose output messages
 
   -q, --quiet              Silence most output messages
-
-  --disable-ansi           Disable ANSI escape code formatting
 
   -c --config-dir=DIR      Search `DIR` for `.gloss.conf` files instead of the
                            target directory
@@ -76,20 +75,18 @@ Basic options:
   -l, --term-limit=NUM     Limit results to `NUM` terms [default: {term_limit}]
 
   -o, --output-type=TYPE   Use output TYPE [default: table]
-
   --show-output-types      Print a list of supported output types and exit
 
   -t, --table-format=TYPE  Use table format `TYPE` [default: {table_format}]
-
   --show-table-formats     Print a list of supported table formats and exit
 
   --print-cache            Print the location of the cache directory and exit
-
   --delete-cache           Delete the cache directory and exit
 
   --show-warnings          Show Python warnings
 """
 
+import re
 import sys
 import warnings
 import pathlib
@@ -103,16 +100,19 @@ import tabulate
 from doitintl import docops
 from doitintl.docops.gloss.print import Printer
 from doitintl.docops.gloss.config import Configuration
-from doitintl.docops.gloss.analyzers.terms import TermAnalyzer
+from doitintl.docops.gloss.analyzer import Analyzer
 from doitintl.docops.gloss.cache import Cache
+
+# TODO: For debugging purposes only
+from pprint import pprint
 
 # Format the docstring
 cmd_path = pathlib.PurePath(sys.argv[0])
 cmd_name = cmd_path.name
 format_dict = {
     "cmd_name": cmd_name,
-    "term_limit": docops.term_limit,
-    "table_format": docops.table_format,
+    "term_limit": docops._get_term_limit(),
+    "table_format": docops._get_table_format(),
 }
 # Not needed for now, but may need again the future
 #
@@ -122,29 +122,32 @@ format_dict = {
 __doc__ = __doc__.format(**format_dict)
 
 
-class TermsCommand:
+class Command:
 
-    OUTPUT_TYPES = ["none", "table"]
-    TABLE_FORMATS = tabulate.tabulate_formats
+    _MAX_LINE_LENGTH = 79
+
+    _OUTPUT_TYPES = ["none", "table"]
+    _TABLE_FORMATS = tabulate.tabulate_formats
 
     # Allowed options
-    help = None
-    version = None
-    verbose = None
-    quiet = None
-    disable_ansi = None
-    config_dir = None
-    output_type = None
-    show_output_types = None
-    term_limit = None
-    table_format = None
-    show_table_formats = None
-    print_cache = None
-    delete_cache = None
-    show_warnings = None
+    _help = None
+    _verbose = None
+    _more_verbose = None
+    _max_verbose = None
+    _quiet = None
+    _disable_ansi = None
+    _config_dir = None
+    _output_type = None
+    _show_output_types = None
+    _term_limit = None
+    _table_format = None
+    _show_table_formats = None
+    _print_cache = None
+    _delete_cache = None
+    _show_warnings = None
 
     # Allowed positional arguments
-    dir = None
+    _dir = None
 
     _config = None
     _cache = None
@@ -153,86 +156,95 @@ class TermsCommand:
     def __init__(self, args):
         # Process the dict returned by docopt and use it to automatically set
         # the predefined class attributes
-        for key, value in args.items():
-            if key.startswith("--"):
-                attr_name = key.lstrip("--").replace("-", "_")
-                self.set_class_attr(attr_name, value)
+        for attr_name, attr_value in args.items():
+            attr_name = attr_name.lstrip("-")
+            if attr_name.startswith("<"):
+                attr_name = attr_name.lstrip("<").rstrip(">").lower()
+                self._set_class_attr(attr_name, attr_value)
                 continue
-            if key.startswith("<"):
-                attr_name = key.lstrip("<").rstrip(">").lower()
-                self.set_class_attr(attr_name, value)
-                continue
-            attr_name = key.lower()
-            self.set_class_attr(attr_name, attr_name)
-        self.set_pkg_options()
-        self._config = Configuration(self.dir, self.config_dir)
+            self._set_class_attr(attr_name, attr_value)
+        self._set_pkg_options()
+        self._config = Configuration()
         self._cache = Cache()
         self._validate_docstring()
 
     def _print(self, *args):
-        self._config.printer.print(*args)
+        self._config._print(*args)
 
     def _validate_docstring(self):
         for line_num, line in enumerate(__doc__.splitlines()):
-            max_length = Printer.MAX_LINE_LENGTH
+            max_length = self._MAX_LINE_LENGTH
             if len(line) > max_length:
                 raise docops.ProgramError(
                     f"Docstring line {line_num} "
                     + f"exceeds max line length ({max_length})"
                 )
 
-    def set_class_attr(self, name, value):
+    def _set_class_attr(self, name, value):
+        # The `docops` module handles this for us
+        if name == "version":
+            return None
+        class_name = f"_{name}".lower().replace("-", "_")
         # Raise an exception if the attribute is not a predefined class
         # attribute
-        getattr(self, name)
+        try:
+            getattr(self, class_name)
+        except AttributeError as err:
+            raise docops.ProgramError(f"Unknown option: {name}") from err
         # Set the value of the predefined class attribute
-        setattr(self, name, value)
+        setattr(self, class_name, value)
+        return True
 
     # TODO: I think this is probably an anti-pattern and these should be passed
     # through in other ways
-    def set_pkg_options(self):
-        # Set module options
-        docops.verbose = self.verbose
-        docops.quiet = self.quiet
-        docops.disable_ansi = self.disable_ansi
-        docops.table_format = self.table_format
-        docops.term_limit = self.term_limit
+    def _set_pkg_options(self):
+        # TODO: just make this whole class available in the root module, or to
+        # all other modules, instead of setting root module vars
 
-    def validate_options(self):
-        if self.output_type not in self.OUTPUT_TYPES:
+        # Set module options
+        docops._verbose = self._verbose
+        docops._more_verbose = self._more_verbose
+        docops._max_verbose = self._max_verbose
+        docops._quiet = self._quiet
+        docops._disable_ansi = self._disable_ansi
+        docops._table_format = self._table_format
+        docops._term_limit = self._term_limit
+
+    def _validate_options(self):
+        if self._output_type not in self._OUTPUT_TYPES:
             raise docops.ConfigurationError(
-                f"Not a supported type: {self.output_type}"
+                f"Not a supported type: {self._output_type}"
             )
-        if self.table_format not in self.TABLE_FORMATS:
+        if self._table_format not in self._TABLE_FORMATS:
             raise docops.ConfigurationError(
-                f"Not a supported type: {self.output_type}"
+                f"Not a supported type: {self._output_type}"
             )
 
     def run(self):
-        if self.help:
-            return self.do_help()
-        if not self.show_warnings:
+        if self._help:
+            return self._do_help()
+        if not self._show_warnings:
             warnings.filterwarnings("ignore")
-        if self.delete_cache:
-            return self.do_delete_cache()
-        if self.print_cache:
-            return self.do_print_cache()
-        if self.show_output_types:
-            return self.do_show_output_types()
-        if self.show_table_formats:
-            return self.do_show_table_formats()
-        self.validate_options()
-        self.do_main()
+        if self._delete_cache:
+            return self._do_delete_cache()
+        if self._print_cache:
+            return self._do_print_cache()
+        if self._show_output_types:
+            return self._do_show_output_types()
+        if self._show_table_formats:
+            return self._do_show_table_formats()
+        self._validate_options()
+        return self._do_main()
 
-    def do_help(self):
+    def _do_help(self):
         self._print(__doc__.strip())
         return 0
 
-    def do_delete_cache(self):
+    def _do_delete_cache(self):
         self._cache.delete_cache()
         return 0
 
-    def do_print_cache(self):
+    def _do_print_cache(self):
         if not self._cache.print_cache_path():
             return 1
         return 0
@@ -245,24 +257,24 @@ class TermsCommand:
                 msg += f"  - <str>{noun}</str>\n"
         self._print(msg.strip())
 
-    def do_show_output_types(self):
-        self._do_show_options("output types", self.OUTPUT_TYPES)
+    def _do_show_output_types(self):
+        self._do_show_options("output types", self._OUTPUT_TYPES)
 
-    def do_show_table_formats(self):
-        self._do_show_options("table formats", self.TABLE_FORMATS)
+    def _do_show_table_formats(self):
+        self._do_show_options("table formats", self._TABLE_FORMATS)
 
-    def do_main(self):
-        self._config.load()
-        self._analyzer = TermAnalyzer(self._config)
+    def _do_main(self):
+        self._config.load(self._dir, self._config_dir)
+        self._analyzer = Analyzer(self._config)
         self._analyzer.run()
-        if docops.verbose:
-            print("Output: {self.output_type}")
-        if self.output_type == "table":
+        if docops._verbose:
+            self._print("<info>Output type:</info> {self._output_type}")
+        if self._output_type == "table":
             self._analyzer.print_table()
-            return
-        if self.output_type == "none":
-            return
-        raise docops.ProgramError("I don't know what to do now...")
+            return 0
+        if self._output_type == "none":
+            return 0
+        raise docops.ProgramError("I don't know what to do...")
 
 
 def run():
@@ -274,16 +286,25 @@ def run():
     exit_code = 1
     try:
         try:
+            # Work around limitations of the `docops` module
+            # -----------------------------------------------------------------
+            # The `docops` module will not parse the docstring if there are any
+            # newlines after "Usage"
+            doc = __doc__
             # TODO: There's gotta be a way of doing this differently
-            doc = __doc__.replace("Usage:\n", "Usage:")
+            doc = doc.replace("Usage:\n", "Usage:")
             args = docopt.docopt(doc, help=False, version=docops.__version__)
         except docopt.DocoptExit as err:
             raise docops.CliError(err)
-        command = TermsCommand(args)
+        command = Command(args)
         exit_code = command.run()
     except (KeyboardInterrupt, BrokenPipeError):
         # Exit silently when the the user terminates the program early
         pass
     except docops.Error as err:
-        printer.print(str(err), sys.stderr)
+        prefix = err.get_prefix()
+        if prefix:
+            printer.print(prefix, err, sys.stderr)
+        else:
+            printer.print("", err, sys.stderr)
     sys.exit(exit_code)

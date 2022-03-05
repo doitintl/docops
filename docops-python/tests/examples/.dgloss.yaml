@@ -1,0 +1,84 @@
+corpora:
+  - word-frequency: leeds
+
+wordlists:
+  stopwords:
+    - english
+  builtins:
+    - html
+    - css
+    - shell
+    - makefile
+    - dockerfile
+    - python
+    - go
+  custom:
+    - .dgloss/word-lists/example-a.txt
+    - .dgloss/word-lists/example-b.txt
+
+words:
+  lemma-ignores:
+    - jul
+    - aviv
+    - hint
+    - td
+    - http
+    - click
+    - center
+    - info
+    - create
+  ngram-ignores:
+  ngram-trims:
+
+regexes:
+  lemma-ignores:
+    - '^_'
+    # Ignore lemmas without any letters
+    - '^[^a-zA-Z]+$'
+    # Ignore lemmas that are a single letter
+    - '^[a-zA-Z]$'
+  ngram-seperators:
+    - foo
+  ngram-ignores:
+  ngram-trims:
+
+lemmas:
+  case-sensitive: false
+  ignore:
+    wordlists:
+      - stopwords
+      - builtins
+      - example-file
+    words:
+      - lemma-ignores
+    regexes:
+      - lemma-ignores
+
+ngrams:
+  case-sensitive: true
+  seperators:
+    wordlists:
+    words:
+    regexes:
+      - ngram-seperators
+  ignore:
+    wordlists:
+    regexes:
+      - ngram-ignores
+    literals:
+      - ngram-ignores
+  trim:
+    wordlists:
+      - stopwords
+      - builtins
+      - example-file
+    words:
+      - ngram-trims
+    regexes:
+      - ngram-trims
+
+terms:
+  - name: Amazon Web Services
+    definition: .dgloss/terms/aws.md
+    ngrams:
+      - aws
