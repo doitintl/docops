@@ -14,8 +14,7 @@ BOLD = [1m
 RED = [31m
 RESET = [0m
 
-RULES_DIR := $(dir $(lastword $(MAKEFILE_LIST)))
-BUILD_DIR := $(shell realpath --relative-to "$$(pwd)" $(RULES_DIR)/..)
+BUILD_DIR := $(subst /,,$(dir $(lastword $(MAKEFILE_LIST))))
 TEMPLATES_DIR := $(BUILD_DIR)/templates
 TMP_DIR := $(BUILD_DIR)/tmp
 
