@@ -4,7 +4,8 @@ pull_request_rules:
       - label=ready-to-merge
       - check-success~=^Checks
       - check-success~=^Build
-      - check-success~=^Notify
+      - check-success~=^Notification
+      - check-success~=^Analyze
       - check-success~=GitGuardian
     actions:
       merge:
