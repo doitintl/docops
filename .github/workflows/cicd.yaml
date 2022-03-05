@@ -14,7 +14,7 @@ jobs:
       image: ghcr.io/doitintl/docops-containers/dev:main
     steps:
       - uses: actions/checkout@v2
-      - run: make check
+      - run: cd docops-containers && make check
   build:
     name: Build ${{ matrix.image }}
     needs: checks
@@ -23,10 +23,9 @@ jobs:
       matrix:
         image: [dev, dev-python]
     steps:
-      # TODO: Add file changed test back again
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
+      # TODO: Add file changed test back again and add `fetch-depth: 0` to
+      #       checkout step
       - uses: docker/metadata-action@v3
         id: meta
         with:
@@ -42,18 +41,15 @@ jobs:
         id: build
         with:
           build-args: VARIANT=${{ matrix.image }}
-          context: src
+          context: docops-containers/src
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           push: ${{ github.event_name != 'pull_request' }}
-
   notify:
-    name: Notification
+    name: Notify
     needs: build
     if: always() && github.event_name != 'pull_request'
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/doitintl/docops-containers/dev:main
     steps:
       - uses: actions/checkout@v2
       - uses: martialonline/workflow-status@v2
