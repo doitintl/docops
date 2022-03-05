@@ -1,0 +1,22 @@
+{
+  "recommendations": [
+    "codezombiech.gitignore",
+    "david-reis.crashacters",
+    "davidanson.vscode-markdownlint",
+    "editorconfig.editorconfig",
+    "esbenp.prettier-vscode",
+    "foxundermoon.shell-format",
+    "magicstack.magicpython",
+    "ms-python.vscode-pylance",
+    "ms-vscode.makefile-tools",
+    "redhat.vscode-yaml",
+    "sandcastle.whitespace",
+    "stkb.rewrap",
+    "streetsidesoftware.code-spell-checker",
+    "tamasfe.even-better-toml",
+    "tetradresearch.vscode-h2o",
+    "timonwong.shellcheck",
+    "viktorzetterstrom.non-breaking-space-highlighter",
+    "yzhang.markdown-all-in-one"
+  ]
+}

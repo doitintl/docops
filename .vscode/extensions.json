@@ -1,0 +1,17 @@
+{
+  "recommendations": [
+    "bierner.github-markdown-preview",
+    "codezombiech.gitignore",
+    "davidanson.vscode-markdownlint",
+    "editorconfig.editorconfig",
+    "esbenp.prettier-vscode",
+    "fnando.linter",
+    "foxundermoon.shell-format",
+    "ms-azuretools.vscode-docker",
+    "redhat.vscode-yaml",
+    "sandcastle.whitespace",
+    "streetsidesoftware.code-spell-checker",
+    "timonwong.shellcheck",
+    "yzhang.markdown-all-in-one"
+  ]
+}

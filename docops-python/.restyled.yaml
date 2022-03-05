@@ -1,0 +1,8 @@
+restylers:
+  - black
+  - prettier-json
+  - prettier-yaml
+  - reorder-python-imports
+  - shellharden
+  - shfmt
+  - whitespace

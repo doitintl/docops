@@ -1,0 +1,64 @@
+name: CICD
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  checks:
+    name: Checks
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/doitintl/docops/devcontainer:main
+    steps:
+      - uses: actions/checkout@v2
+      - run: cd docops-containers && make check
+  build-devcontainer:
+    name: Build devcontainer
+    needs: checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      # TODO: Add file changed test back again and add `fetch-depth: 0` to
+      #       checkout step
+      - uses: docker/metadata-action@v3
+        id: meta
+        with:
+          images: ghcr.io/${{ github.repository }}/devcontainer
+          github-token: ${{ github.token }}
+      - uses: docker/login-action@v1
+        if: github.event_name != 'pull_request'
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/build-push-action@v2
+        id: build
+        with:
+          context: docops-containers/src
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          push: ${{ github.event_name != 'pull_request' }}
+  notification:
+    name: Notifcation
+    needs: build-devcontainer
+    if: always() && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: martialonline/workflow-status@v2
+        id: check
+      - uses: ravsamhq/notify-slack-action@v1
+        env:
+          STATUS: '{workflow} workflow <{run_url}|{status_message}>'
+          COMMIT: for commit `<{commit_url}|{commit_sha}>`
+          BRANCH: on branch `{branch}`
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        with:
+          status: ${{ steps.check.outputs.status }}
+          notification_title: ''
+          message_format: ${{ env.STATUS }} ${{ env.COMMIT }} ${{ env.BRANCH }}
+          footer: <{repo_url}|{repo}>
+          notify_when: success,warning,failure

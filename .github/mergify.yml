@@ -1,0 +1,13 @@
+pull_request_rules:
+  - name: Ready to merge
+    conditions:
+      - label=ready-to-merge
+      - check-success~=^Checks
+      - check-success~=^Build
+      - check-success~=^Notification
+      - check-success~=^Analyze
+      - check-success~=GitGuardian
+    actions:
+      merge:
+        method: rebase
+        rebase_fallback: none

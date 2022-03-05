@@ -1,0 +1,17 @@
+default: true
+
+# Blank line inside blockquote
+# https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md#md028
+MD028: false
+
+# Line length
+# https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md#md013
+MD013: false
+
+# Emphasis used instead of a heading
+# https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md#md036
+MD036: false
+
+# Inline HTML
+# https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md#md033
+MD033: false
