@@ -1,13 +1,17 @@
 # MIT License
+
 # Copyright 2021, DoiT International
+
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
 # to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 # copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions:
+
 # The above copyright notice and this permission notice shall be included in
 # all copies or substantial portions of the Software.
+
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -15,23 +19,27 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+
+
 import ast
 import os
-import pathlib
 import re
+import pathlib
 from collections import UserDict
 
-import inflect
-import inflection
 import nltk
-from doitintl import docops
-from doitintl.docops.gloss import charset
-from doitintl.docops.gloss.cache import Cache
-from doitintl.docops.gloss.print import Printer
 from nltk import downloader
 from nltk import stem
 from nltk.corpus import stopwords
+
 from tabulate import tabulate
+import inflection
+import inflect
+
+from doitintl import docops
+from doitintl.docops.gloss import charset
+from doitintl.docops.gloss.print import Printer
+from doitintl.docops.gloss.cache import Cache
 
 
 # TODO: Change to Command?
@@ -66,7 +74,7 @@ class Configuration(UserDict):
     ]
 
     # See https://www.nltk.org/nltk_data/
-    NLTK_CORPORA = ["omw-1.4", "punkt", "stopwords", "wordnet"]
+    NLTK_CORPORA = ["punkt", "wordnet", "stopwords"]
 
     target_dirname = None
     config_dirname = None
@@ -118,10 +126,11 @@ class Configuration(UserDict):
                 if not docops.quiet:
                     self._print(f"<fg=blue>Installing corpus</>: {name}")
                 dl.download(name, quiet=True)
-            elif dl.is_stale(name):
-                if not docops.quiet:
-                    self._print(f"<fg=blue>Updating corpus</>: {name}")
-                dl.update(quiet=True)
+            else:
+                if dl.is_stale(name):
+                    if not docops.quiet:
+                        self._print(f"<fg=blue>Updating corpus</>: {name}")
+                    dl.update(quiet=True)
         self.lemmatizer = stem.WordNetLemmatizer()
 
     # TODO: Instead of scanning the whole directory tree to build up the

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "doitintl-docops"
-version = "2.1.0"
+version = "2.0.1"
 description = "Python library and CLI tools for doing DocOps at DoiT"
 authors = ["DoiT International <engineering@doit-intl.com>"]
 homepage = "https://github.com/doitintl/docops/"
@@ -8,7 +8,7 @@ repository = "https://github.com/doitintl/docops-utils/"
 readme = "README.md"
 keywords = [ "ci-cd", "docs", "docops", "glossaries", "nlp", "qa-automation" ]
 classifiers = [
-  "Development Status :: 5 - Production/Stable",
+  "Development Status :: 2 - Pre-Alpha",
   "Environment :: Console",
   "Intended Audience :: Information Technology",
   "License :: OSI Approved :: Apache Software License",
@@ -32,7 +32,6 @@ packages = [
   { include = "doitintl", "from" = "src" },
 ]
 
-# cSpell:disable
 [tool.poetry.dependencies]
 api-client = "^1.3.1"
 appdirs = "^1.4.4"
@@ -42,16 +41,19 @@ inflect = "^5.3.0"
 inflection = "^0.5.1"
 nltk = "^3.6.2"
 pastel = "^0.2.1"
-python = "^3.8"
+python = ">=3.8,<3.10"
 simplejson = "^3.17.5"
 tabulate = "^0.8.9"
-Pillow = "^9.0.0"
+spacy = "^3.1.3"
+pytextrank = "^3.2.1"
+scipy = "^1.7.1"
+textacy = "^0.11.0"
 
 [tool.poetry.dev-dependencies]
 bandit = "^1.7.0"
 black = { version = "^21.7b0", allow-prereleases = true }
 flake8 = "^3.9.2"
-ipython = "^7.31.1"
+ipython = "^7.27.0"
 prospector = "^1.5.1"
 pycodestyle = "^2.7.0"
 pydocstyle = "^6.1.1"
@@ -59,22 +61,21 @@ pylama = "^7.7.1"
 pylint = "^2.10.2"
 pyroma = "^3.2"
 vulture = "^2.3"
-reorder-python-imports = "^2.6.0"
+autopep8 = "^1.5.7"
+icecream = "^2.1.1"
 
 [build-system]
 build-backend = "poetry.core.masonry.api"
 requires = ["poetry-core>=1.0.0"]
-# cSpell:enable
 
 [tool.poetry.scripts]
 docops-gitbook = "doitintl.docops.gitbook.cli:run"
 docops-gloss-terms = "doitintl.docops.gloss.cli.terms:run"
-docops-screenshots = "doitintl.docops.screenshots.cli:run"
+docops-nlp = "doitintl.docops.nlp.cli:run"
 
 [tool.black]
 line-length = 79
 
-# cSpell:disable-next-line
 [tool.pydocstyle]
 ignore = [
   # For now, while still in alpha, ignore all lint errors about missing

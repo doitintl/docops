@@ -30,10 +30,10 @@ PATH         := $(VENV)/bin:$(PATH)
 INIT_STAMP   := init.stamp
 # TODO: Rename directory to CI to match GitHub workflows
 TESTS_DIR    := tests
-LOG_DIR      := $(TESTS_DIR)/logs
-TEST_DIR     := $(TESTS_DIR)/rules
 CLONES_DIR   := $(TESTS_DIR)/clones
-
+LOG_DIR      := $(TESTS_DIR)/logs
+NPL_DIR      := $(TESTS_DIR)/npl
+RULES_DIR    := $(TESTS_DIR)/rules
 
 MAKE_TESTS    = $(MAKE) -C . -f
 
@@ -50,6 +50,7 @@ $(INIT_STAMP):
 	poetry update
 	@ echo
 	poetry install
+	spacy download en_core_web_sm
 	@ touch $@
 	@ echo
 	@ printf "\e[0;34mRun \`\e[4;34mpoetry shell\e[0;34m\` to activate your "
@@ -68,6 +69,7 @@ update:
 .PHONY: reset # Reset the development environment
 reset:
 	rm -rf "$(VENV)"
+	rm -rf "$(CLONES_DIR)"
 	rm -rf "$(INIT_STAMP)"
 
 # TODO: Move all linting tools here too so the whole CI workflow can be done
@@ -87,6 +89,11 @@ clones:
 test: init
 	rm -rf "$(LOG_DIR)"
 	@ # TODO: Split the Poetry stuff into a different build step
-	poetry run $(MAKE_TESTS) $(TEST_DIR)/pkg/poetry.mk
-	poetry run $(MAKE_TESTS) $(TEST_DIR)/cli/docops-gitbook.mk
-	poetry run $(MAKE_TESTS) $(TEST_DIR)/cli/docops-gloss-terms.mk
+	poetry run $(MAKE_TESTS) $(RULES_DIR)/pkg/poetry.mk
+	poetry run $(MAKE_TESTS) $(RULES_DIR)/cli/docops-gitbook.mk
+	poetry run $(MAKE_TESTS) $(RULES_DIR)/cli/docops-gloss-terms.mk
+
+# Experimentsl target
+test-nlp: init
+	cd $(NPL_DIR) && ./compile.sh
+	cd $(NPL_DIR) docops-nlp

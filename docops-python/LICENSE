@@ -20,21 +20,26 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-===============================================================================
-
-Some components of this project were derived from one or more Bottle Garden
-<https://github.com/bottle-garden> projects.
-
-Copyright 2021, the project contributors
-
-Unless otherwise stated, every component of a Bottle Garden project is
-distributed under the terms of the Apache License 2.0
-<http://www.apache.org/licenses/LICENSE-2.0>.
 
 ===============================================================================
 
-The `data/corpora/leeds.txt.gz` file was copied from the University of Leeds
-Centre for Translation Studies corpora collection
-<http://corpus.leeds.ac.uk/list.html> and is distributed under the Creative
-Commons (CC BY) Attribution license
-<https://creativecommons.org/licenses/by/2.5/>.
+For the `src/gloss` directory:
+
+    Some components in this directory were derived from one or more Bottle
+    Garden <https://github.com/bottle-garden> projects.
+
+    Copyright 2021, the project contributors
+
+    Unless otherwise stated, every contribution from a Bottle Garden project is
+    distributed under the terms of the Apache License 2.0
+    <http://www.apache.org/licenses/LICENSE-2.0>.
+
+
+===============================================================================
+
+For the `data/corpora/leeds.txt.gz` file:
+
+    This file was copied from the University of Leeds Centre for Translation
+    Studies corpora collection <http://corpus.leeds.ac.uk/list.html> and is
+    distributed under the Creative Commons (CC BY) Attribution license
+    <https://creativecommons.org/licenses/by/2.5/>.

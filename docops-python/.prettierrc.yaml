@@ -1,3 +1,13 @@
+# Configuration for Prettier
+# https://prettier.io/
+# =============================================================================
+
+# Configuration file:
+# https://prettier.io/docs/en/configuration.html
+
+# Options:
+# https://prettier.io/docs/en/options.html
+
 bracketSameLine: true
 bracketSpacing: false
 proseWrap: 'always'

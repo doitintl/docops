@@ -40,6 +40,7 @@ __version__ = __dist__.version
 src_path = pathlib.Path(__file__).parent
 data_path = src_path.joinpath("data")
 
+debug = False
 verbose = False
 quiet = False
 disable_ansi = False
@@ -48,7 +49,8 @@ table_format = "simple"
 
 # TODO: Document this in the developer ops and integrate it into the
 # `launch.json`config
-debug = bool(os.environ.get("DOCOPS_DEBUG", None))
+if os.environ.get("DOCOPS_DEBUG", None):
+    debug = True
 
 # The standard UNIX file-parsing error outputs are:
 #
@@ -135,7 +137,7 @@ class ParseError(ConfigurationError):
         output = ""
         for parse_error in self._parse_errors:
             filename, line_num, msg = parse_error
-            output += f"{filename}:{line_num}: {msg}\n"
+            output = output + f"{filename}:{line_num}: {msg}\n"
         if verbose:
             error_type = self.get_error_type()
             output = f"<error{error_type}</error>:\n\n{output}"

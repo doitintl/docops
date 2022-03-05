@@ -1,4 +1,4 @@
-name: Packaging
+name: Python support
 on:
   pull_request:
   push:
@@ -6,16 +6,8 @@ on:
       - main
 
 jobs:
-  static-analysis:
-    name: Static analysis
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: jpetrucciani/black-check@master
-        if: always()
-  execution:
-    needs: static-analysis
-    name: Python ${{ matrix.version }} tests
+  run:
+    name: Using version ${{ matrix.version }}
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/doitintl/docops/python-${{ matrix.version }}:main
