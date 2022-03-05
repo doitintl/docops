@@ -7,6 +7,10 @@
 # POSIX locale
 LC_ALL=C
 
+# ANSI formatting
+BOLD = [1m
+RESET = [0m
+
 # Functions
 # =============================================================================
 
@@ -21,35 +25,33 @@ endef
 # checks
 # -----------------------------------------------------------------------------
 
-.DEFAULT_GOAL: checks
+.DEFAULT_GOAL: check
 
-.PHONY: checks
-checks:
+.PHONY: check
+check:
 
 # dockerfilelint
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 # https://github.com/replicatedhq/dockerfilelint
 
-# DOCKERFILELINT := dockerfilelint
+DOCKERFILELINT := dockerfilelint
 
-# all: dockerfilelint
-# .PHONY: dockerfilelint
-# dockerfilelint:
-# 	$(call print-target)
-# 	find . -name 'Dockerfile' -print0 | xargs -0 $(DOCKERFILELINT)
+check: dockerfilelint
+.PHONY: dockerfilelint
+dockerfilelint:
+	$(call print-target)
+	find . -name 'Dockerfile' -print0 | xargs -0 $(DOCKERFILELINT)
 
 # hadolint
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 # https://github.com/hadolint/hadolint
 
-# HADOLINT := hadolint
+HADOLINT := hadolint
 
-# Disabled until `hadolint` is available in the published devcontainer
-
-# checks: hadolint
-# .PHONY: hadolint
-# hadolint:
-# 	$(call print-target)
-# 	find . -name 'Dockerfile' -print0 | xargs -0 $(HADOLINT)
+check: hadolint
+.PHONY: hadolint
+hadolint:
+	$(call print-target)
+	find . -name 'Dockerfile' -print0 | xargs -0 $(HADOLINT)

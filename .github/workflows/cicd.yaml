@@ -14,7 +14,7 @@ jobs:
       image: ghcr.io/doitintl/docops-containers/dev:main
     steps:
       - uses: actions/checkout@v2
-      - run: make checks
+      - run: make check
   build:
     name: Build ${{ matrix.image }}
     needs: checks

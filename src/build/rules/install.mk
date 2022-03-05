@@ -10,8 +10,8 @@
 LC_ALL = C
 
 # ANSI formatting
-RED = [31m
 BOLD = [1m
+RED = [31m
 RESET = [0m
 
 RULES_DIR := $(dir $(lastword $(MAKEFILE_LIST)))
