@@ -18,6 +18,7 @@ MAKE_RULES := $(MAKE) --no-print-directory -f $(RULES)
 
 BUILD_DEPS = \
 	bashrc \
+	black \
 	brok \
 	build-essential \
 	codespell \
