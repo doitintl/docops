@@ -30,6 +30,7 @@ BUILD_DEPS = \
 	file \
 	hadolint \
 	html-minifier \
+	imagemagick \
 	imgdup2go \
 	lintspaces-cli \
 	markdown-link-check \

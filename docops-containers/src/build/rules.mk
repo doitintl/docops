@@ -292,6 +292,14 @@ hadolint:
 .PHONY: html-minifier
 html-minifier: npm-html-minifier
 
+# imagemagick
+# -----------------------------------------------------------------------------
+
+# https://github.com/ImageMagick/ImageMagick
+
+.PHONY: imagemagick
+imagemagick: apt-imagemagick
+
 # imgdup2go
 # -----------------------------------------------------------------------------
 
