@@ -515,7 +515,7 @@ VALE_SIG_URL = $(call gh_url,$(VALE_REPO),v$(VALE_VERSION),$(VALE_SIG))
 # TODO: Create temporary directory
 
 .PHONY: vale
-vale:
+vale: pip-docutils
 	$(call print_target)
 	$(call gh_test_latest,$(VALE_REPO),v$(VALE_VERSION))
 	$(call reset_dir,$(VALE_DIR))
