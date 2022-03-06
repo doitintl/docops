@@ -134,6 +134,15 @@ bashrc: apt-bash-completion apt-gawk
 	$(call touch_file,$(USER),$(USER_HOME)/$(WILL_CITE))
 	$(call touch_file,$(USER),$(USER_HOME)/$(FIRST_RUN))
 
+# black
+# -----------------------------------------------------------------------------
+
+# Black
+# https://github.com/psf/black
+
+.PHONY: black
+black: pipx-black
+
 # brok
 # -----------------------------------------------------------------------------
 
