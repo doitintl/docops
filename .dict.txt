@@ -1,6 +1,12 @@
 b726f01758b17dee47dbf544e7ffe2b80a4fb1a1
 cmp
+codespace
+codespaces
 commit
+devcontainer
+devcontainers
+docops
+doitintl
 env
 gh
 mrkdwn
