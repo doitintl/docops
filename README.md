@@ -78,7 +78,7 @@ Status: Downloaded newer image for ghcr.io/doitintl/docops/devcontainer:main
 ghcr.io/doitintl/docops/devcontainer:main
 ```
 
-As long as you are remain authenticated with the registry, you can use the [VS Code Remote - Containers extension][remote-containers] to clone any GitHub repository into a running version of the DocOps devcontainer.
+As long as you remain authenticated with the registry, you can use the [VS Code Remote - Containers extension][remote-containers] to clone any GitHub repository into a running version of the DocOps devcontainer.
 
 To do this, within VS Code, run one of the available _Remote-Containers: Clone Repository in&hellip;_ commands and enter the repository URL when prompted. Because the DoiT International [docops][docops] and [docs][docs] repositories are pre-configured to use the DocOps devcontainer, VS Code will start the devcontainer for these repositories without any additional prompts.
 
