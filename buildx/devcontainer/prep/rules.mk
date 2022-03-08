@@ -97,43 +97,6 @@ endef
 # Targets
 # =============================================================================
 
-# dotfiles
-# -----------------------------------------------------------------------------
-
-BASHRC_SRC = $(TEMPLATES_DIR)/bashrc.sh
-
-BASHRC_DEST = .bash_docops
-FIRST_RUN = .config/vscode-dev-containers/first-run-notice-already-displayed
-WILL_CITE = .parallel/will-cite
-
-# $(call touch_file,user,file)
-define touch_file
-mkdir -p $(dir $(2))
-touch $(2)
-chown -R $(1):$(1) $(dir $(2))
-endef
-
-# $(call install_bashrc,user,home)
-define install_bashrc
-cp $(BASHRC_SRC) $(2)/$(BASHRC_DEST)
-chown $(1):$(1) $(2)/$(BASHRC_DEST)
-sed -i '/^.*$(BASHRC_DEST)$$/d' $(2)/.bashrc
-printf '\n. ~/$(BASHRC_DEST)\n' >>$(2)/.bashrc
-gawk -i inplace 'NF{c=1} (c++)<3' $(2)/.bashrc
-endef
-
-# TODO: Testing this rule results in many copies of the same changes made to
-# your actual `.bashrc` file. We should remove any existing modifications
-# before applying changes.
-.PHONY: bashrc
-bashrc: apt-bash-completion apt-gawk
-	$(call print_target)
-	$(call install_bashrc,$(ROOT),$(ROOT_HOME))
-	$(call touch_file,$(ROOT),$(ROOT_HOME)/$(WILL_CITE))
-	$(call install_bashrc,$(USER),$(USER_HOME))
-	$(call touch_file,$(USER),$(USER_HOME)/$(WILL_CITE))
-	$(call touch_file,$(USER),$(USER_HOME)/$(FIRST_RUN))
-
 # black
 # -----------------------------------------------------------------------------
 
@@ -206,6 +169,56 @@ dockerfilelint: npm-dockerfilelint
 
 .PHONY: doitintl-docops
 doitintl-docops: pipx-doitintl-docops
+
+
+# dotfiles
+# -----------------------------------------------------------------------------
+
+BASHRC_SRC = $(TEMPLATES_DIR)/bashrc.sh
+
+BASHRC_DEST = .bash_docops
+CONFIG_DIR = .config
+VSCODE_DEV_CONTAINERS_DIR = $(CONFIG_DIR)/vscode-dev-containers
+FIRST_RUN = $(VSCODE_DEV_CONTAINERS_DIR)/first-run-notice-already-displayed
+PARALLEL_DIR = .parallel
+WILL_CITE = $(PARALLEL_DIR)/will-cite
+
+# $(call mkdir,user,dir)
+define mkdir
+mkdir -p $(2)
+chown -R $(1):$(1) $(2)
+endef
+
+# $(call touch,user,file)
+define touch
+touch $(2)
+chown -R $(1):$(1) $(2)
+endef
+
+# $(call install_bashrc,user,home)
+define install_bashrc
+cp $(BASHRC_SRC) $(2)/$(BASHRC_DEST)
+chown $(1):$(1) $(2)/$(BASHRC_DEST)
+sed -i '/^.*$(BASHRC_DEST)$$/d' $(2)/.bashrc
+printf '\n. ~/$(BASHRC_DEST)\n' >>$(2)/.bashrc
+gawk -i inplace 'NF{c=1} (c++)<3' $(2)/.bashrc
+endef
+
+# TODO: Testing this rule results in many copies of the same changes made to
+# your actual `.bashrc` file. We should remove any existing modifications
+# before applying changes.
+.PHONY: dotfiles
+dotfiles: apt-bash-completion apt-gawk
+	$(call print_target)
+	$(call install_bashrc,$(ROOT),$(ROOT_HOME))
+	$(call mkdir,$(ROOT),$(ROOT_HOME)/$(PARALLEL_DIR))
+	$(call touch,$(ROOT),$(ROOT_HOME)/$(WILL_CITE))
+	$(call install_bashrc,$(USER),$(USER_HOME))
+	$(call mkdir,$(USER),$(USER_HOME)/$(PARALLEL_DIR))
+	$(call touch,$(USER),$(USER_HOME)/$(WILL_CITE))
+	$(call mkdir,$(USER),$(USER_HOME)/$(CONFIG_DIR))
+	$(call mkdir,$(USER),$(USER_HOME)/$(VSCODE_DEV_CONTAINERS_DIR))
+	$(call touch,$(USER),$(USER_HOME)/$(FIRST_RUN))
 
 # ec
 # -----------------------------------------------------------------------------
