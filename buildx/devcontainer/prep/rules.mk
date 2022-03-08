@@ -420,7 +420,7 @@ prettier: npm-prettier
 # https://github.com/amperser/proselint
 
 .PHONY: proselint
-proselint: npm-proselint
+proselint: npm-proselint pipx-proselint
 
 # shellcheck
 # -----------------------------------------------------------------------------
