@@ -4,7 +4,7 @@ _Common resources to help with doing DocOps at DoiT International_
 
 [![CICD][cicd-badge]][cicd-workflow] [![CodeQL][codeql-badge]][codeql-workflow]
 
-[cicd-badge]: https://github.com/doitintl/docops/actions/workflows/cicd.yaml/badge.svg
+[cicd-badge]: https://github.com/doitintl/docops/actions/workflows/cicd.yml/badge.svg
 [cicd-workflow]: https://github.com/doitintl/docops/actions/workflows/cicd.yml
 [codeql-badge]: https://github.com/doitintl/docops/actions/workflows/codeql.yml/badge.svg
 [codeql-workflow]: https://github.com/doitintl/docops/actions/workflows/codeql.yml
