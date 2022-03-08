@@ -7,49 +7,67 @@ on:
       - main
 
 jobs:
-  checks:
-    name: Checks
+  preflight-checks:
+    name: Preflight checks
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/doitintl/docops/devcontainer:main
     steps:
       - uses: actions/checkout@v2
-      - run: cd docops-containers && make check
-  build-devcontainer:
-    name: Build devcontainer
-    needs: checks
+      - run: make check
+  buildx-change-scan:
+    name: Buildx change scan
+    runs-on: ubuntu-latest
+    outputs:
+      any: ${{ steps.filter.outputs.any }}
+    steps:
+      - uses: actions/checkout@v2
+      # https://github.com/dorny/paths-filter
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          list-files: none
+          filters: |
+            any: buildx/**
+  buildx-run:
+    name: Buildx run
+    needs: [preflight-checks, buildx-change-scan]
+    if: ${{ needs.buildx-change-scan.outputs.any == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      # TODO: Add file changed test back again and add `fetch-depth: 0` to
-      #       checkout step
+      # https://github.com/docker/metadata-action
       - uses: docker/metadata-action@v3
         id: meta
         with:
           images: ghcr.io/${{ github.repository }}/devcontainer
           github-token: ${{ github.token }}
+      # https://github.com/docker/login-action
       - uses: docker/login-action@v1
         if: github.event_name != 'pull_request'
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      # https://github.com/docker/build-push-action
       - uses: docker/build-push-action@v2
         id: build
         with:
-          context: docops-containers/src
+          context: buildx/devcontainer
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           push: ${{ github.event_name != 'pull_request' }}
   notification:
     name: Notifcation
-    needs: build-devcontainer
+    needs: buildx-run
     if: always() && github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      # https://github.com/martialonline/workflow-status
       - uses: martialonline/workflow-status@v2
         id: check
+      # https://github.com/ravsamhq/notify-slack-action
       - uses: ravsamhq/notify-slack-action@v1
         env:
           STATUS: '{workflow} workflow <{run_url}|{status_message}>'
