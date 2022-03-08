@@ -459,36 +459,41 @@ shfmt:
 
 # https://github.com/textlint/textlint
 
-# TODO: Experiment with npm textlint packages:
-#
-# - textlint
-# - @textlint-rule/textlint-rule-no-duplicate-abbr
-# - @textlint-rule/textlint-rule-no-invalid-control-character
-# - @textlint-rule/textlint-rule-no-unmatched-pair
-# - textlint-filter-rule-allowlist
-# - textlint-filter-rule-comments
-# - textlint-filter-rule-node-types
-# - textlint-rule-abbr-within-parentheses
-# - textlint-rule-alex
-# - textlint-rule-apostrophe
-# - textlint-rule-commonmisspellings
-# - textlint-rule-diacritics
-# - textlint-rule-doubled-spaces
-# - textlint-rule-en-capitalization
-# - textlint-rule-en-max-word-count
-# - textlint-rule-en-spell
-# - textlint-rule-max-comma
-# - textlint-rule-no-dead-link
-# - textlint-rule-no-empty-section
-# - textlint-rule-no-start-duplicated-conjunction
-# - textlint-rule-no-todo
-# - textlint-rule-no-zero-width-spaces
-# - textlint-rule-rousseau
-# - textlint-rule-spelling
-# - textlint-rule-stop-words
-# - textlint-rule-terminology
-# - textlint-rule-unexpanded-acronym dictionary-en
-# - textlint-rule-write-good
+TEXTLINT_DEPS = \
+	npm-dictionary-en \
+	npm-textlint \
+	npm-textlint-filter-rule-allowlist \
+	npm-textlint-filter-rule-comments \
+	npm-textlint-filter-rule-node-types \
+	npm-textlint-rule-abbr-within-parentheses \
+	npm-textlint-rule-alex \
+	npm-textlint-rule-apostrophe \
+	npm-textlint-rule-common-misspellings \
+	npm-textlint-rule-diacritics \
+	npm-textlint-rule-doubled-spaces \
+	npm-textlint-rule-en-capitalization \
+	npm-textlint-rule-en-max-word-count \
+	npm-textlint-rule-en-spell \
+	npm-textlint-rule-max-comma \
+	npm-textlint-rule-no-dead-link \
+	npm-textlint-rule-no-empty-section \
+	npm-textlint-rule-no-start-duplicated-conjunction \
+	npm-textlint-rule-no-todo \
+	npm-textlint-rule-no-zero-width-spaces \
+	npm-textlint-rule-rousseau \
+	npm-textlint-rule-spelling \
+	npm-textlint-rule-stop-words \
+	npm-textlint-rule-terminology \
+	npm-textlint-rule-unexpanded-acronym \
+	npm-textlint-rule-write-good \
+
+.PHONY: textlint
+textlint: $(TEXTLINT_DEPS)
+	@ # Install manually because the `@` doesn't work as a pattern rule
+	$(NPM_INSTALL) \
+		@textlint-rule/textlint-rule-no-duplicate-abbr \
+		@textlint-rule/textlint-rule-no-invalid-control-character \
+		@textlint-rule/textlint-rule-no-unmatched-pair
 
 # tidy
 # -----------------------------------------------------------------------------
