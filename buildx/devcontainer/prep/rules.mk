@@ -652,6 +652,8 @@ pipx-%: $(TMP_DIR)/pipx.stamp
 # Stamp rules
 # =============================================================================
 
+# TODO: Fix issue causing stamp rules to be made multiple times
+
 # apt.stamp
 # -----------------------------------------------------------------------------
 
