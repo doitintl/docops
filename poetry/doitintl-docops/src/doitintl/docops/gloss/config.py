@@ -131,9 +131,7 @@ class Configuration(UserDict):
     def _scan_dir(self):
         dirname = self.config_dirname
         if not docops.quiet:
-            self._print(
-                f"<fg=blue>Scanning configuration directory</>: {dirname}"
-            )
+            self._print(f"<fg=blue>Scanning configuration directory</>: {dirname}")
         for root, dirs, files in os.walk(dirname):
             # Sort directories and files so that we process them in a
             # order (alphabetical, ascending)
@@ -170,9 +168,7 @@ class Configuration(UserDict):
         if docops.verbose:
             self._print(f"<fg=green>Configuration for</>: {filename}\n")
             headers = ["Line", "Command", "Option", "Argument"]
-            table = tabulate(
-                table_lines, headers=headers, tablefmt=docops.table_format
-            )
+            table = tabulate(table_lines, headers=headers, tablefmt=docops.table_format)
             self._print(table)
             print("")
 

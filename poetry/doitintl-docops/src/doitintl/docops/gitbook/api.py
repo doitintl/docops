@@ -39,8 +39,7 @@ class Client(apiclient.APIClient):
         self.api_token = os.environ.get("GITBOOK_API_TOKEN", None)
         if not self.api_token:
             raise exceptions.ClientError(
-                "The `GITBOOK_API_TOKEN` environment variable "
-                + "has not been set."
+                "The `GITBOOK_API_TOKEN` environment variable " + "has not been set."
             )
         self.db = cache.Database()
         header_auth = apiclient.HeaderAuthentication(token=self.api_token)

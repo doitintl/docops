@@ -200,13 +200,9 @@ class TermsCommand:
 
     def validate_options(self):
         if self.output_type not in self.OUTPUT_TYPES:
-            raise docops.ConfigurationError(
-                f"Not a supported type: {self.output_type}"
-            )
+            raise docops.ConfigurationError(f"Not a supported type: {self.output_type}")
         if self.table_format not in self.TABLE_FORMATS:
-            raise docops.ConfigurationError(
-                f"Not a supported type: {self.output_type}"
-            )
+            raise docops.ConfigurationError(f"Not a supported type: {self.output_type}")
 
     def run(self):
         if self.help:

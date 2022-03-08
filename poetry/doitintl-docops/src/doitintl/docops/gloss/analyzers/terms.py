@@ -102,19 +102,13 @@ class TermAnalyzer:
         # TODO: Raise custom exception if dict key not found
         corpus_def = self._config.word_freq_corpus
         if not corpus_def:
-            raise docops.ConfigurationError(
-                "No word frequency corpus specified"
-            )
+            raise docops.ConfigurationError("No word frequency corpus specified")
         corpus_name = corpus_def["name"]
         if not docops.quiet:
-            self._print(
-                f"<fg=blue>Loading word frequency corpus</>: {corpus_name}"
-            )
+            self._print(f"<fg=blue>Loading word frequency corpus</>: {corpus_name}")
         with gzip.open(corpus_def["abs_filename"], "rb") as f:
             bytes = f.read()
-        text = charset.decode_bytes(
-            bytes, filename=corpus_def["data_filename"]
-        )
+        text = charset.decode_bytes(bytes, filename=corpus_def["data_filename"])
         line_re = re.compile(corpus_def["re"])
         con = sqlite3.connect(self._config.cache.get_db_path())
         cur = con.cursor()
@@ -221,7 +215,5 @@ class TermAnalyzer:
             rank = round(math.log(delta))
             table_rows.append([rank, lemma])
         con.close()
-        table = tabulate(
-            table_rows, headers=headers, tablefmt=docops.table_format
-        )
+        table = tabulate(table_rows, headers=headers, tablefmt=docops.table_format)
         self._print(table)
