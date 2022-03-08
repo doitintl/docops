@@ -1,6 +1,8 @@
 # =============================================================================
-# Build a development container image
+# Prepare the container image
 # =============================================================================
+
+# This Makefile is copied into the container image by the Dockerfile
 
 .POSIX:
 
@@ -10,13 +12,13 @@
 LC_ALL = C
 
 SRC_DIR := $(subst /,,$(dir $(lastword $(MAKEFILE_LIST))))
-BUILD_DIR := $(SRC_DIR)/build
-TMP_DIR := $(BUILD_DIR)/tmp
-RULES := $(BUILD_DIR)/rules.mk
+PREP_DIR := $(SRC_DIR)/prep
+TMP_DIR := $(PREP_DIR)/tmp
+PREP_RULES := $(PREP_DIR)/rules.mk
 
-MAKE_RULES := $(MAKE) --no-print-directory -f $(RULES)
+MAKE_PREP := $(MAKE) --no-print-directory -f $(PREP_RULES)
 
-BUILD_DEPS = \
+PREP_DEPS = \
 	bashrc \
 	black \
 	brok \
@@ -51,7 +53,7 @@ BUILD_DEPS = \
 # Targets
 # =============================================================================
 
-.DEFAULT_GOAL := build
+.DEFAULT_GOAL := prep
 
 .PHONY: list
 list:
@@ -61,8 +63,8 @@ list:
 list-check:
 	@$(BUILD_DIR)/list.sh --check
 
-.PHONY: build
-build: $(BUILD_DEPS)
+.PHONY: prep
+prep: $(PREP_DEPS)
 
 .PHONY: clean
 clean:
@@ -72,4 +74,4 @@ clean:
 # =============================================================================
 
 %:
-	@ $(MAKE_RULES) $@
+	@ $(MAKE_PREP) $@
