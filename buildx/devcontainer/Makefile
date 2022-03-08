@@ -19,7 +19,7 @@ PREP_RULES := $(PREP_DIR)/rules.mk
 MAKE_PREP := $(MAKE) --no-print-directory -f $(PREP_RULES)
 
 PREP_DEPS = \
-	bashrc \
+	dotfiles \
 	black \
 	brok \
 	build-essential \
@@ -58,11 +58,11 @@ PREP_DEPS = \
 
 .PHONY: list
 list:
-	@$(BUILD_DIR)/list.sh
+	@$(PREP_DIR)/list.sh
 
 .PHONY: list
 list-check:
-	@$(BUILD_DIR)/list.sh --check
+	@$(PREP_DIR)/list.sh --check
 
 .PHONY: prep
 prep: $(PREP_DEPS)
