@@ -31,7 +31,7 @@ We designed the DocOps devcontainer image for dual use with Microsoft [Visual St
 
 ### Remote development
 
-GitHub Codespaces launches the DocOps devcontainer on GitHub's infrastructure and provides you with remote access.
+GitHub Codespaces allows you to work on repositories inside a devcontainer that runs remotely on GitHub's cloud infrastructure.
 
 The DoiT International [docops][docops] and [docs][docs] repositories are pre-configured to use the [DocOps devcontainer][devcontainer].
 
