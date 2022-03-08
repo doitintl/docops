@@ -14,9 +14,12 @@ indent_size = off
 max_line_length = off
 
 [*.py]
-indent_size = 4
+indent_size = off
 
 [*.sh]
+indent_size = 4
+
+[Dockerfile]
 indent_size = 4
 
 [{Makefile,*.mk}]
@@ -24,6 +27,9 @@ indent_size = 4
 indent_style = tab
 
 [.markdown-link-check.json]
+max_line_length = off
+
+[poetry.lock]
 max_line_length = off
 
 [COMMIT_EDITMSG]

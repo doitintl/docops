@@ -1,12 +1,30 @@
 pull_request_rules:
   - name: Ready to merge
     conditions:
-      - label=ready-to-merge
-      - check-success~=^Preflight
-      - check-success~=^Buildx
-      - check-success~=^Analylze
-      - check-success~=GitGuardian
+      and:
+        and:
+        - label=ready-to-merge
+        - check-failure~=^Preflight
+        - check-success~=^Analylze
+        - check-success~=GitGuardian
+        or:
+          - check-success~=^Buildx
+          - check-skipped~=^Buildx
+        or:
+          - check-success~=^Poetry
+          - check-skipped~=^Poetry
+        or:
+          - check-success~=^Scrutinizer
+          - check-skipped~=^Scrutinizer
+        or:
+          - check-success~=^Sourcery
+          - check-skipped~=^Sourcery
+        or:
+          - check-success~=^LGTM
+          - check-neutral~=^LGTM
+          - check-skipped~=^LGTM
     actions:
       merge:
         method: rebase
         rebase_fallback: none
+        strict: true

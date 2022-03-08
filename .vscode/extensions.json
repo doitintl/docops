@@ -10,12 +10,17 @@
     "fnando.linter",
     "foxundermoon.shell-format",
     "jeff-hykin.better-dockerfile-syntax",
+    "magicstack.magicpython",
     "ms-azuretools.vscode-docker",
+    "ms-python.vscode-pylance",
+    "ms-vscode.makefile-tools",
     "redhat.vscode-yaml",
     "sandcastle.whitespace",
     "streetsidesoftware.code-spell-checker",
+    "tamasfe.even-better-toml",
+    "tetradresearch.vscode-h2o",
     "timonwong.shellcheck",
-    "yzhang.markdown-all-in-one",
-    "ms-vscode.makefile-tools"
+    "viktorzetterstrom.non-breaking-space-highlighter",
+    "yzhang.markdown-all-in-one"
   ]
 }

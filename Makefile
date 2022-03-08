@@ -68,3 +68,16 @@ check: yamllint
 yamllint:
 	$(call print-target)
 	$(YAMLLINT)
+
+# black
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# https://github.com/psf/black
+
+BLACK := black --check .
+
+check: black
+.PHONY: black
+black:
+	$(call print-target)
+	$(BLACK)
