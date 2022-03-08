@@ -33,7 +33,9 @@ jobs:
             poetry: poetry/**
   buildx-run:
     name: Buildx run
-    needs: [preflight-checks, change-scan]
+    needs:
+      - preflight-checks
+      - change-scan
     if: ${{ needs.change-scan.outputs.buildx == 'true' }}
     runs-on: ubuntu-latest
     steps:
@@ -61,7 +63,9 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
   poetry-tests:
     name: Poetry tests
-    needs: [preflight-checks, change-scan]
+    needs:
+      - preflight-checks
+      - change-scan
     if: ${{ needs.change-scan.outputs.poetry == 'true' }}
     runs-on: ubuntu-latest
     container:
@@ -78,7 +82,9 @@ jobs:
           path: tests/logs
   notification:
     name: Notifcation
-    needs: buildx-run
+    needs:
+      - buildx-run
+      - poetry-tests
     if: always() && github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     steps:
