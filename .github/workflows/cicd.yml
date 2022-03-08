@@ -75,11 +75,11 @@ jobs:
       - run: cd poetry/doitintl-docops && make test
         env:
           GITBOOK_API_TOKEN: ${{ secrets.GITBOOK_API_TOKEN }}
-      - uses: actions/upload-artifact@v2
-        if: always()
-        with:
-          name: poetry-test-logs
-          path: tests/logs
+      # - uses: actions/upload-artifact@v2
+      #   if: always()
+      #   with:
+      #     name: poetry-test-logs
+      #     path: tests/logs
   notification:
     name: Notifcation
     needs:
