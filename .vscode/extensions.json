@@ -2,16 +2,20 @@
   "recommendations": [
     "bierner.github-markdown-preview",
     "codezombiech.gitignore",
+    "dansnow.vscode-dockerfilelint",
+    "david-reis.crashacters",
     "davidanson.vscode-markdownlint",
     "editorconfig.editorconfig",
     "esbenp.prettier-vscode",
     "fnando.linter",
     "foxundermoon.shell-format",
+    "jeff-hykin.better-dockerfile-syntax",
     "ms-azuretools.vscode-docker",
     "redhat.vscode-yaml",
     "sandcastle.whitespace",
     "streetsidesoftware.code-spell-checker",
     "timonwong.shellcheck",
-    "yzhang.markdown-all-in-one"
+    "yzhang.markdown-all-in-one",
+    "ms-vscode.makefile-tools"
   ]
 }

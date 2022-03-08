@@ -55,3 +55,16 @@ check: hadolint
 hadolint:
 	$(call print-target)
 	find . -name 'Dockerfile' -print0 | xargs -0 $(HADOLINT)
+
+# yamllint
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# https://github.com/adrienverge/yamllint
+
+YAMLLINT := yamllint .
+
+check: yamllint
+.PHONY: yamllint
+yamllint:
+	$(call print-target)
+	$(YAMLLINT)

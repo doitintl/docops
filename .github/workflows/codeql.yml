@@ -7,11 +7,11 @@ on:
     # The branches below must be a subset of the branches above
     branches: [main]
   schedule:
-    - cron: '24 22 * * 0'
+    - cron: 24 22 * * 0
 
 jobs:
   analyze:
-    name: Analyze
+    name: Analylze
     runs-on: ubuntu-latest
     permissions:
       actions: read
@@ -21,7 +21,7 @@ jobs:
       fail-fast: false
       matrix:
         # https://git.io/codeql-language-support
-        language: ['python']
+        language: [python]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
