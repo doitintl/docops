@@ -46,6 +46,7 @@ PREP_DEPS = \
 	proselint \
 	shellcheck \
 	shfmt \
+	textlint \
 	tidy \
 	vale \
 	yamllint
