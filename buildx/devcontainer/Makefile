@@ -49,7 +49,8 @@ PREP_DEPS = \
 	textlint \
 	tidy \
 	vale \
-	yamllint
+	yamllint \
+	yarn
 
 # Targets
 # =============================================================================
