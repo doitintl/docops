@@ -9,11 +9,6 @@
 # POSIX locale
 LC_ALL = C
 
-# ANSI formatting
-BOLD = [1m
-RED = [31m
-RESET = [0m
-
 BUILD_DIR := $(subst /,,$(dir $(lastword $(MAKEFILE_LIST))))
 TEMPLATES_DIR := $(BUILD_DIR)/templates
 TMP_DIR := $(BUILD_DIR)/tmp
@@ -37,16 +32,6 @@ GH_LATEST = releases/latest
 # Functions
 # =============================================================================
 
-# print_target
-# -----------------------------------------------------------------------------
-
-# If `target` is empty, `$@` is used
-
-# $(call print_target,target)
-define print_target
-@ printf "\e$(BOLD)make %s\e$(RESET)\n" "$$(echo $(firstword $(1) $@))"
-endef
-
 # gh_get_latest
 # -----------------------------------------------------------------------------
 
@@ -63,7 +48,7 @@ endef
 define gh_test_latest
 $(call gh_get_latest,$(1)) | tee -- $@.latest
 @ if ! cat <$@.latest | grep -F '$(2)' >/dev/null; then \
-	printf '\e$(RED)Version mismatch\e$(RESET)\n'; \
+	echo 'ERROR: Version mismatch'; \
 fi
 @ rm -- $@.latest
 endef
@@ -94,7 +79,7 @@ chmod -R 755 $(1) && \
 mv $(1) $(SYSTEM_BIN)
 endef
 
-# Targets
+# Primary targets
 # =============================================================================
 
 # black
@@ -120,7 +105,6 @@ BROK_DEB_URL = $(call gh_url,$(BROK_REPO),$(BROK_VERSION),$(BROK_DEB))
 
 .PHONY: brok
 brok:
-	$(call print_target)
 	$(call gh_test_latest,$(BROK_REPO),$(BROK_VERSION))
 	$(call reset_dir,$(BROK_DIR))
 	$(CURL) $(BROK_DEB_URL) >$(BROK_DIR)/$(BROK_DEB)
@@ -170,7 +154,6 @@ dockerfilelint: npm-dockerfilelint
 .PHONY: doitintl-docops
 doitintl-docops: pipx-doitintl-docops
 
-
 # dotfiles
 # -----------------------------------------------------------------------------
 
@@ -209,7 +192,6 @@ endef
 # before applying changes.
 .PHONY: dotfiles
 dotfiles: apt-bash-completion apt-gawk
-	$(call print_target)
 	$(call install_bashrc,$(ROOT),$(ROOT_HOME))
 	$(call mkdir,$(ROOT),$(ROOT_HOME)/$(PARALLEL_DIR))
 	$(call touch,$(ROOT),$(ROOT_HOME)/$(WILL_CITE))
@@ -237,7 +219,6 @@ EC_URL = $(call gh_url,$(EC_REPO),$(EC_VERSION),$(EC_TGZ))
 
 .PHONY: ec
 ec:
-	$(call print_target)
 	$(call gh_test_latest,$(EC_REPO),$(EC_VERSION))
 	$(call reset_dir,$(EC_DIR))
 	$(CURL) $(EC_URL) >$(EC_DIR)/$(EC_TGZ)
@@ -290,7 +271,6 @@ HADOLINT_FILE_URL = $(call gh_url, \
 
 .PHONY: hadolint
 hadolint:
-	$(call print_target)
 	$(call gh_test_latest,$(HADOLINT_REPO),v$(HADOLINT_VERSION))
 	$(call reset_dir,$(HADOLINT_DIR))
 	$(CURL) $(HADOLINT_FILE_URL) >$(HADOLINT_DIR)/$(HADOLINT_BIN)
@@ -330,7 +310,6 @@ IMGDUP2GO_TGZ_URL = $(call gh_url, \
 
 .PHONY: imgdup2go
 imgdup2go:
-	$(call print_target)
 	$(call gh_test_latest,$(IMGDUP2GO_REPO),v$(IMGDUP2GO_VERSION))
 	$(call reset_dir,$(IMGDUP2GO_DIR))
 	$(CURL) $(IMGDUP2GO_TGZ_URL) >$(IMGDUP2GO_DIR)/$(IMGDUP2GO_TGZ)
@@ -379,7 +358,6 @@ MISSPELL_TGZ_URL = $(call gh_url, \
 
 .PHONY: misspell
 misspell:
-	$(call print_target)
 	$(call gh_test_latest,$(MISSPELL_REPO),v$(MISSPELL_VERSION))
 	$(call reset_dir,$(MISSPELL_DIR))
 	$(CURL) $(MISSPELL_TGZ_URL) >$(MISSPELL_DIR)/$(MISSPELL_TGZ)
@@ -460,7 +438,6 @@ SHFMT_FILE_URL = $(call gh_url, \
 
 .PHONY: shfmt
 shfmt:
-	$(call print_target)
 	$(call gh_test_latest,$(SHFMT_REPO),v$(SHFMT_VERSION))
 	$(call reset_dir,$(SHFMT_DIR))
 	$(CURL) $(SHFMT_FILE_URL) >$(SHFMT_DIR)/$(SHFMT_BIN)
@@ -534,7 +511,6 @@ VALE_SIG_URL = $(call gh_url,$(VALE_REPO),v$(VALE_VERSION),$(VALE_SIG))
 
 .PHONY: vale
 vale: pip-docutils
-	$(call print_target)
 	$(call gh_test_latest,$(VALE_REPO),v$(VALE_VERSION))
 	$(call reset_dir,$(VALE_DIR))
 	$(CURL) $(VALE_TGZ_URL) >$(VALE_DIR)/$(VALE_TGZ)
@@ -571,7 +547,6 @@ VALE_SERVER_INSTALL_BIN = $(VALE_SERVER_INSTALL)/usr/bin/$(VALE_SERVER_BIN)
 
 .PHONY: vale-server
 vale-server:
-	$(call print_target)
 	$(call gh_test_latest,$(VALE_SERVER_REPO),v$(VALE_SERVER_VERSION))
 	$(call reset_dir,$(VALE_SERVER_DIR))
 	$(CURL) $(VALE_SERVER_APP_URL) >$(VALE_SERVER_DIR)/$(VALE_SERVER_APP)
@@ -596,8 +571,25 @@ vale-server:
 .PHONY: yamllint
 yamllint: apt-yamllint
 
-# Pattern rules
+# Prerequsite rules
 # =============================================================================
+
+$(TMP_DIR):
+	@ mkdir -p $(TMP_DIR)
+
+# $(call echo_run,rule)
+define echo_run
+echo $(1) && $(1)
+endef
+
+# apt
+# -----------------------------------------------------------------------------
+
+apt: $(TMP_DIR)
+	@ if ! test -f $(TMP_DIR)/$@.stamp; then \
+		$(call echo_run,apt-get update $(APT_GET_OPTS)); \
+		touch $(TMP_DIR)/$@.stamp; \
+	fi
 
 # apt-%
 # -----------------------------------------------------------------------------
@@ -606,9 +598,23 @@ DEBIAN_FRONTEND = noninteractive
 APT_GET_OPTS = -y --no-install-recommends
 APT_GET_INSTALL = apt-get install $(APT_GET_OPTS)
 
-apt-%: $(TMP_DIR)/apt.stamp
-	$(call print_target, $*)
-	$(APT_GET_INSTALL) $*
+apt-%: apt
+	@ if ! test -f $(TMP_DIR)/$@.stamp; then \
+		$(call echo_run,$(APT_GET_INSTALL) $*); \
+		touch $(TMP_DIR)/$@.stamp; \
+	fi
+# cargo.stamp
+# -----------------------------------------------------------------------------
+
+# RUSTUP_URL = https://sh.rustup.rs
+
+cargo: apt-pkg-config
+	@ if ! test -f $(TMP_DIR)/$@.stamp; then \
+		$(call echo_run,$(CURL) $(RUSTUP_URL) >$(TMP_DIR)/rustup.sh); \
+		$(call echo_run,chmod 755 $(TMP_DIR)/rustup.sh); \
+		$(call echo_run,$(TMP_DIR)/rustup.sh -y --no-modify-path); \
+		touch $(TMP_DIR)/$@.stamp; \
+	fi
 
 # cargo-%
 # -----------------------------------------------------------------------------
@@ -617,9 +623,21 @@ DEBIAN_FRONTEND = noninteractive
 APT_GET_OPTS = -y --no-install-recommends
 CARGO_INSTALL = cargo install $(APT_GET_OPTS)
 
-acargopt-%: $(TMP_DIR)/cargo.stamp
-	$(call print_target, $*)
-	$(CARGO_INSTALL) $*
+cargo-%: cargo
+	@ if ! test -f $(TMP_DIR)/$@.stamp; then \
+		$(call echo_run,$(CARGO_INSTALL) $*); \
+		touch $(TMP_DIR)/$@.stamp; \
+	fi
+
+# npm
+# -----------------------------------------------------------------------------
+
+npm: apt-npm
+	@ if ! test -f $(TMP_DIR)/$@.stamp; then \
+		$(call echo_run,npm config set fund false --global); \
+		$(call echo_run,$(NPM_INSTALL) npm@latest); \
+		touch $(TMP_DIR)/$@.stamp; \
+	fi
 
 # npm-%
 # -----------------------------------------------------------------------------
@@ -627,65 +645,13 @@ acargopt-%: $(TMP_DIR)/cargo.stamp
 NPM_OPTS = --global --no-audit --prefer-dedupe
 NPM_INSTALL = npm install $(NPM_OPTS)
 
-npm-%: $(TMP_DIR)/npm.stamp
-	$(call print_target, $*)
-	$(NPM_INSTALL) $*
+npm-%: npm
+	@ if ! test -f $(TMP_DIR)/$@.stamp; then \
+		$(call echo_run,$(NPM_INSTALL) $*); \
+		touch $(TMP_DIR)/$@.stamp; \
+	fi
 
-# pip-%
-# -----------------------------------------------------------------------------
-
-PIP_INSTALL = pip install --no-cache-dir --upgrade
-
-pip-%: $(TMP_DIR)/pip.stamp
-	$(call print_target, $*)
-	$(PIP_INSTALL) $*
-
-# pipx-%
-# -----------------------------------------------------------------------------
-
-PIPX_INSTALL = pipx install --force
-
-pipx-%: $(TMP_DIR)/pipx.stamp
-	$(call print_target, $*)
-	$(PIPX_INSTALL) $*
-
-# Stamp rules
-# =============================================================================
-
-# TODO: Fix issue causing stamp rules to be made multiple times
-
-# apt.stamp
-# -----------------------------------------------------------------------------
-
-$(TMP_DIR)/apt.stamp:
-	apt-get update $(APT_GET_OPTS)
-	mkdir -p $(TMP_DIR)
-	touch $@
-
-# cargo.stamp
-# -----------------------------------------------------------------------------
-
-# Currently unused (see `fixred` target)
-
-# RUSTUP_URL = https://sh.rustup.rs
-
-# $(TMP_DIR)/cargo.stamp: apt-pkg-config
-# 	$(CURL) $(RUSTUP_URL) >$(TMP_DIR)/rustup.sh
-# 	chmod 755 $(TMP_DIR)/rustup.sh
-# 	$(TMP_DIR)/rustup.sh -y --no-modify-path
-# 	mkdir -p $(TMP_DIR)
-# 	touch $@
-
-# npm.stamp
-# -----------------------------------------------------------------------------
-
-$(TMP_DIR)/npm.stamp: apt-npm
-	npm config set fund false --global
-	$(NPM_INSTALL) npm@latest
-	mkdir -p $(TMP_DIR)
-	touch $@
-
-# pip.stamp
+# pip
 # -----------------------------------------------------------------------------
 
 PIP_APT_DEPS = \
@@ -695,17 +661,45 @@ PIP_APT_DEPS = \
 	apt-python3-wheel \
 	apt-python3-venv
 
-$(TMP_DIR)/pip.stamp: $(PIP_APT_DEPS)
-	$(PIP_INSTALL) pip
-	mkdir -p $(TMP_DIR)
-	touch $@
+pip: $(PIP_APT_DEPS)
+	@ if ! test -f $(TMP_DIR)/$@.stamp; then \
+		$(call echo_run,$(PIP_INSTALL) pip); \
+		touch $(TMP_DIR)/$@.stamp; \
+	fi
 
-# pipx.stamp
+# pip-%
 # -----------------------------------------------------------------------------
 
-$(TMP_DIR)/pipx.stamp: pip-pipx
-	mkdir -p $(TMP_DIR)
-	touch $@
+PIP_INSTALL = pip install --no-cache-dir --upgrade
+
+pip-%: pip
+	@ if ! test -f $(TMP_DIR)/$@.stamp; then \
+		$(call echo_run,$(PIP_INSTALL) $*); \
+		touch $(TMP_DIR)/$@.stamp; \
+	fi
+
+# pipx
+# -----------------------------------------------------------------------------
+
+pipx: pip-pipx
+
+# pipx-%
+# -----------------------------------------------------------------------------
+
+PIPX_INSTALL = pipx install --force
+
+pipx-%: pipx
+	@ if ! test -f $(TMP_DIR)/$@.stamp; then \
+		$(call echo_run,$(PIPX_INSTALL) $*); \
+		touch $(TMP_DIR)/$@.stamp; \
+	fi
+
+# clean
+# -----------------------------------------------------------------------------
+
+.PHONY: clean
+clean:
+	rm -rf $(TMP_DIR)
 
 # Default goal
 # =============================================================================
