@@ -571,6 +571,14 @@ vale-server:
 .PHONY: yamllint
 yamllint: apt-yamllint
 
+# yarn
+# -----------------------------------------------------------------------------
+
+# https://github.com/yarnpkg/yarn
+
+.PHONY: yarn
+yarn: npm-yarn
+
 # Prerequsite rules
 # =============================================================================
 
