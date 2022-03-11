@@ -603,16 +603,18 @@ apt-%: apt
 		$(call echo_run,$(APT_GET_INSTALL) $*); \
 		touch $(TMP_DIR)/$@.stamp; \
 	fi
+
 # cargo.stamp
 # -----------------------------------------------------------------------------
 
-# RUSTUP_URL = https://sh.rustup.rs
+RUSTUP_URL = https://sh.rustup.rs
+RUSTUP_FILE = $(TMP_DIR)/rustup.sh
 
 cargo: apt-pkg-config
 	@ if ! test -f $(TMP_DIR)/$@.stamp; then \
-		$(call echo_run,$(CURL) $(RUSTUP_URL) >$(TMP_DIR)/rustup.sh); \
-		$(call echo_run,chmod 755 $(TMP_DIR)/rustup.sh); \
-		$(call echo_run,$(TMP_DIR)/rustup.sh -y --no-modify-path); \
+		$(call echo_run,$(CURL) $(RUSTUP_URL) >$(RUSTUP_FILE)); \
+		$(call echo_run,chmod 755 $(RUSTUP_FILE)); \
+		$(call echo_run,$(RUSTUP_FILE) -y --no-modify-path); \
 		touch $(TMP_DIR)/$@.stamp; \
 	fi
 
@@ -620,7 +622,6 @@ cargo: apt-pkg-config
 # -----------------------------------------------------------------------------
 
 DEBIAN_FRONTEND = noninteractive
-APT_GET_OPTS = -y --no-install-recommends
 CARGO_INSTALL = cargo install $(APT_GET_OPTS)
 
 cargo-%: cargo
@@ -629,10 +630,27 @@ cargo-%: cargo
 		touch $(TMP_DIR)/$@.stamp; \
 	fi
 
+# nodejs
+# -----------------------------------------------------------------------------
+
+NODESOURCE_URL = https://deb.nodesource.com/setup_16.x
+NODESOURCE_FILE = $(TMP_DIR)/nodesource_setup.sh
+APT_GET_AUTOREMOVE = apt-get autoremove -y
+
+nodejs:
+	@ if ! test -f $(TMP_DIR)/$@.stamp; then \
+		$(call echo_run,$(CURL) $(NODESOURCE_URL) >$(NODESOURCE_FILE)); \
+		$(call echo_run,chmod 755 $(NODESOURCE_FILE)); \
+		$(call echo_run,$(NODESOURCE_FILE)); \
+		$(call echo_run,$(APT_GET_INSTALL) $@); \
+		$(call echo_run,$(APT_GET_AUTOREMOVE)); \
+		touch $(TMP_DIR)/$@.stamp; \
+	fi
+
 # npm
 # -----------------------------------------------------------------------------
 
-npm: apt-npm
+npm: nodejs
 	@ if ! test -f $(TMP_DIR)/$@.stamp; then \
 		$(call echo_run,npm config set fund false --global); \
 		$(call echo_run,$(NPM_INSTALL) npm@latest); \
