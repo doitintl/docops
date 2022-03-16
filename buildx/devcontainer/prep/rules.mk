@@ -49,6 +49,7 @@ define gh_test_latest
 $(call gh_get_latest,$(1)) | tee -- $@.latest
 @ if ! cat <$@.latest | grep -F '$(2)' >/dev/null; then \
 	echo 'ERROR: Version mismatch'; \
+	exit 1; \
 fi
 @ rm -- $@.latest
 endef
@@ -226,6 +227,14 @@ ec:
 	cd $(EC_DIR) && mv bin/$(EC_FILE) $(EC_BIN)
 	cd $(EC_DIR) && $(call install_bin,$(EC_BIN))
 	rm -rf $(EC_DIR)
+
+# fd-find
+# -----------------------------------------------------------------------------
+
+# https://github.com/sharkdp/fd
+
+.PHONY: fd-find
+fd-find: apt-fd-find
 
 # fdupes
 # -----------------------------------------------------------------------------

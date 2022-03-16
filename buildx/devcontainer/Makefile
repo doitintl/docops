@@ -28,6 +28,7 @@ PREP_DEPS = \
 	dockerfilelint \
 	doitintl-docops \
 	ec \
+	fd-find \
 	fdupes \
 	file \
 	hadolint \
