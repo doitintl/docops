@@ -270,7 +270,7 @@ file: apt-file
 
 HADOLINT_BIN = hadolint
 HADOLINT_DIR = $(TMP_DIR)/$(HADOLINT_BIN)
-HADOLINT_VERSION = 2.8.0
+HADOLINT_VERSION = 2.9.1
 HADOLINT_REPO = hadolint/hadolint
 HADOLINT_FILE = $(HADOLINT_BIN)-Linux-x86_64
 HADOLINT_FILE_URL = $(call gh_url, \
