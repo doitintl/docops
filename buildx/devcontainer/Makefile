@@ -49,6 +49,7 @@ PREP_DEPS = \
 	shfmt \
 	textlint \
 	tidy \
+	tree \
 	vale \
 	yamllint \
 	yarn
