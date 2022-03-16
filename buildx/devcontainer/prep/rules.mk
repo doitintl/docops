@@ -502,6 +502,14 @@ textlint: $(TEXTLINT_DEPS)
 .PHONY: tidy
 tidy: apt-tidy
 
+# tree
+# -----------------------------------------------------------------------------
+
+# http://mama.indstate.edu/users/ice/tree/
+
+.PHONY: tree
+tree: apt-tree
+
 # vale
 # -----------------------------------------------------------------------------
 
