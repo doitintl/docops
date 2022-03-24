@@ -453,6 +453,14 @@ shfmt:
 	$(call install_bin,$(SHFMT_DIR)/$(SHFMT_BIN))
 	rm -rf $(SHFMT_DIR)
 
+# silversearcher-ag
+# -----------------------------------------------------------------------------
+
+# https://github.com/ggreer/the_silver_searcher
+
+.PHONY: silversearcher-ag
+silversearcher-ag: apt-silversearcher-ag
+
 # textlint
 # -----------------------------------------------------------------------------
 

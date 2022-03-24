@@ -19,7 +19,6 @@ PREP_RULES := $(PREP_DIR)/rules.mk
 MAKE_PREP := $(MAKE) --no-print-directory -f $(PREP_RULES)
 
 PREP_DEPS = \
-	dotfiles \
 	black \
 	brok \
 	build-essential \
@@ -27,6 +26,7 @@ PREP_DEPS = \
 	cspell \
 	dockerfilelint \
 	doitintl-docops \
+	dotfiles \
 	ec \
 	fd-find \
 	fdupes \
@@ -47,6 +47,7 @@ PREP_DEPS = \
 	proselint \
 	shellcheck \
 	shfmt \
+	silversearcher-ag \
 	textlint \
 	tidy \
 	tree \
