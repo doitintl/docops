@@ -22,6 +22,6 @@ ENV PIPX_BIN_DIR=/usr/local/bin
 COPY . /tmp/checkout
 WORKDIR /tmp/checkout
 RUN ./bootstrap.sh && \
-  make prep && \
+  make build && \
   ./clean.sh && \
   rm -rf /tmp/checkout
