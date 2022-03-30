@@ -88,5 +88,5 @@ test: init
 	rm -rf "$(LOG_DIR)"
 	@ # TODO: Split the Poetry stuff into a different build step
 	poetry run $(MAKE_TESTS) $(TEST_DIR)/pkg/poetry.mk
-	poetry run $(MAKE_TESTS) $(TEST_DIR)/cli/docops-gitbook.mk
-	poetry run $(MAKE_TESTS) $(TEST_DIR)/cli/docops-gloss-terms.mk
+	# poetry run $(MAKE_TESTS) $(TEST_DIR)/cli/docops-gitbook.mk
+	# poetry run $(MAKE_TESTS) $(TEST_DIR)/cli/docops-gloss-terms.mk
