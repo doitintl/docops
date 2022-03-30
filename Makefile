@@ -50,6 +50,8 @@ dockerfilelint:
 
 HADOLINT := hadolint
 
+# TODO: Move this to a Makefile under `buildx` to mirror Python setup or move
+# Python files to top-level directory
 check: hadolint
 .PHONY: hadolint
 hadolint:
@@ -68,3 +70,17 @@ check: yamllint
 yamllint:
 	$(call print-target)
 	$(YAMLLINT)
+
+# black
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# https://github.com/psf/black
+
+BLACK := black --check .
+
+# TODO: Get Black working
+# check: black
+.PHONY: black
+black:
+	$(call print-target)
+	$(BLACK)
