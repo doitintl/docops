@@ -406,6 +406,15 @@ misspell:
 	rm -rf $(MISSPELL_DIR)
 build: misspell
 
+# moreutils
+# -----------------------------------------------------------------------------
+
+# https://joeyh.name/code/moreutils/
+
+.PHONY: moreutils
+imagemagick: apt-moreutils
+build: moreutils
+
 # optipng
 # -----------------------------------------------------------------------------
 
