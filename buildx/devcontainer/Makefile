@@ -300,7 +300,7 @@ build: file
 
 HADOLINT_BIN = hadolint
 HADOLINT_DIR = $(TMP_DIR)/$(HADOLINT_BIN)
-HADOLINT_VERSION = 2.9.3
+HADOLINT_VERSION = 2.10.0
 HADOLINT_REPO = hadolint/hadolint
 HADOLINT_FILE = $(HADOLINT_BIN)-Linux-x86_64
 HADOLINT_FILE_URL = $(call gh_url, \
@@ -580,7 +580,7 @@ build: tree
 
 VALE_BIN = vale
 VALE_DIR = $(TMP_DIR)/$(VALE_BIN)
-VALE_VERSION = 2.15.4
+VALE_VERSION = 2.15.5
 VALE_REPO = errata-ai/vale
 VALE_TGZ = $(VALE_BIN)_$(VALE_VERSION)_Linux_64-bit.tar.gz
 VALE_SIG = $(VALE_BIN)_$(VALE_VERSION)_checksums.txt
