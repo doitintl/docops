@@ -65,7 +65,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       # https://github.com/martialonline/workflow-status
-      - uses: martialonline/workflow-status@v2
+      - uses: martialonline/workflow-status@v3
         id: check
       # https://github.com/ravsamhq/notify-slack-action
       - uses: ravsamhq/notify-slack-action@v1
