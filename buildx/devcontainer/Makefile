@@ -489,7 +489,7 @@ build: shellcheck
 
 SHFMT_BIN = shfmt
 SHFMT_DIR = $(TMP_DIR)/$(SHFMT_BIN)
-SHFMT_VERSION = 3.5.0 
+SHFMT_VERSION = 3.5.0
 SHFMT_REPO = mvdan/sh
 SHFMT_FILE = $(SHFMT_BIN)_v$(SHFMT_VERSION)_linux_amd64
 SHFMT_FILE_URL = $(call gh_url, \
@@ -581,7 +581,7 @@ build: tree
 
 VALE_BIN = vale
 VALE_DIR = $(TMP_DIR)/$(VALE_BIN)
-VALE_VERSION = 2.15.5
+VALE_VERSION = 2.17.0
 VALE_REPO = errata-ai/vale
 VALE_TGZ = $(VALE_BIN)_$(VALE_VERSION)_Linux_64-bit.tar.gz
 VALE_SIG = $(VALE_BIN)_$(VALE_VERSION)_checksums.txt
