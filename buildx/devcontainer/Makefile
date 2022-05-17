@@ -458,6 +458,7 @@ build: poetry
 
 .PHONY: prettier
 prettier: npm-prettier
+prettier: npm-prettier-plugin-toml
 build: prettier
 
 # proselint
