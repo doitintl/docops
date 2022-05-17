@@ -489,7 +489,7 @@ build: shellcheck
 
 SHFMT_BIN = shfmt
 SHFMT_DIR = $(TMP_DIR)/$(SHFMT_BIN)
-SHFMT_VERSION = 3.4.3
+SHFMT_VERSION = 3.5.0 
 SHFMT_REPO = mvdan/sh
 SHFMT_FILE = $(SHFMT_BIN)_v$(SHFMT_VERSION)_linux_amd64
 SHFMT_FILE_URL = $(call gh_url, \
