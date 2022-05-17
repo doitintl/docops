@@ -1,5 +1,5 @@
 ARG VARIANT
-FROM mcr.microsoft.com/vscode/devcontainers/base:debian as build
+FROM mcr.microsoft.com/vscode/devcontainers/base:ubuntu as build
 ARG VARIANT
 
 # TODO: Switch to using variant-specific `.env` files once the
