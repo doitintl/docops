@@ -1,5 +1,6 @@
 rules:
   document-start: disable
   octal-values: enable
-  quoted-strings:
-    required: only-when-needed
+  # Not available in yamllint 1.20.0
+  # quoted-strings:
+  #   required: only-when-needed
