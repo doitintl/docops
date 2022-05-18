@@ -62,11 +62,10 @@ class Client(apiclient.APIClient):
             ) WITHOUT ROWID;
         """
         )
-        results = self.db.execute(
+        if results := self.db.execute(
             "SELECT uid, title, baseDomain FROM users WHERE api_token = ?",
             [self.api_token],
-        )
-        if results:
+        ):
             uid, title, baseDomain = results[0]
         else:
             try:

@@ -123,8 +123,8 @@ class TermAnalyzer:
             matches = line_re.match(line.strip())
             if not matches:
                 continue
-            ipm = float(matches.group("ipm"))
-            lemma = matches.group("lemma")
+            ipm = float(matches["ipm"])
+            lemma = matches["lemma"]
             lemma = self._config.lemmatizer.lemmatize(lemma)
             lemma = self._filter_lemma(lemma)
             if not lemma:
@@ -199,7 +199,7 @@ class TermAnalyzer:
             cur.execute(self._INSERT_LEMMA_QUERY, [source, lemma, ipm])
             if docops.verbose:
                 if len(lemma) > 40:
-                    lemma = lemma[:40] + "[...]"
+                    lemma = f"{lemma[:40]}[...]"
                 self._print(f"<fg=green>Added</>: {source}, {lemma}, {ipm}")
         con.commit()
         con.close()
