@@ -233,9 +233,7 @@ class TermsCommand:
         return 0
 
     def do_print_cache(self):
-        if not self._cache.print_cache_path():
-            return 1
-        return 0
+        return 0 if self._cache.print_cache_path() else 1
 
     # TODO: Convert most methods of this class to private methods
     def _do_show_options(self, plural_noun, noun_list):
