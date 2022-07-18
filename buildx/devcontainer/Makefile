@@ -559,6 +559,7 @@ TEXTLINT_DEPS = \
 textlint: $(TEXTLINT_DEPS) npm pipx-proselint
 	@ # Install manually because the `@` doesn't work as a pattern rule
 	$(NPM_INSTALL) \
+		@textlint/textlint-plugin-markdown \
 		@textlint-rule/textlint-rule-no-duplicate-abbr \
 		@textlint-rule/textlint-rule-no-invalid-control-character \
 		@textlint-rule/textlint-rule-no-unmatched-pair \
